@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <div id="container">
+      <label>Nombre y Apellidos:</label>
+      <input id="name" type="text" /><br />
+      <label>Usuario:</label>
+      <input id="username" /><br />
+      <button id="validar">Validar</button>
+      <div id="resultado"></div>
+      <div id="error"></div>
+    </div>
+    <script>
+      let name = document.querySelector("#name");
+      let username = document.querySelector("#username");
+      let error = document.querySelector("#error");
+
+      document.getElementById("validar").addEventListener("click", function () {
+        let isValid = true;
+
+        if (name.value.length < 5 || name.value.length > 30) {
+          error.textContent =
+            "ERROR El nombre debe tener entre 5 y 30 caracteres.";
+          isValid = false;
+        }
+
+        if (username.value.length !== 6) {
+          error.textContent = "ERROR!! El nombre debe tener 6 caracteres";
+          isValid = false;
+        }
+      });
+    </script>
+  </body>
+</html>
