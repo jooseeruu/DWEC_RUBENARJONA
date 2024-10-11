@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ejercicios</title>
+  </head>
+  <body>
+    <h2>Ejercicio 1</h2>
+    <form id="ejercicio1">
+      <label for="horas">Número de horas trabajadas:</label>
+      <input type="number" id="horas" name="horas" required />
+      <br />
+      <label for="coste">salario por hora:</label>
+      <input type="number" id="salario" name="salario" required />
+      <br />
+      <button type="button" onclick="CalcPago()">Calcular Pago</button>
+      <p id="resultado1"></p>
+    </form>
+
+    <h2>Ejercicio 2</h2>
+    <form id="ejercicio2">
+      <label for="peso">Peso en kilogramos:</label>
+      <input type="number" id="peso" name="peso" step="0.01" required />
+      <br />
+      <label for="altura">Altura en metros:</label>
+      <input type="number" id="altura" name="altura" step="0.01" required />
+      <br />
+      <button type="button" onclick="CalcIMC()">Calcular IMC</button>
+      <p id="resultado2"></p>
+    </form>
+
+    <h2>Ejercicio 3</h2>
+    <form id="ejercicio3">
+      <label for="numero1">Primer número (n):</label>
+      <input type="number" id="numero1" name="numero1" required />
+      <br />
+      <label for="numero2">Segundo número (m):</label>
+      <input type="number" id="numero2" name="numero2" required />
+      <br />
+      <button type="button" onclick="CalcDivision()">Calcular División</button>
+      <p id="resultadoCociente"></p>
+      <p id="resultadoResto"></p>
+    </form>
+
+    <h2>Ejercicio 4</h2>
+    <form id="ejercicio4">
+      <label for="cantidad">Cantidad a invertir:</label>
+      <input type="number" id="cantidad" name="cantidad" required />
+      <br />
+      <label for="interes">Interés anual (%):</label>
+      <input type="number" id="interes" name="interes" step="0.01" required />
+      <br />
+      <label for="anos">Número de años:</label>
+      <input type="number" id="anos" name="anos" required />
+      <br />
+      <button type="button" onclick="CalcInv()">Calcular Inversión</button>
+      <p id="resultado4"></p>
+    </form>
+
+    <h2>Ejercicio 5</h2>
+    <form id="ejercicio5">
+      <label for="payasos">Número de payasos vendidos:</label>
+      <input type="number" id="payasos" name="payasos" required />
+      <br />
+      <label for="munecas">Número de muñecas vendidas:</label>
+      <input type="number" id="munecas" name="munecas" required />
+      <br />
+      <button type="button" onclick="CalcPeso()">Calcular Peso</button>
+      <p id="resultado5"></p>
+    </form>
+
+    <h2>Ejercicio 6</h2>
+    <form id="ejercicio6">
+      <label for="barras">Número de barras no frescas vendidas:</label>
+      <input type="number" id="barras" name="barras" required />
+      <br />
+      <button type="button" onclick="CalcPan()">Calcular Precio</button>
+      <p id="resultado6"></p>
+    </form>
+
+    <script>
+      function CalcPago() {
+        const horas = document.getElementById("horas").value;
+        const salario = document.getElementById("salario").value;
+        const pago = horas * salario;
+        const resultado1 = (document.getElementById(
+          "resultado1"
+        ).innerText = `Te corresponden ${pago} euros`);
+      }
+
+      function CalcIMC() {
+        const peso = parseFloat(document.getElementById("peso").value);
+        const altura = parseFloat(document.getElementById("altura").value);
+        const CalcIMC = peso / (altura * altura);
+        const IMC = Math.round(CalcIMC * 100) / 100;
+        document.getElementById(
+          "resultado2"
+        ).innerText = `Tienes un IMC de ${IMC}`;
+      }
+
+      function CalcDivision() {
+        const numero1 = parseFloat(document.getElementById("numero1").value);
+        const numero2 = parseFloat(document.getElementById("numero2").value);
+        const cociente = Math.floor(numero1 / numero2);
+        const resto = numero1 % numero2;
+        document.getElementById(
+          "resultadoCociente"
+        ).innerText = `El cociente es ${cociente}`;
+        document.getElementById(
+          "resultadoResto"
+        ).innerText = `El resto es ${resto}`;
+      }
+
+      function CalcInv() {}
+    </script>
+  </body>
+</html>
