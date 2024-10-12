@@ -10,8 +10,8 @@ function CalcPago() {
 
 // Ejercicio 2
 function CalcIMC() {
-  const peso = parseFloat(document.getElementById("peso").value);
-  const altura = parseFloat(document.getElementById("altura").value);
+  const peso = Number(document.getElementById("peso").value);
+  const altura = Number(document.getElementById("altura").value);
   const IMC = peso / (altura * altura);
   document.getElementById(
     "resultado2"
@@ -20,8 +20,8 @@ function CalcIMC() {
 
 // Ejercicio 3
 function CalcDivision() {
-  const numero1 = parseFloat(document.getElementById("numero1").value);
-  const numero2 = parseFloat(document.getElementById("numero2").value);
+  const numero1 = Number(document.getElementById("numero1").value);
+  const numero2 = Number(document.getElementById("numero2").value);
   const cociente = Math.floor(numero1 / numero2);
   const resto = numero1 % numero2;
   document.getElementById(
@@ -32,9 +32,9 @@ function CalcDivision() {
 
 // Ejercicio 4
 function CalcInv() {
-  const cantidad = parseFloat(document.getElementById("cantidad").value);
-  const interes = parseFloat(document.getElementById("interes").value / 100);
-  const anos = parseFloat(document.getElementById("anos").value);
+  const cantidad = Number(document.getElementById("cantidad").value);
+  const interes = Number(document.getElementById("interes").value / 100);
+  const anos = Number(document.getElementById("anos").value);
   const capital = cantidad * (1 + interes) ** anos;
   document.getElementById(
     "resultado4"

@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Ejercicios</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
   </head>
   <body>
     <h2>Ejercicio 1</h2>
@@ -70,47 +71,75 @@
 
     <h2>Ejercicio 6</h2>
     <form id="ejercicio6">
-      <label for="barras">Número de barras no frescas vendidas:</label>
-      <input type="number" id="barras" name="barras" required />
+      <label for="barrasNoDia"
+        >Número de barras que no son del día vendidas:</label
+      >
+      <input type="number" id="barrasNoDia" name="barrasNoDia" required />
+      <br />
+      <label for="totalBarras">Total de barras vendidas:</label>
+      <input type="number" id="totalBarras" name="totalBarras" required />
       <br />
       <button type="button" onclick="CalcPan()">Calcular Precio</button>
       <p id="resultado6"></p>
     </form>
 
-    <script>
-      function CalcPago() {
-        const horas = document.getElementById("horas").value;
-        const salario = document.getElementById("salario").value;
-        const pago = horas * salario;
-        const resultado1 = (document.getElementById(
-          "resultado1"
-        ).innerText = `Te corresponden ${pago} euros`);
-      }
+    <h2>Ejercicio 7</h2>
+    <form id="cuestionario">
+      <label>Pregunta 1: ¿Sabes que es el Esternocleidoocipitomastoideo?</label
+      ><br />
+      <input type="radio" name="pregunta1" value="sí" /> Sí<br />
+      <input type="radio" name="pregunta1" value="no" /> No<br /><br />
 
-      function CalcIMC() {
-        const peso = parseFloat(document.getElementById("peso").value);
-        const altura = parseFloat(document.getElementById("altura").value);
-        const CalcIMC = peso / (altura * altura);
-        const IMC = Math.round(CalcIMC * 100) / 100;
-        document.getElementById(
-          "resultado2"
-        ).innerText = `Tienes un IMC de ${IMC}`;
-      }
+      <label>Pregunta 2: ¿Seguro?</label><br />
+      <input type="radio" name="pregunta2" value="sí" /> Sí<br />
+      <input type="radio" name="pregunta2" value="no" /> No<br /><br />
 
-      function CalcDivision() {
-        const numero1 = parseFloat(document.getElementById("numero1").value);
-        const numero2 = parseFloat(document.getElementById("numero2").value);
-        const cociente = Math.floor(numero1 / numero2);
-        const resto = numero1 % numero2;
-        document.getElementById(
-          "resultadoCociente"
-        ).innerText = `El cociente es ${cociente}`;
-        document.getElementById(
-          "resultadoResto"
-        ).innerText = `El resto es ${resto}`;
-      }
+      <label>Pregunta 3: ¿Seguro seguro?</label><br />
+      <input type="radio" name="pregunta3" value="sí" /> Sí<br />
+      <input type="radio" name="pregunta3" value="no" /> No<br /><br />
 
-      function CalcInv() {}
-    </script>
+      <button type="button" onclick="verificarRespuestas()">Enviar</button>
+    </form>
+    <p id="resultado7"></p>
+
+    <h2>Ejercicio 8</h2>
+    <form id="autenticacion">
+      <label for="usuario">Usuario:</label><br />
+      <input type="text" id="usuario" name="usuario" required /><br />
+      <label for="contrasena">Contraseña:</label><br />
+      <input
+        type="password"
+        id="contrasena"
+        name="contrasena"
+        required
+      /><br /><br />
+      <button type="button" onclick="verificarAutenticacion()">Ingresar</button>
+    </form>
+    <p id="resultado8"></p>
+
+    <h2>Ejercicio 9</h2>
+    <form id="evaluacion">
+      <label for="satisfacion"
+        >¿Como de satisfecho estas con la gestión de BorjaMoll?</label
+      ><br />
+      <input
+        type="number"
+        id="satisfacion"
+        name="satisfacion"
+        required
+      /><br /><br />
+      <button type="button" onclick="evalBM()">Evaluar</button>
+    </form>
+    <p id="resultado9"></p>
+
+    <h2>Ejercicio 10</h2>
+    <form id="resultado">
+      <label for="nota">Ingresa tu nota del 1 al 10:</label><br />
+      <input type="number" id="nota" name="nota" required /><br /><br />
+      <button type="button" onclick="mostrarMensaje()">Evaluar</button>
+    </form>
+    <p id="resultado10"></p>
+    <script src="ejercicios1-5.js"></script>
+    <script src="ejercicios6-10.js"></script>
   </body>
 </html>
