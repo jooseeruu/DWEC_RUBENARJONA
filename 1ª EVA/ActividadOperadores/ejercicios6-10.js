@@ -41,14 +41,19 @@ function verificarAutenticacion() {
   const usuario = document.getElementById("usuario").value;
   const contrasena = document.getElementById("contrasena").value;
 
-  const usuarioCorrecto = "Ruben";
-  const contrasenaCorrecta = "Arjona";
+  const credenciales = {
+    usuario: "Ruben",
+    contrasena: "Arjona",
+  };
 
-  if (usuario === usuarioCorrecto && contrasena === contrasenaCorrecta) {
+  const autenticado =
+    usuario === credenciales.usuario && contrasena === credenciales.contrasena;
+
+  if (autenticado) {
     document.getElementById("resultado8").innerText = "Autenticación exitosa";
   } else {
     document.getElementById("resultado8").innerText =
-      "Usuario o contraseña equivocados";
+      "Credenciales incorrectas";
   }
 }
 
