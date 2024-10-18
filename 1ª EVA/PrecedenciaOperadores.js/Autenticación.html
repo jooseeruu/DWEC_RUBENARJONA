@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Autenticación</title>
+  </head>
+  <body>
+    <h1>Autenticación</h1>
+    <button onclick="autenticacion()">Iniciar Autenticación</button>
+
+    <script>
+      function autenticacion() {
+        const user = prompt("¿Quién eres?");
+        if (user === null) {
+          alert("Autenticación cancelada");
+          return;
+        }
+
+        if (user !== "Administrador") {
+          alert("No te conozco");
+          return;
+        }
+
+        const password = prompt("Introduce la contraseña");
+        if (password === null) {
+          alert("Autenticación cancelada");
+          return;
+        }
+
+        if (password === "1234") {
+          alert("¡Bienvenido, Administrador!");
+        } else {
+          alert("Contraseña incorrecta");
+        }
+      }
+    </script>
+  </body>
+</html>
