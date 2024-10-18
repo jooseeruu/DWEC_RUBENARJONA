@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manipulación del DOM Mejorada</title>
+    <style>
+      .highlight {
+        background-color: yellow;
+      }
+      .editable {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Manipulación del DOM en JavaScript</h1>
+    <button id="addButton">Añadir Elemento</button>
+    <button id="removeButton">Eliminar Elemento</button>
+    <button id="editButton">Editar Primer Elemento</button>
+    <ul id="itemList"></ul>
+
+    <script>
+      // Seleccionamos los elementos del DOM que vamos a manipular
+      const addButton = document.getElementById("addButton");
+      const removeButton = document.getElementById("removeButton");
+      const editButton = document.getElementById("editButton");
+      const itemList = document.getElementById("itemList");
+
+      // Función para crear y añadir un nuevo elemento a la lista
+      function addElement() {
+        // Creamos un nuevo elemento li
+        const newItem = document.createElement("li");
+        // Añadimos texto al nuevo li
+        newItem.textContent = "Nuevo Elemento";
+        // Modificamos el estilo del nuevo li
+        newItem.style.color = "blue";
+        newItem.style.margin = "10px 0";
+        // Añadimos una clase al nuevo li
+        newItem.classList.add("highlight", "editable");
+        // Añadimos el nuevo li a la lista
+        itemList.appendChild(newItem);
+      }
+
+      // Función para eliminar el último elemento de la lista
+      function removeElement() {
+        // Comprobamos si hay elementos en la lista
+        if (itemList.lastChild) {
+          // Eliminamos el último elemento de la lista
+          itemList.removeChild(itemList.lastChild);
+        } else {
+          alert("No hay más elementos para eliminar.");
+        }
+      }
+
+      // Función para editar el primer elemento de la lista
+      function editElement() {
+        // Comprobamos si hay elementos en la lista
+        if (itemList.firstChild) {
+          // Editamos el texto del primer elemento de la lista
+          itemList.firstChild.textContent = "Elemento Editado";
+          // Cambiamos el color del texto
+          itemList.firstChild.style.color = "red";
+        } else {
+          alert("No hay elementos para editar.");
+        }
+      }
+
+      // Función para editar un elemento al hacer clic
+      function editOnClick(event) {
+        if (event.target.classList.contains("editable")) {
+          const newText = prompt("Edita el texto:", event.target.textContent);
+          if (newText !== null) {
+            event.target.textContent = newText;
+          }
+        }
+      }
+
+      // Añadimos eventos a los botones
+      addButton.addEventListener("click", addElement);
+      removeButton.addEventListener("click", removeElement);
+      editButton.addEventListener("click", editElement);
+      // Añadimos un evento de clic a la lista para editar elementos
+      itemList.addEventListener("click", editOnClick);
+    </script>
+  </body>
+</html>
