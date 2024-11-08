@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Información del Navegador</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      #info {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Información del Navegador</h1>
+    <button id="obtenerInfo">Obtener Información del Navegador</button>
+    <div id="info"></div>
+
+    <script>
+      document
+        .getElementById("obtenerInfo")
+        .addEventListener("click", function () {
+          const infoDiv = document.getElementById("info");
+          infoDiv.innerHTML = "";
+
+          // Obtener información del navegador usando window.navigator
+          const idioma = navigator.language || navigator.userLanguage;
+          const navegador = navigator.userAgent;
+          const enLinea = navigator.onLine ? "Sí" : "No";
+
+          // Crear contenido HTML para mostrar la información
+          const infoHTML = `
+                <p><strong>Idioma del Navegador:</strong> ${idioma}</p>
+                <p><strong>Nombre del Navegador:</strong> ${navegador}</p>
+                <p><strong>¿Está en línea?:</strong> ${enLinea}</p>
+            `;
+
+          // Añadir la información al div
+          infoDiv.innerHTML = infoHTML;
+        });
+    </script>
+  </body>
+</html>

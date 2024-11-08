@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Manipulación del DOM con Document</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      #info {
+        margin-top: 20px;
+      }
+      .elemento {
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #000;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Manipulación del DOM con JavaScript</h1>
+    <p id="activeElementInfo"></p>
+    <button id="crearElemento">Crear Elemento</button>
+    <button id="modificarElemento">Modificar Elemento</button>
+    <button id="eliminarElemento">Eliminar Elemento</button>
+    <div id="info"></div>
+
+    <script>
+      // Mostrar el elemento actualmente enfocado
+      document.addEventListener(
+        "focus",
+        function () {
+          const activeElement = document.activeElement;
+          document.getElementById(
+            "activeElementInfo"
+          ).textContent = `Elemento activo: ${activeElement.tagName}`;
+        },
+        true
+      );
+
+      // Crear y agregar un nuevo elemento al DOM
+      document
+        .getElementById("crearElemento")
+        .addEventListener("click", function () {
+          const infoDiv = document.getElementById("info");
+          const nuevoElemento = document.createElement("div");
+          nuevoElemento.className = "elemento";
+          nuevoElemento.textContent =
+            "Este es un nuevo elemento creado por JavaScript.";
+          infoDiv.appendChild(nuevoElemento);
+        });
+
+      // Modificar el último elemento creado
+      document
+        .getElementById("modificarElemento")
+        .addEventListener("click", function () {
+          const elementos = document.getElementsByClassName("elemento");
+          if (elementos.length > 0) {
+            const ultimoElemento = elementos[elementos.length - 1];
+            ultimoElemento.textContent = "Este elemento ha sido modificado.";
+            ultimoElemento.style.backgroundColor = "#f0f0f0";
+          } else {
+            alert("No hay elementos para modificar.");
+          }
+        });
+
+      // Eliminar el último elemento creado
+      document
+        .getElementById("eliminarElemento")
+        .addEventListener("click", function () {
+          const elementos = document.getElementsByClassName("elemento");
+          if (elementos.length > 0) {
+            const ultimoElemento = elementos[elementos.length - 1];
+            ultimoElemento.remove();
+          } else {
+            alert("No hay elementos para eliminar.");
+          }
+        });
+
+      // Usar otras propiedades y métodos de document
+      console.log("Base URI:", document.baseURI);
+      console.log("Character Set:", document.characterSet);
+      console.log("Cookies:", document.cookie);
+      console.log("Doctype:", document.doctype);
+      console.log("Document Element:", document.documentElement.tagName);
+      console.log("Document URI:", document.documentURI);
+      console.log("Domain:", document.domain);
+      console.log("Embeds:", document.embeds.length);
+      console.log("Forms:", document.forms.length);
+      console.log("Has Focus:", document.hasFocus());
+      console.log("Head:", document.head.tagName);
+      console.log("Images:", document.images.length);
+      console.log("Implementation:", document.implementation);
+      console.log("Last Modified:", document.lastModified);
+      console.log("Links:", document.links.length);
+      console.log("Ready State:", document.readyState);
+      console.log("Referrer:", document.referrer);
+      console.log("Scripts:", document.scripts.length);
+      console.log("Title:", document.title);
+      console.log("URL:", document.URL);
+    </script>
+  </body>
+</html>

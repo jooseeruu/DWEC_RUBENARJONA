@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Información de la Pantalla</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      #info {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Información de la Pantalla</h1>
+    <button id="obtenerInfoPantalla">Obtener Información de la Pantalla</button>
+    <div id="info"></div>
+
+    <script>
+      document
+        .getElementById("obtenerInfoPantalla")
+        .addEventListener("click", function () {
+          const infoDiv = document.getElementById("info");
+          infoDiv.innerHTML = "";
+
+          // Obtener información de la pantalla usando el objeto screen
+          const anchoPantalla = screen.width;
+          const altoPantalla = screen.height;
+          const profundidadColor = screen.colorDepth;
+          const resolucion = screen.pixelDepth;
+
+          // Crear contenido HTML para mostrar la información
+          const infoHTML = `
+                <p><strong>Ancho de la Pantalla:</strong> ${anchoPantalla} píxeles</p>
+                <p><strong>Alto de la Pantalla:</strong> ${altoPantalla} píxeles</p>
+                <p><strong>Profundidad de Color:</strong> ${profundidadColor} bits por píxel</p>
+                <p><strong>Resolución de la Pantalla:</strong> ${resolucion} píxeles</p>
+            `;
+
+          // Añadir la información al div
+          infoDiv.innerHTML = infoHTML;
+        });
+    </script>
+  </body>
+</html>

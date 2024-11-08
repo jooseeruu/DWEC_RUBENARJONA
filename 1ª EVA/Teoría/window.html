@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modificar Tamaño de Ventana</title>
+  </head>
+  <body>
+    <h1>Modificar Tamaño de Ventana</h1>
+    <button onclick="openResizableWindow()">
+      Abrir Ventana Redimensionable
+    </button>
+
+    <script>
+      function openResizableWindow() {
+        const newWindow = window.open(
+          "",
+          "",
+          "width=400,height=400,resizable=yes"
+        );
+        newWindow.document.write("<h1>Ventana Redimensionable</h1>");
+        newWindow.document.write(
+          '<button onclick="window.resizeTo(800, 600)">Cambiar Tamaño de Ventana</button>'
+        );
+      }
+    </script>
+  </body>
+</html>
