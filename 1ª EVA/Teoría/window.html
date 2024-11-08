@@ -10,6 +10,7 @@
     <button onclick="openResizableWindow()">
       Abrir Ventana Redimensionable
     </button>
+    <button></button>
 
     <script>
       function openResizableWindow() {
@@ -18,7 +19,9 @@
           "",
           "width=400,height=400,resizable=yes"
         );
-        newWindow.document.write("<h1>Ventana Redimensionable</h1>");
+        newWindow.document.write(
+          '<h1 style="color: blue; background-color: yellow;">DEP JS</h1>'
+        );
         newWindow.document.write(
           '<button onclick="window.resizeTo(800, 600)">Cambiar Tamaño de Ventana</button>'
         );
