@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reload, Replace, and Assign Example</title>
+  </head>
+  <body>
+    <h1>Reload, Replace, and Assign Example</h1>
+    <button onclick="reloadPage()">Reload Page</button>
+    <button onclick="replacePage()">Replace Page</button>
+    <button onclick="assignPage()">Assign Page</button>
+
+    <script>
+      function reloadPage() {
+        location.reload();
+      }
+
+      function replacePage() {
+        location.replace(
+          "https://www.google.com/search?q=reload+assign+replace&oq=reload+assign+repla&gs_lcrp=EgZjaHJvbWUqBwgBECEYoAEyBggAEEUYOTIHCAEQIRigATIHCAIQIRigATIHCAMQIRigATIHCAQQIRifBTIHCAUQIRifBdIBCTE1ODk5ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8"
+        );
+      }
+
+      function assignPage() {
+        location.assign(
+          "https://www.google.com/search?q=js+die&sa=X&sca_esv=ae598eb43b0ccdde&sxsrf=ADLYWILVMmdk-cqV9GKmeH0SXNdFKYzz0A:1731083784889&udm=2&fbs=AEQNm0CbCVgAZ5mWEJDg6aoPVcBgBXzeWcoyUkQudr_R1bh2QvUTs3RkXKKX_mHmC2QZdz61GdN9lQa4YMLo-0eEb7dJJG-nxXTKsO5pQhgqG5SenXUConGRQqgE-oYbXn8pwFjd84DLPHfT_M4Zi4H6V6-RqIMu08hbi-QD5G0L5QlYz_kZxXI&ved=2ahUKEwi2oczQlc2JAxXwRaQEHT3UO98QtKgLegQIAhAH&biw=1440&bih=731&dpr=2#vhid=bRPWy1_FZOGB_M&vssid=mosaic);"
+        );
+      }
+    </script>
+  </body>
+</html>
