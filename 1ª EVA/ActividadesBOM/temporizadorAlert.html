@@ -3,7 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>TemporizadorAlert</title>
+    <script>
+      function temporizadorAlerta(segundos) {
+        const tituloOriginal = document.title;
+        let tiempoRestante = segundos;
+
+        const intervalo = setInterval(() => {
+          document.title = `Restan: ${tiempoRestante} segundos`;
+          tiempoRestante--;
+
+          if (tiempoRestante < 0) {
+            clearInterval(intervalo);
+            document.title = tituloOriginal;
+            alert("Tiempo completado");
+          }
+        }, 1000);
+      }
+    </script>
   </head>
-  <body></body>
+  <body>
+    <button onclick="temporizadorAlerta(10)">Iniciar Temporizador</button>
+  </body>
 </html>

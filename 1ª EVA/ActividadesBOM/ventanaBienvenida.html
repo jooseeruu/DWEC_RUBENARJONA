@@ -3,7 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>ventanaBienvenida</title>
   </head>
   <body></body>
 </html>
+<script>
+  function mostrarVentana() {
+    const width = 300;
+    const height = 200;
+    const left = screen.width / 2 - width / 2;
+    const top = screen.height / 2 - height / 2;
+    const ventana = window.open(
+      "",
+      "ventanaBienvenida",
+      `width=${width}, height=${height}, top=${top}, left=${left}`
+    );
+    ventana.document.write("<h1>Bienvenido</h1>");
+    ventana.document.close();
+
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+      history.go(1);
+    };
+
+    setTimeout(() => {
+      ventana.close();
+      window.onpopstate = null;
+    }, 3000);
+  }
+
+  window.onload = mostrarVentana;
+</script>
