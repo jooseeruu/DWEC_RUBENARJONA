@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Practice</title>
+  </head>
+  <body>
+    <!--
+        Ejercicio 3: Cambio de ubicación con temporizador
+
+        Enunciado:
+        Crea una función llamada cambiarUbicacion que utilice el setTimeout para redirigir al usuario a una
+        nueva URL después de un número específico de segundos pasado como argumento.
+
+        La función debe tomar dos parámetros: la URL de destino y el tiempo en segundos.
+
+        Mientras el temporizador corre, el título de la página debe mostrar el tiempo restante en el formato
+        "Redireccionando en X segundos". Una vez completado el tiempo, la función debe redirigir automáticamente al usuario a la URL
+        especificada y restaurar el título original de la página.
+      -->
+  </body>
+  <script>
+    function cambiarUbicacion(url, segundos) {
+      const tituloOriginal = document.title;
+      let tiempoRestante = segundos;
+
+      const intervalo = setInterval(() => {
+        if (tiempoRestante > 0) {
+          document.title = `Redireccionando en ${tiempoRestante} segundos`;
+          tiempoRestante--;
+        } else {
+          clearInterval(intervalo);
+          document.title = tituloOriginal;
+          window.location.href = url;
+        }
+      }, 1000);
+    }
+
+    cambiarUbicacion("https://www.example.com", 5);
+  </script>
+</html>
