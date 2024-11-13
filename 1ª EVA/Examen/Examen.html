@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TAREA DWEC UT3</title>
+  </head>
+  <body onload="generarDatos()">
+    <div id="resultado"></div>
+    <button type="button" onclick="mostrarVentana()">Ventana Emergente</button>
+  </body>
+  <script>
+    const h1 = document.createElement("h1");
+    h1.textContent = "TAREA DWEC UT3";
+    document.body.appendChild(h1);
+    const persona = {
+      nombre: "José Rubén",
+      apellidos: "Arjona Jiménez",
+      nombreCompleto: "José Rubén Arjona Jiménez",
+      nacimiento: new Date(2004, 7, 29),
+    };
+    const edad = new Date().getFullYear() - persona.nacimiento.getFullYear();
+
+    function generarDatos() {
+      document.getElementById("resultado").innerHTML = `
+        <p>Buenos Días ${persona.nombre} ${persona.apellidos}</p>
+        <p>Fecha de nacimiento: ${persona.nacimiento.toLocaleDateString()}</p>
+        <p>tus nombre tiene ${
+          persona.nombre.length
+        } letras y tus apellidos tiene ${
+        persona.apellidos.length
+      } letras incluyendo espacios <p>
+        <p>tu nombre completo en mayusculas es ${persona.nombre.toUpperCase()} ${persona.apellidos.toUpperCase()} </p>
+        <p>La primera letra A de tu nombre completo es ${persona.nombreCompleto.indexOf(
+          "A"
+        )} y la última letra A de tu nombre completo es ${persona.nombreCompleto.lastIndexOf(
+        "A"
+      )}</p>
+        <p>tu edad es ${edad} años</p>
+        <p> la raiz cuadrada de tu edad es sqrt(${edad}) = ${Math.sqrt(
+        edad
+      )}</p>
+      `;
+    }
+    function mostrarVentana() {
+      const newWindow = window.open("", "", "width=400,height=600,");
+      newWindow.document.write(
+        `<h2>Hola mi nombre es ${persona.nombre} mi apellido es ${persona.apellidos} y mi edad es ${edad} años </h2>
+        <h3> Has seleccionado de la ventana principal </h3>`
+      );
+    }
+  </script>
+</html>
