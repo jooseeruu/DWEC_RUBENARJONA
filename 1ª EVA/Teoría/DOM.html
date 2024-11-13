@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Browser Object Model (BOM) Reference</title>
+  </head>
+  <body>
+    <h1>Browser Object Model (BOM) - Reference Guide</h1>
+    <p>
+      El BOM permite interactuar con el navegador mediante una serie de objetos
+      y métodos que permiten controlar aspectos de la ventana, la ubicación, la
+      navegación, entre otros.
+    </p>
+
+    <h2>1. Window Object</h2>
+    <p>
+      El objeto <code>window</code> es el objeto global del BOM y contiene
+      métodos y propiedades fundamentales.
+    </p>
+    <ul>
+      <li>
+        <strong><code>window.open()</code>:</strong> Abre una nueva ventana o
+        pestaña.
+      </li>
+      <li>
+        <strong><code>window.close()</code>:</strong> Cierra la ventana actual.
+      </li>
+      <li>
+        <strong><code>window.alert()</code>:</strong> Muestra un cuadro de
+        alerta.
+      </li>
+      <li>
+        <strong><code>window.confirm()</code>:</strong> Muestra un cuadro de
+        confirmación con opciones Aceptar/Cancelar.
+      </li>
+      <li>
+        <strong><code>window.prompt()</code>:</strong> Solicita entrada de texto
+        del usuario.
+      </li>
+    </ul>
+    <p>
+      Documentación:
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/API/Window"
+        target="_blank"
+        >MDN - Window</a
+      >
+    </p>
+
+    <h2>2. Location Object</h2>
+    <p>
+      El objeto <code>location</code> contiene información sobre la URL actual
+      de la ventana.
+    </p>
+    <ul>
+      <li>
+        <strong><code>window.location.href</code>:</strong> Obtiene o establece
+        la URL completa.
+      </li>
+      <li>
+        <strong><code>window.location.reload()</code>:</strong> Recarga la
+        página actual.
+      </li>
+      <li>
+        <strong><code>window.location.assign()</code>:</strong> Carga un nuevo
+        documento.
+      </li>
+      <li>
+        <strong><code>window.location.replace()</code>:</strong> Reemplaza el
+        documento actual con una nueva URL sin guardar el estado en el
+        historial.
+      </li>
+    </ul>
+    <p>
+      Documentación:
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/API/Location"
+        target="_blank"
+        >MDN - Location</a
+      >
+    </p>
+
+    <h2>3. History Object</h2>
+    <p>
+      El objeto <code>history</code> permite controlar el historial de
+      navegación del usuario.
+    </p>
+    <ul>
+      <li>
+        <strong><code>window.history.back()</code>:</strong> Navega una página
+        atrás en el historial.
+      </li>
+      <li>
+        <strong><code>window.history.forward()</code>:</strong> Navega una
+        página adelante en el historial.
+      </li>
+      <li>
+        <strong><code>window.history.go()</code>:</strong> Navega un número
+        específico de páginas en el historial.
+      </li>
+      <li>
+        <strong><code>window.history.length</code>:</strong> Devuelve el número
+        de entradas en el historial.
+      </li>
+    </ul>
+    <p>
+      Documentación:
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/API/History"
+        target="_blank"
+        >MDN - History</a
+      >
+    </p>
+
+    <h2>4. Navigator Object</h2>
+    <p>
+      El objeto <code>navigator</code> proporciona información sobre el
+      navegador del usuario.
+    </p>
+    <ul>
+      <li>
+        <strong><code>navigator.userAgent</code>:</strong> Proporciona
+        información sobre el navegador y el sistema operativo.
+      </li>
+      <li>
+        <strong><code>navigator.language</code>:</strong> Devuelve el idioma
+        preferido del navegador.
+      </li>
+      <li>
+        <strong><code>navigator.geolocation</code>:</strong> Accede a la
+        ubicación geográfica (requiere permisos).
+      </li>
+    </ul>
+    <p>
+      Documentación:
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator"
+        target="_blank"
+        >MDN - Navigator</a
+      >
+    </p>
+
+    <h2>5. Screen Object</h2>
+    <p>
+      El objeto <code>screen</code> proporciona información sobre la pantalla
+      del dispositivo.
+    </p>
+    <ul>
+      <li>
+        <strong><code>screen.width</code>:</strong> Ancho de la pantalla en
+        píxeles.
+      </li>
+      <li>
+        <strong><code>screen.height</code>:</strong> Alto de la pantalla en
+        píxeles.
+      </li>
+      <li>
+        <strong><code>screen.availWidth</code>:</strong> Ancho disponible
+        (excluyendo elementos como la barra de tareas).
+      </li>
+      <li>
+        <strong><code>screen.availHeight</code>:</strong> Alto disponible.
+      </li>
+    </ul>
+    <p>
+      Documentación:
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/API/Screen"
+        target="_blank"
+        >MDN - Screen</a
+      >
+    </p>
+
+    <h2>6. Ejemplos</h2>
+    <pre>
+    <code>
+      // Ejemplo: Redirigir al usuario después de 3 segundos
+      setTimeout(() => {
+        window.location.href = "https://www.example.com";
+      }, 3000);
+
+      // Ejemplo: Mostrar una alerta
+      window.alert("Hola, usuario!");
+
+      // Ejemplo: Volver una página en el historial
+      window.history.back();
+    </code>
+  </pre>
+  </body>
+</html>
