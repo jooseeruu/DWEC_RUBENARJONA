@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    /*function ask(question, yes, no) {
+      if (confirm(question)) yes();
+      else no();
+    }*/
+
+    let ask = (question, yes, no) => (confirm(question) ? yes() : no());
+
+    /*ask(
+  "Do you agree?",
+  function() { alert("You agreed."); },
+  function() { alert("You canceled the execution."); }
+);*/
+
+    ask(
+      "Do you agree?",
+      () => alert("You agreed."),
+      () => alert("You canceled the execution.")
+    );
+    let yes = () => alert("You agreed.");
+    let no = () => alert("You canceled the execution.");
+  </script>
+</html>
