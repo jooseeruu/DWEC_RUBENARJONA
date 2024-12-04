@@ -31,23 +31,26 @@
     const cuadradoRojo = document.getElementById("cuadradoRojo");
     const cuadradoBlanco = document.getElementById("cuadradoBlanco");
 
-    cuadradoBlanco.addEventListener("mouseover", (event) => {
-      // cuando el mouse pasa por encima del cuadrado blanco
-      const dentroRojo = cuadradoRojo.contains(event.target); // devuelve true si el elemento está dentro del cuadrado rojo
-      if (dentroRojo) {
-        // si el elemento está dentro del cuadrado rojo
-        console.log("Dentro"); // imprime "Dentro"
-      } else {
-        console.log("Fuera"); // si no, imprime "Fuera"
-      }
-    });
-    cuadradoBlanco.addEventListener("click", (event) => {
-      // cuando se hace click en el cuadrado blanco
+    // Función para manejar eventos
+    const manejarEvento = (event, tipo) => {
       const dentroRojo = cuadradoRojo.contains(event.target);
       if (dentroRojo) {
-        // si el elemento está dentro del cuadrado rojo
-        console.log("Dentro"); // imprime "Dentro"
+        console.log("Dentro");
+      } else if (tipo === "mouseover") {
+        console.log("Fuera");
       }
-    });
+    };
+
+    // Delegación de eventos con false en la fase de burbuja
+    cuadradoBlanco.addEventListener(
+      "mouseover",
+      (event) => manejarEvento(event, "mouseover"),
+      false
+    );
+    cuadradoBlanco.addEventListener(
+      "click",
+      (event) => manejarEvento(event, "click"),
+      false
+    );
   </script>
 </html>
