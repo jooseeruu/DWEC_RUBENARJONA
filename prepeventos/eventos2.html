@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejemplos de Manejo de Eventos en JavaScript</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .example {
+        margin-bottom: 30px;
+      }
+      .example button,
+      .example input {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Ejemplos de Manejo de Eventos en JavaScript</h1>
+
+    <!-- Ejemplo 1: Asignación de Manejadores de Eventos en HTML -->
+    <div class="example">
+      <h2>1. Asignación de Manejadores de Eventos en HTML</h2>
+      <button onclick="mostrarAlerta()">Haz clic aquí</button>
+    </div>
+
+    <!-- Ejemplo 2: Uso de addEventListener() -->
+    <div class="example">
+      <h2>2. Uso de addEventListener()</h2>
+      <button id="btnAddEventListener">Haz clic aquí</button>
+    </div>
+
+    <!-- Ejemplo 3: Eliminación de Manejadores de Eventos con removeEventListener() -->
+    <div class="example">
+      <h2>
+        3. Eliminación de Manejadores de Eventos con removeEventListener()
+      </h2>
+      <button id="btnRemoveEventListener">Haz clic aquí</button>
+      <button id="btnEliminarManejador">Eliminar Manejador</button>
+    </div>
+
+    <!-- Ejemplo 4: Propiedades de Eventos en el DOM -->
+    <div class="example">
+      <h2>4. Propiedades de Eventos en el DOM</h2>
+      <button id="btnPropiedadesDOM">Haz clic aquí</button>
+    </div>
+
+    <!-- Ejemplo 5: Delegación de Eventos -->
+    <div class="example">
+      <h2>5. Delegación de Eventos</h2>
+      <div id="contenedor">
+        <button class="btnDelegado">Botón 1</button>
+        <button class="btnDelegado">Botón 2</button>
+        <button class="btnDelegado">Botón 3</button>
+      </div>
+    </div>
+
+    <!-- Ejemplo 6: Manejo de la Propagación de Eventos -->
+    <div class="example">
+      <h2>6. Manejo de la Propagación de Eventos</h2>
+      <div id="padre" style="padding: 20px; background-color: #f0f0f0">
+        Contenedor Padre
+        <div id="hijo" style="padding: 20px; background-color: #d0d0d0">
+          Contenedor Hijo
+        </div>
+      </div>
+    </div>
+
+    <!-- Ejemplo 7: Uso del Objeto Event -->
+    <div class="example">
+      <h2>7. Uso del Objeto Event</h2>
+      <button id="btnObjetoEvent">Haz clic aquí</button>
+    </div>
+
+    <script>
+      // Ejemplo 1: Asignación de Manejadores de Eventos en HTML
+      function mostrarAlerta() {
+        alert("Botón clickeado");
+      }
+
+      // Ejemplo 2: Uso de addEventListener()
+      const btnAddEventListener = document.getElementById(
+        "btnAddEventListener"
+      );
+      btnAddEventListener.addEventListener("click", function () {
+        alert("Botón clickeado con addEventListener");
+      });
+
+      // Ejemplo 3: Eliminación de Manejadores de Eventos con removeEventListener()
+      const btnRemoveEventListener = document.getElementById(
+        "btnRemoveEventListener"
+      );
+      function manejadorEvento() {
+        alert("Este manejador será eliminado");
+      }
+      btnRemoveEventListener.addEventListener("click", manejadorEvento);
+      const btnEliminarManejador = document.getElementById(
+        "btnEliminarManejador"
+      );
+      btnEliminarManejador.addEventListener("click", function () {
+        btnRemoveEventListener.removeEventListener("click", manejadorEvento);
+        alert("Manejador eliminado");
+      });
+
+      // Ejemplo 4: Propiedades de Eventos en el DOM
+      const btnPropiedadesDOM = document.getElementById("btnPropiedadesDOM");
+      btnPropiedadesDOM.onclick = function () {
+        alert("Botón clickeado con propiedad DOM");
+      };
+
+      // Ejemplo 5: Delegación de Eventos
+      const contenedor = document.getElementById("contenedor");
+      contenedor.addEventListener("click", function (event) {
+        if (event.target && event.target.matches("button.btnDelegado")) {
+          alert(event.target.textContent + " clickeado");
+        }
+      });
+
+      // Ejemplo 6: Manejo de la Propagación de Eventos
+      const padre = document.getElementById("padre");
+      const hijo = document.getElementById("hijo");
+      padre.addEventListener("click", function () {
+        alert("Click en el contenedor padre");
+      });
+      hijo.addEventListener("click", function (event) {
+        alert("Click en el contenedor hijo");
+        event.stopPropagation(); // Detiene la propagación
+      });
+
+      // Ejemplo 7: Uso del Objeto Event
+      const btnObjetoEvent = document.getElementById("btnObjetoEvent");
+      btnObjetoEvent.addEventListener("click", function (event) {
+        alert(
+          "Tipo de evento: " +
+            event.type +
+            "\nElemento objetivo: " +
+            event.target.tagName
+        );
+      });
+    </script>
+  </body>
+</html>
