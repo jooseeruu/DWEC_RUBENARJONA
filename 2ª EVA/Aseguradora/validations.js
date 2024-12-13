@@ -10,7 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
       !validarMatricula() ||
       !validarFMatricula() ||
       !validarFCarnet() ||
-      !validarFotoJPG()
+      !validarFotoJPG() ||
+      !validarFNacimiento()
     ) {
       event.preventDefault(); // Detiene el envío del formulario si hay errores
     }
@@ -41,8 +42,9 @@ function validarDNI() {
 
 function validarCorreo() {
   const correo = document.getElementById("correo").value.trim();
+  // https://w3.unpocodetodo.info/utiles/regex-ejemplos.php?type=email Una implementación del Estandard Official: RFC 5322
   const patron =
-    /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/; //https://es.stackoverflow.com/questions/415/regex-para-validar-numeros-de-movil-espa%C3%B1oles
+    /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
   if (!patron.test(correo)) {
     alert("Correo no válido");
     return false;
@@ -52,7 +54,7 @@ function validarCorreo() {
 
 function validarTelefono() {
   const telefono = document.getElementById("telefono").value.trim();
-  const patron = /^(?:\+34|0034|34)?[ -]?(6|7)(?:[ -]?[0-9]){8}$/;
+  const patron = /^(?:\+34|0034|34)?[ -]?(6|7)(?:[ -]?[0-9]){8}$/; //https://es.stackoverflow.com/questions/415/regex-para-validar-numeros-de-movil-espa%C3%B1oles
   if (!patron.test(telefono)) {
     alert("Teléfono no válido");
     return false;
