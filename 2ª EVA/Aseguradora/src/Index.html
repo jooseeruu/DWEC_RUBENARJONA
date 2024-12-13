@@ -4,132 +4,209 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Formulario de Seguro de Coche</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet" />
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/src/css/styles.css" />
   </head>
   <body>
-    <h1>Formulario de Seguro de Coche</h1>
-    <form id="form-seguro" enctype="multipart/form-data">
-      <!-- Campos de texto -->
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" required />
-      <br />
+    <div class="card">
+      <div class="card-header text-center bg-primary text-white">
+        <h2 class="mb-0" style="font-size: 1.25rem">
+          Formulario de Seguro de Coche
+        </h2>
+      </div>
+      <div class="card-body">
+        <form id="form-seguro" class="row g-2" enctype="multipart/form-data">
+          <!-- Nombre -->
+          <div class="col-md-6">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              class="form-control"
+              required />
+          </div>
 
-      <label for="apellidos">Apellidos:</label>
-      <input type="text" id="apellidos" name="apellidos" required />
-      <br />
+          <!-- Apellidos -->
+          <div class="col-md-6">
+            <label for="apellidos" class="form-label">Apellidos</label>
+            <input
+              type="text"
+              id="apellidos"
+              name="apellidos"
+              class="form-control"
+              required />
+          </div>
 
-      <label for="dni">DNI:</label>
-      <input type="text" id="dni" name="dni" required />
-      <br />
+          <!-- DNI -->
+          <div class="col-md-6">
+            <label for="dni" class="form-label">DNI</label>
+            <input
+              type="text"
+              id="dni"
+              name="dni"
+              class="form-control"
+              required />
+          </div>
 
-      <label for="correo">Correo electrónico:</label>
-      <input type="email" id="correo" name="correo" required />
-      <br />
+          <!-- Correo -->
+          <div class="col-md-6">
+            <label for="correo" class="form-label">Correo Electrónico</label>
+            <input
+              type="email"
+              id="correo"
+              name="correo"
+              class="form-control"
+              required />
+          </div>
 
-      <!-- Campos numéricos -->
-      <label for="telefono">Teléfono:</label>
-      <input type="tel" id="telefono" name="telefono" required />
-      <br />
+          <!-- Teléfono -->
+          <div class="col-md-6">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input
+              type="tel"
+              id="telefono"
+              name="telefono"
+              class="form-control"
+              required />
+          </div>
 
-      <label for="codigo_postal">Código postal:</label>
-      <input type="text" id="codigo_postal" name="codigo_postal" required />
-      <br />
+          <!-- Código Postal -->
+          <div class="col-md-6">
+            <label for="codigo_postal" class="form-label">Código Postal</label>
+            <input
+              type="text"
+              id="codigo_postal"
+              name="codigo_postal"
+              class="form-control"
+              required />
+          </div>
 
-      <!-- Campos de fecha -->
-      <label for="fecha_nacimiento">Fecha de nacimiento:</label>
-      <input
-        type="date"
-        id="fecha_nacimiento"
-        name="fecha_nacimiento"
-        required />
-      <br />
+          <!-- Fecha de Nacimiento -->
+          <div class="col-md-6">
+            <label for="fecha_nacimiento" class="form-label"
+              >Fecha de Nacimiento</label
+            >
+            <input
+              type="date"
+              id="fecha_nacimiento"
+              name="fecha_nacimiento"
+              class="form-control"
+              required />
+          </div>
 
-      <label for="fecha_carnet">Fecha del carnet de conducir:</label>
-      <input type="date" id="fecha_carnet" name="fecha_carnet" required />
-      <br />
+          <!-- Fecha del Carnet -->
+          <div class="col-md-6">
+            <label for="fecha_carnet" class="form-label"
+              >Fecha del Carnet</label
+            >
+            <input
+              type="date"
+              id="fecha_carnet"
+              name="fecha_carnet"
+              class="form-control"
+              required />
+          </div>
 
-      <label for="fecha_matriculacion">Fecha de matriculación:</label>
-      <input
-        type="date"
-        id="fecha_matriculacion"
-        name="fecha_matriculacion"
-        required />
-      <br />
+          <!-- Matrícula -->
+          <div class="col-md-6">
+            <label for="matricula" class="form-label">Matrícula</label>
+            <input
+              type="text"
+              id="matricula"
+              name="matricula"
+              class="form-control"
+              required />
+          </div>
 
-      <label for="matricula">Matricula:</label>
-      <input type="text" id="matricula" name="matricula" required />
-      <br />
+          <!-- Comunidad -->
+          <div class="col-md-6">
+            <label for="comunidad" class="form-label">Comunidad</label>
+            <select
+              id="comunidad"
+              name="comunidad"
+              class="form-select"
+              required>
+              <option value="">Selecciona una comunidad</option>
+            </select>
+          </div>
 
-      <!-- Selectores -->
-      <label for="sexo">Sexo:</label>
-      <select id="sexo" name="sexo" required>
-        <option value="Hombre">Hombre</option>
-        <option value="Mujer">Mujer</option>
-        <option value="Otro">Otro</option>
-      </select>
-      <br />
+          <!-- Provincia -->
+          <div class="col-md-6">
+            <label for="provincia" class="form-label">Provincia</label>
+            <select
+              id="provincia"
+              name="provincia"
+              class="form-select"
+              required>
+              <option value="">Selecciona una provincia</option>
+            </select>
+          </div>
 
-      <label for="comunidad">Comunidad:</label>
-      <select id="comunidad" name="comunidad" required>
-        <option value="">Selecciona una comunidad</option>
-        <!-- Opciones de comunidad -->
-      </select>
-      <br />
+          <!-- Marca -->
+          <div class="col-md-6">
+            <label for="marca" class="form-label">Marca</label>
+            <select id="marca" name="marca" class="form-select" required>
+              <option value="">Selecciona una marca</option>
+            </select>
+          </div>
 
-      <label for="provincia">Provincia:</label>
-      <select id="provincia" name="provincia" required>
-        <option value="">Selecciona una provincia</option>
-        <!-- Opciones dependientes de la comunidad -->
-      </select>
-      <br />
+          <!-- Tipo de Seguro -->
+          <div class="col-md-6">
+            <label for="tipo_seguro" class="form-label">Tipo de Seguro</label>
+            <select
+              id="tipo_seguro"
+              name="tipo_seguro"
+              class="form-select"
+              required>
+              <option value="Terceros">Terceros</option>
+              <option value="Terceros ampliado">Terceros ampliado</option>
+              <option value="Con franquicia">Con franquicia</option>
+              <option value="Todo riesgo">Todo riesgo</option>
+            </select>
+          </div>
 
-      <label for="marca">Marca:</label>
-      <select id="marca" name="marca" required>
-        <option value="">Selecciona una marca</option>
-        <!-- Opciones de marca -->
-      </select>
-      <br />
+          <!-- Foto Carnet -->
+          <div class="col-12">
+            <label for="foto_carnet" class="form-label">Foto Carnet</label>
+            <input
+              type="file"
+              id="foto_carnet"
+              name="foto_carnet"
+              class="form-control" />
+          </div>
 
-      <label for="modelo">Modelo:</label>
-      <select id="modelo" name="modelo" required>
-        <option value="">Selecciona un modelo</option>
-        <!-- Opciones dependientes de la marca -->
-      </select>
-      <br />
+          <!-- Checkbox -->
+          <div class="col-12">
+            <div class="form-check">
+              <input
+                type="checkbox"
+                id="acepto"
+                name="acepto"
+                class="form-check-input"
+                required />
+              <label for="acepto" class="form-check-label"
+                >Acepto términos y condiciones</label
+              >
+            </div>
+          </div>
 
-      <label for="tipo_seguro">Tipo de seguro:</label>
-      <select id="tipo_seguro" name="tipo_seguro" required>
-        <option value="Terceros">Terceros</option>
-        <option value="Terceros ampliado">Terceros ampliado</option>
-        <option value="Con franquicia">Con franquicia</option>
-        <option value="Todo riesgo">Todo riesgo</option>
-      </select>
-      <br />
+          <!-- Botón -->
+          <div class="col-12 text-center">
+            <button type="submit" class="btn btn-primary">
+              Calcular Precio
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
 
-      <label for="tipo_vehiculo">Tipo de vehículo:</label>
-      <select id="tipo_vehiculo" name="tipo_vehiculo" required>
-        <option value="Diesel">Diesel</option>
-        <option value="Gasolina">Gasolina</option>
-        <option value="Hibrido">Híbrido</option>
-        <option value="Electrico">Eléctrico</option>
-      </select>
-      <br />
-
-      <!-- Subida de fichero -->
-      <label for="foto_carnet">Foto del carnet de conducir (JPG):</label>
-      <input type="file" id="foto_carnet" name="foto_carnet" />
-      <br />
-
-      <!-- Checkbox -->
-      <input type="checkbox" id="acepto" name="acepto" required />
-      <label for="acepto">Acepto los términos y condiciones</label>
-      <br />
-
-      <!-- Botón de envío -->
-      <button type="submit">Calcular Precio</button>
-    </form>
-    <script src="/src/js/locationLoader.js"></script>
-    <script src="/src/js/objects.js"></script>
-    <script src="/src/js/validations.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

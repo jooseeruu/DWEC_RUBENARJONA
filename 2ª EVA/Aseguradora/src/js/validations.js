@@ -30,19 +30,19 @@ function validarNombreApellido() {
   return true;
 }
 
+//https://gist.github.com/afgomez/5691823
 function validarDNI() {
   const dni = document.getElementById("dni").value.trim();
-  const patron = /^(\d{8})([A-Z])$/; //https://gist.github.com/afgomez/5691823
+  const patron = /^(\d{8})([A-Z])$/;
   if (!patron.test(dni)) {
     alert("DNI no válido (8 dígitos y una letra)");
     return false;
   }
   return true;
 }
-
+// https://w3.unpocodetodo.info/utiles/regex-ejemplos.php?type=email Una implementación del Estandard Official: RFC 5322
 function validarCorreo() {
   const correo = document.getElementById("correo").value.trim();
-  // https://w3.unpocodetodo.info/utiles/regex-ejemplos.php?type=email Una implementación del Estandard Official: RFC 5322
   const patron =
     /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
   if (!patron.test(correo)) {
@@ -51,10 +51,10 @@ function validarCorreo() {
   }
   return true;
 }
-
+//https://es.stackoverflow.com/questions/415/regex-para-validar-numeros-de-movil-espa%C3%B1oles
 function validarTelefono() {
   const telefono = document.getElementById("telefono").value.trim();
-  const patron = /^(?:\+34|0034|34)?[ -]?(6|7)(?:[ -]?[0-9]){8}$/; //https://es.stackoverflow.com/questions/415/regex-para-validar-numeros-de-movil-espa%C3%B1oles
+  const patron = /^(?:\+34|0034|34)?[ -]?(6|7)(?:[ -]?[0-9]){8}$/;
   if (!patron.test(telefono)) {
     alert("Teléfono no válido");
     return false;
@@ -72,24 +72,27 @@ function validarCodigoPostal() {
   return true;
 }
 
+//https://github.com/robertostory/validate_matricula_espana/blob/main/script.js
 function validarMatricula() {
-  //https://github.com/robertostory/validate_matricula_espana/blob/main/script.js
-  const matricula = document.getElementById("matricula").value;
-  let matriculaFormateada = matricula.toUpperCase().replace("-", "").trim();
-  let patronNEW =
-    /^\d\d\d\d[BCDFGHJKLMNPRSTVWXYZ][BCDFGHJKLMNPRSTVWXYZ][BCDFGHJKLMNPRSTVWXYZ]$/;
-  let patronMID = /^[A-Z]{1,2}\d\d\d\d[A-Z]{1,2}$/;
-  let patronOLD = /^[A-Z]{1,2}\d\d\d\d\d\d$/;
-  let ciclomotores =
-    /^C\d\d\d\d[BCDFGHJKLMNPRSTVWXYZ][BCDFGHJKLMNPRSTVWXYZ][BCDFGHJKLMNPRSTVWXYZ]$/;
-  if (
-    !patronNEW.test(matriculaFormateada) ||
-    !patronMID.test(matriculaFormateada) ||
-    !patronOLD.test(matriculaFormateada) ||
-    !ciclomotores.test(matriculaFormateada)
-  ) {
+  const matricula = document
+    .getElementById("matricula")
+    .value.trim()
+    .toUpperCase()
+    .replace("-", "");
+
+  const patrones = [
+    /^\d{4}[BCDFGHJKLMNPRSTVWXYZ]{3}$/, // Patron NEW (4 dígitos + 3 letras)
+    /^[A-Z]{1,2}\d{4}[A-Z]{1,2}$/, // Patron MID (1 o 2 letras + 4 dígitos + 1 o 2 letras)
+    /^[A-Z]{1,2}\d{6}$/, // Patron OLD (1 o 2 letras + 6 dígitos)
+  ];
+
+  // Verifica si al menos uno de los patrones coincide
+  const esValida = patrones.some((patron) => patron.test(matricula));
+
+  if (!esValida) {
     alert("Matrícula no válida");
     return false;
   }
   return true;
 }
+//faltan validaciones de fecha de matriculación y fecha de carnet y validación de foto
