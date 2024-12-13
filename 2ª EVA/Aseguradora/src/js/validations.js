@@ -71,3 +71,25 @@ function validarCodigoPostal() {
   }
   return true;
 }
+
+function validarMatricula() {
+  //https://github.com/robertostory/validate_matricula_espana/blob/main/script.jss
+  const matricula = document.getElementById("matricula").value;
+  let matriculaFormateada = matricula.toUpperCase().replace("-", "").trim();
+  let patronNEW =
+    /^\d\d\d\d[BCDFGHJKLMNPRSTVWXYZ][BCDFGHJKLMNPRSTVWXYZ][BCDFGHJKLMNPRSTVWXYZ]$/;
+  let patronMID = /^[A-Z]{1,2}\d\d\d\d[A-Z]{1,2}$/;
+  let patronOLD = /^[A-Z]{1,2}\d\d\d\d\d\d$/;
+  let ciclomotores =
+    /^C\d\d\d\d[BCDFGHJKLMNPRSTVWXYZ][BCDFGHJKLMNPRSTVWXYZ][BCDFGHJKLMNPRSTVWXYZ]$/;
+  if (
+    !patronNEW.test(matriculaFormateada) ||
+    !patronMID.test(matriculaFormateada) ||
+    !patronOLD.test(matriculaFormateada) ||
+    !ciclomotores.test(matriculaFormateada)
+  ) {
+    alert("Matrícula no válida");
+    return false;
+  }
+  return true;
+}
