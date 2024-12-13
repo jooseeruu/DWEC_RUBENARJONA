@@ -73,7 +73,7 @@ function validarCodigoPostal() {
 }
 
 function validarMatricula() {
-  //https://github.com/robertostory/validate_matricula_espana/blob/main/script.jss
+  //https://github.com/robertostory/validate_matricula_espana/blob/main/script.js
   const matricula = document.getElementById("matricula").value;
   let matriculaFormateada = matricula.toUpperCase().replace("-", "").trim();
   let patronNEW =
