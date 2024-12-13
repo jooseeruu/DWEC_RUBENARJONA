@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Seguro de Coche</title>
+  </head>
+  <body>
+    <h1>Formulario de Seguro de Coche</h1>
+    <form id="form-seguro" enctype="multipart/form-data">
+      <!-- Campos de texto -->
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required />
+      <br />
+
+      <label for="apellidos">Apellidos:</label>
+      <input type="text" id="apellidos" name="apellidos" required />
+      <br />
+
+      <label for="dni">DNI:</label>
+      <input type="text" id="dni" name="dni" required />
+      <br />
+
+      <label for="correo">Correo electrónico:</label>
+      <input type="email" id="correo" name="correo" required />
+      <br />
+
+      <!-- Campos numéricos -->
+      <label for="telefono">Teléfono:</label>
+      <input type="tel" id="telefono" name="telefono" required />
+      <br />
+
+      <label for="codigo_postal">Código postal:</label>
+      <input type="text" id="codigo_postal" name="codigo_postal" required />
+      <br />
+
+      <!-- Campos de fecha -->
+      <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+      <input
+        type="date"
+        id="fecha_nacimiento"
+        name="fecha_nacimiento"
+        required />
+      <br />
+
+      <label for="fecha_carnet">Fecha del carnet de conducir:</label>
+      <input type="date" id="fecha_carnet" name="fecha_carnet" required />
+      <br />
+
+      <label for="fecha_matriculacion">Fecha de matriculación:</label>
+      <input
+        type="date"
+        id="fecha_matriculacion"
+        name="fecha_matriculacion"
+        required />
+      <br />
+
+      <!-- Selectores -->
+      <label for="sexo">Sexo:</label>
+      <select id="sexo" name="sexo" required>
+        <option value="Hombre">Hombre</option>
+        <option value="Mujer">Mujer</option>
+        <option value="Otro">Otro</option>
+      </select>
+      <br />
+
+      <label for="comunidad">Comunidad:</label>
+      <select id="comunidad" name="comunidad" required>
+        <option value="">Selecciona una comunidad</option>
+        <!-- Opciones de comunidad -->
+      </select>
+      <br />
+
+      <label for="provincia">Provincia:</label>
+      <select id="provincia" name="provincia" required>
+        <option value="">Selecciona una provincia</option>
+        <!-- Opciones dependientes de la comunidad -->
+      </select>
+      <br />
+
+      <label for="marca">Marca:</label>
+      <select id="marca" name="marca" required>
+        <option value="">Selecciona una marca</option>
+        <!-- Opciones de marca -->
+      </select>
+      <br />
+
+      <label for="modelo">Modelo:</label>
+      <select id="modelo" name="modelo" required>
+        <option value="">Selecciona un modelo</option>
+        <!-- Opciones dependientes de la marca -->
+      </select>
+      <br />
+
+      <label for="matricula">Matricula:</label>
+      <input type="text" id="matricula" name="matricula" required />
+      <br />
+
+      <label for="tipo_seguro">Tipo de seguro:</label>
+      <select id="tipo_seguro" name="tipo_seguro" required>
+        <option value="Terceros">Terceros</option>
+        <option value="Terceros ampliado">Terceros ampliado</option>
+        <option value="Con franquicia">Con franquicia</option>
+        <option value="Todo riesgo">Todo riesgo</option>
+      </select>
+      <br />
+
+      <label for="tipo_vehiculo">Tipo de vehículo:</label>
+      <select id="tipo_vehiculo" name="tipo_vehiculo" required>
+        <option value="Diesel">Diesel</option>
+        <option value="Gasolina">Gasolina</option>
+        <option value="Hibrido">Híbrido</option>
+        <option value="Electrico">Eléctrico</option>
+      </select>
+      <br />
+
+      <!-- Subida de fichero -->
+      <label for="foto_carnet">Foto del carnet de conducir (JPG):</label>
+      <input type="file" id="foto_carnet" name="foto_carnet" />
+      <br />
+
+      <!-- Checkbox -->
+      <input type="checkbox" id="acepto" name="acepto" required />
+      <label for="acepto">Acepto los términos y condiciones</label>
+      <br />
+
+      <!-- Botón de envío -->
+      <button type="submit">Calcular Precio</button>
+    </form>
+    <script src="locationLoader.js"></script>
+    <script src="validations.js"></script>
+    <script src="objects.js"></script>
+  </body>
+</html>
