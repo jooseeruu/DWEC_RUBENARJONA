@@ -22,3 +22,10 @@ button {
   font-size: 0.85rem;
   padding: 0.4rem 1rem;
 }
+.is-valid {
+  border-color: #198754; /* Verde */
+}
+
+.is-invalid {
+  border-color: #dc3545; /* Rojo */
+}

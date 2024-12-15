@@ -95,4 +95,74 @@ function validarMatricula() {
   }
   return true;
 }
-//faltan validaciones de fecha de matriculación y fecha de carnet y validación de foto
+//faltan validaciones de y validación de foto
+
+function validarFMatricula() {
+  const fechaMatricula = document.getElementById("fecha_matricula").value;
+  const fechaActual = new Date(); // Fecha actual en formato ISO
+  if (fechaMatricula > fechaActual) {
+    alert("La fecha de matriculación no puede ser futura");
+    return false;
+  }
+  return true;
+}
+
+function validarFNacimiento() {
+  const fechaNacimiento = new Date(
+    document.getElementById("fecha_nacimiento").value
+  );
+  const fechaActual = new Date();
+
+  if (fechaNacimiento > fechaActual) {
+    alert("La fecha de nacimiento no puede ser futura");
+    return false;
+  }
+
+  const edadMinima = new Date(
+    fechaNacimiento.getFullYear() + 18,
+    fechaNacimiento.getMonth(),
+    fechaNacimiento.getDate()
+  );
+
+  if (fechaActual < edadMinima) {
+    alert("Debes tener al menos 18 años");
+    return false;
+  }
+
+  return true;
+}
+
+function validarFCarnet() {
+  const fechaCarnet = document.getElementById("fecha_carnet").value;
+  const fechaNacimiento = document.getElementById("fecha_nacimiento").value;
+  if (fechaCarnet < fechaNacimiento) {
+    alert("La fecha de carnet no puede ser anterior a la de nacimiento");
+    return false;
+  }
+  const fechaActual = new Date();
+  if (fechaCarnet > fechaActual) {
+    alert("La fecha de carnet no puede ser futura");
+    return false;
+  }
+
+  return true;
+}
+
+function validarFotoJPG() {
+  const fotoInput = document.getElementById("fotoCarnet");
+  const archivo = fotoInput.files[0]; // Obtenemos el archivo cargado
+
+  if (!archivo) {
+    alert("No se ha seleccionado ningún archivo");
+    return false;
+  }
+
+  // Validamos tipo MIME para asegurarse de que sea JPG, es muy facil cambiar la extensión de un archivo de un archivo y si solo se valida por la extensión se puede subir un archivo malicioso
+  const mimeValido = ["image/jpeg", "image/jpg"];
+  if (!mimeValido.includes(archivo.type)) {
+    alert("La foto debe ser de tipo JPG");
+    return false;
+  }
+
+  return true;
+}
