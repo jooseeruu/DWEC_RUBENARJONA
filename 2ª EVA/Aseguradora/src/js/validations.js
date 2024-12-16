@@ -217,3 +217,5 @@ function validarFotoJPG() {
   limpiarError("foto_carnet");
   return true;
 }
+// 1 validar todo prevenir inyecciones sql
+// 2 meter tipo de vehiculo 
