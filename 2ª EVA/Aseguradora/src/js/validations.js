@@ -63,8 +63,8 @@ function validarNombreApellido() {
 }
 //https://gist.github.com/afgomez/5691823
 function validarDNI() {
-  const input = document.getElementById("dni").toUpperCase();
-  const valor = input.value.trim();
+  const input = document.getElementById("dni");
+  const valor = input.value.trim().toUpperCase();
   const patron = /^(\d{8})([a-zA-Z])$/; // 8 dígitos y una letra
   if (!patron.test(valor)) {
     mostrarError("dni", "DNI no válido (8 dígitos y una letra)");
@@ -178,15 +178,29 @@ function validarFCarnet() {
 function validarFotoJPG() {
   const input = document.getElementById("foto_carnet");
   const archivo = input.files[0];
+
   if (!archivo) {
     mostrarError("foto_carnet", "No se ha seleccionado ningún archivo");
     return false;
   }
-  const mimeValido = ["image/jpg"];
-  if (!mimeValido.includes(archivo.type)) {
+
+  // Lista de tipos MIME válidos (solo aceptamos image/jpeg)
+  const mimeValido = "image/jpeg"; // JPG y JPEG son lo mismo en cuanto a MIME type
+  if (archivo.type !== mimeValido) {
     mostrarError("foto_carnet", "La foto debe ser de tipo JPG");
     return false;
   }
+
+  // Validación adicional: comprobar la extensión .jpg
+  const nombreArchivo = archivo.name.toLowerCase();
+  if (!nombreArchivo.endsWith(".jpg")) {
+    mostrarError("foto_carnet", "El archivo debe tener la extensión .jpg");
+    return false;
+  }
+
   limpiarError("foto_carnet");
   return true;
 }
+
+// NOTAS:
+// - Arreglar Validacion Apellidos
