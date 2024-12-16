@@ -1,168 +1,192 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Creamos un array de objetos con los campos a validar y sus funciones de validación
+  const campos = [
+    { id: "nombre", validator: validarNombreApellido },
+    { id: "apellidos", validator: validarNombreApellido },
+    { id: "dni", validator: validarDNI },
+    { id: "correo", validator: validarCorreo },
+    { id: "telefono", validator: validarTelefono },
+    { id: "codigo_postal", validator: validarCodigoPostal },
+    { id: "matricula", validator: validarMatricula },
+    { id: "fecha_nacimiento", validator: validarFNacimiento },
+    { id: "fecha_carnet", validator: validarFCarnet },
+    { id: "foto_carnet", validator: validarFotoJPG },
+  ];
+  // Asignamos los eventos a los campos
+  campos.forEach((campo) => {
+    const input = document.getElementById(campo.id);
+    if (input) {
+      input.addEventListener("input", campo.validator);
+      input.addEventListener("blur", campo.validator);
+    }
+  });
+  // Asignamos el evento submit al formulario
   const form = document.getElementById("form-seguro");
   form.addEventListener("submit", (event) => {
-    if (
-      !validarNombreApellido() ||
-      !validarDNI() ||
-      !validarCorreo() ||
-      !validarTelefono() ||
-      !validarCodigoPostal() ||
-      !validarMatricula() ||
-      !validarFMatricula() ||
-      !validarFCarnet() ||
-      !validarFotoJPG() ||
-      !validarFNacimiento()
-    ) {
-      event.preventDefault(); // Detiene el envío del formulario si hay errores
+    let esValido = true;
+    campos.forEach((campo) => {
+      if (!campo.validator()) esValido = false;
+    });
+    if (!esValido) {
+      event.preventDefault();
     }
   });
 });
-
+// Funcion de mostrar error
+function mostrarError(id, mensaje) {
+  const errorDiv = document.getElementById(`error-${id}`);
+  if (errorDiv) {
+    errorDiv.textContent = mensaje;
+  }
+}
+// Limpiamos el error si ya no se cumple la condición
+function limpiarError(id) {
+  const errorDiv = document.getElementById(`error-${id}`);
+  if (errorDiv) {
+    errorDiv.textContent = "";
+  }
+}
+// Validaciones
 function validarNombreApellido() {
-  let nombre = document.getElementById("nombre").value.trim();
-  const patron = /^[a-zA-Z]+( [a-zA-Z]+)?$/;
-  if (!patron.test(nombre) || nombre.length > 30) {
-    alert(
+  const input = document.getElementById("nombre");
+  const valor = input.value.trim();
+  const patron = /^[a-zA-Z]+( [a-zA-Z]+)?$/; // Solo letras, un espacio entre palabras
+  if (!patron.test(valor) || valor.length > 30) {
+    mostrarError(
+      "nombre",
       "Nombre no válido (solo letras, un espacio entre palabras y máximo 30 caracteres)"
     );
     return false;
   }
+  limpiarError("nombre");
   return true;
 }
-
 //https://gist.github.com/afgomez/5691823
 function validarDNI() {
-  const dni = document.getElementById("dni").value.trim();
-  const patron = /^(\d{8})([A-Z])$/;
-  if (!patron.test(dni)) {
-    alert("DNI no válido (8 dígitos y una letra)");
+  const input = document.getElementById("dni").toUpperCase();
+  const valor = input.value.trim();
+  const patron = /^(\d{8})([A-Z])$/; // 8 dígitos y una letra
+  if (!patron.test(valor)) {
+    mostrarError("dni", "DNI no válido (8 dígitos y una letra)");
     return false;
   }
+  limpiarError("dni");
   return true;
 }
 // https://w3.unpocodetodo.info/utiles/regex-ejemplos.php?type=email Una implementación del Estandard Official: RFC 5322
 function validarCorreo() {
-  const correo = document.getElementById("correo").value.trim();
+  const input = document.getElementById("correo");
+  const valor = input.value.trim();
   const patron =
-    /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
-  if (!patron.test(correo)) {
-    alert("Correo no válido");
+    /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/; // Estandar RFC 5322
+  if (!patron.test(valor)) {
+    mostrarError("correo", "Correo no válido");
     return false;
   }
+  limpiarError("correo");
   return true;
 }
 //https://es.stackoverflow.com/questions/415/regex-para-validar-numeros-de-movil-espa%C3%B1oles
 function validarTelefono() {
-  const telefono = document.getElementById("telefono").value.trim();
+  const input = document.getElementById("telefono");
+  const valor = input.value.trim();
   const patron = /^(?:\+34|0034|34)?[ -]?(6|7)(?:[ -]?[0-9]){8}$/;
-  if (!patron.test(telefono)) {
-    alert("Teléfono no válido");
+  if (!patron.test(valor)) {
+    mostrarError("telefono", "Teléfono no válido");
     return false;
   }
+  limpiarError("telefono");
   return true;
 }
 
 function validarCodigoPostal() {
-  const codigo = document.getElementById("codigo_postal").value.trim();
-  const patron = /^[0-9]{5}$/;
-  if (!patron.test(codigo)) {
-    alert("Código postal no válido (deben ser 5 dígitos)");
+  const input = document.getElementById("codigo_postal");
+  const valor = input.value.trim();
+  const patron = /^[0-9]{5}$/; // 5 dígitos
+  if (!patron.test(valor)) {
+    mostrarError(
+      "codigo_postal",
+      "Código postal no válido (deben ser 5 dígitos)"
+    );
     return false;
   }
+  limpiarError("codigo_postal");
   return true;
 }
-
 //https://github.com/robertostory/validate_matricula_espana/blob/main/script.js
 function validarMatricula() {
-  const matricula = document
-    .getElementById("matricula")
-    .value.trim()
-    .toUpperCase()
-    .replace("-", "");
-
+  const input = document.getElementById("matricula");
+  const valor = input.value.trim().toUpperCase();
   const patrones = [
     /^\d{4}[BCDFGHJKLMNPRSTVWXYZ]{3}$/, // Patron NEW (4 dígitos + 3 letras)
     /^[A-Z]{1,2}\d{4}[A-Z]{1,2}$/, // Patron MID (1 o 2 letras + 4 dígitos + 1 o 2 letras)
     /^[A-Z]{1,2}\d{6}$/, // Patron OLD (1 o 2 letras + 6 dígitos)
   ];
-
-  // Verifica si al menos uno de los patrones coincide
-  const esValida = patrones.some((patron) => patron.test(matricula));
-
-  if (!esValida) {
-    alert("Matrícula no válida");
+  if (!patrones.some((patron) => patron.test(valor))) {
+    mostrarError("matricula", "Matrícula no válida");
     return false;
   }
-  return true;
-}
-//faltan validaciones de y validación de foto
-
-function validarFMatricula() {
-  const fechaMatricula = document.getElementById("fecha_matricula").value;
-  const fechaActual = new Date(); // Fecha actual en formato ISO
-  if (fechaMatricula > fechaActual) {
-    alert("La fecha de matriculación no puede ser futura");
-    return false;
-  }
+  limpiarError("matricula");
   return true;
 }
 
 function validarFNacimiento() {
-  const fechaNacimiento = new Date(
-    document.getElementById("fecha_nacimiento").value
-  );
+  const input = document.getElementById("fecha_nacimiento");
+  const valor = new Date(input.value);
   const fechaActual = new Date();
-
-  if (fechaNacimiento > fechaActual) {
-    alert("La fecha de nacimiento no puede ser futura");
+  if (valor > fechaActual) {
+    mostrarError(
+      "fecha_nacimiento",
+      "La fecha de nacimiento no puede ser futura"
+    );
     return false;
   }
-
   const edadMinima = new Date(
-    fechaNacimiento.getFullYear() + 18,
-    fechaNacimiento.getMonth(),
-    fechaNacimiento.getDate()
+    valor.getFullYear() + 18,
+    valor.getMonth(),
+    valor.getDate()
   );
-
   if (fechaActual < edadMinima) {
-    alert("Debes tener al menos 18 años");
+    mostrarError("fecha_nacimiento", "Debes tener al menos 18 años");
     return false;
   }
-
+  limpiarError("fecha_nacimiento");
   return true;
 }
 
 function validarFCarnet() {
-  const fechaCarnet = document.getElementById("fecha_carnet").value;
-  const fechaNacimiento = document.getElementById("fecha_nacimiento").value;
-  if (fechaCarnet < fechaNacimiento) {
-    alert("La fecha de carnet no puede ser anterior a la de nacimiento");
+  const carnet = new Date(document.getElementById("fecha_carnet").value);
+  const nacimiento = new Date(
+    document.getElementById("fecha_nacimiento").value
+  );
+  const actual = new Date();
+  if (carnet < nacimiento) {
+    mostrarError(
+      "fecha_carnet",
+      "La fecha del carnet no puede ser anterior a la de nacimiento"
+    );
     return false;
   }
-  const fechaActual = new Date();
-  if (fechaCarnet > fechaActual) {
-    alert("La fecha de carnet no puede ser futura");
+  if (carnet > actual) {
+    mostrarError("fecha_carnet", "La fecha del carnet no puede ser futura");
     return false;
   }
-
+  limpiarError("fecha_carnet");
   return true;
 }
-
+// Validamos tipo MIME para asegurarse de que sea JPG, es muy facil cambiar la extensión de un archivo de un archivo y si solo se valida por la extensión se puede subir un archivo malicioso
 function validarFotoJPG() {
-  const fotoInput = document.getElementById("fotoCarnet");
-  const archivo = fotoInput.files[0]; // Obtenemos el archivo cargado
-
+  const input = document.getElementById("foto_carnet");
+  const archivo = input.files[0];
   if (!archivo) {
-    alert("No se ha seleccionado ningún archivo");
+    mostrarError("foto_carnet", "No se ha seleccionado ningún archivo");
     return false;
   }
-
-  // Validamos tipo MIME para asegurarse de que sea JPG, es muy facil cambiar la extensión de un archivo de un archivo y si solo se valida por la extensión se puede subir un archivo malicioso
-  const mimeValido = ["image/jpeg", "image/jpg"];
+  const mimeValido = ["image/jpg"];
   if (!mimeValido.includes(archivo.type)) {
-    alert("La foto debe ser de tipo JPG");
+    mostrarError("foto_carnet", "La foto debe ser de tipo JPG");
     return false;
   }
-
+  limpiarError("foto_carnet");
   return true;
 }

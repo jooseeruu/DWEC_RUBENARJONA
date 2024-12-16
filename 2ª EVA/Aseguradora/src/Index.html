@@ -8,8 +8,6 @@
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet" />
-
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="/src/css/styles.css" />
   </head>
   <body>
@@ -21,7 +19,7 @@
       </div>
       <div class="card-body">
         <form id="form-seguro" class="row g-2" enctype="multipart/form-data">
-          <!-- Nombre -->
+          <!-- Input: Nombre -->
           <div class="col-md-6">
             <label for="nombre" class="form-label">Nombre</label>
             <input
@@ -30,9 +28,10 @@
               name="nombre"
               class="form-control"
               required />
+            <div id="error-nombre" class="text-danger mt-1"></div>
           </div>
 
-          <!-- Apellidos -->
+          <!-- Input: Apellidos -->
           <div class="col-md-6">
             <label for="apellidos" class="form-label">Apellidos</label>
             <input
@@ -41,9 +40,10 @@
               name="apellidos"
               class="form-control"
               required />
+            <div id="error-apellidos" class="text-danger mt-1"></div>
           </div>
 
-          <!-- DNI -->
+          <!-- Input: DNI -->
           <div class="col-md-6">
             <label for="dni" class="form-label">DNI</label>
             <input
@@ -52,9 +52,10 @@
               name="dni"
               class="form-control"
               required />
+            <div id="error-dni" class="text-danger mt-1"></div>
           </div>
 
-          <!-- Correo -->
+          <!-- Input: Correo Electrónico -->
           <div class="col-md-6">
             <label for="correo" class="form-label">Correo Electrónico</label>
             <input
@@ -63,9 +64,10 @@
               name="correo"
               class="form-control"
               required />
+            <div id="error-correo" class="text-danger mt-1"></div>
           </div>
 
-          <!-- Teléfono -->
+          <!-- Input: Teléfono -->
           <div class="col-md-6">
             <label for="telefono" class="form-label">Teléfono</label>
             <input
@@ -74,9 +76,10 @@
               name="telefono"
               class="form-control"
               required />
+            <div id="error-telefono" class="text-danger mt-1"></div>
           </div>
 
-          <!-- Código Postal -->
+          <!-- Input: Código Postal -->
           <div class="col-md-6">
             <label for="codigo_postal" class="form-label">Código Postal</label>
             <input
@@ -85,9 +88,10 @@
               name="codigo_postal"
               class="form-control"
               required />
+            <div id="error-codigo_postal" class="text-danger mt-1"></div>
           </div>
 
-          <!-- Fecha de Nacimiento -->
+          <!-- Input: Fecha de Nacimiento -->
           <div class="col-md-6">
             <label for="fecha_nacimiento" class="form-label"
               >Fecha de Nacimiento</label
@@ -98,9 +102,10 @@
               name="fecha_nacimiento"
               class="form-control"
               required />
+            <div id="error-fecha_nacimiento" class="text-danger mt-1"></div>
           </div>
 
-          <!-- Fecha del Carnet -->
+          <!-- Input: Fecha del Carnet -->
           <div class="col-md-6">
             <label for="fecha_carnet" class="form-label"
               >Fecha del Carnet</label
@@ -111,9 +116,10 @@
               name="fecha_carnet"
               class="form-control"
               required />
+            <div id="error-fecha_carnet" class="text-danger mt-1"></div>
           </div>
 
-          <!-- Matrícula -->
+          <!-- Input: Matrícula -->
           <div class="col-md-6">
             <label for="matricula" class="form-label">Matrícula</label>
             <input
@@ -122,9 +128,10 @@
               name="matricula"
               class="form-control"
               required />
+            <div id="error-matricula" class="text-danger mt-1"></div>
           </div>
 
-          <!-- Comunidad -->
+          <!-- Input: Comunidad -->
           <div class="col-md-6">
             <label for="comunidad" class="form-label">Comunidad</label>
             <select
@@ -136,7 +143,7 @@
             </select>
           </div>
 
-          <!-- Provincia -->
+          <!-- Input: Provincia -->
           <div class="col-md-6">
             <label for="provincia" class="form-label">Provincia</label>
             <select
@@ -148,7 +155,7 @@
             </select>
           </div>
 
-          <!-- Marca -->
+          <!-- Input: Marca -->
           <div class="col-md-6">
             <label for="marca" class="form-label">Marca</label>
             <select id="marca" name="marca" class="form-select" required>
@@ -156,7 +163,7 @@
             </select>
           </div>
 
-          <!-- Tipo de Seguro -->
+          <!-- Input: Tipo de Seguro -->
           <div class="col-md-6">
             <label for="tipo_seguro" class="form-label">Tipo de Seguro</label>
             <select
@@ -171,7 +178,15 @@
             </select>
           </div>
 
-          <!-- Foto Carnet -->
+          <!-- Input: Modelo -->
+          <div class="col-md-6">
+            <label for="modelo" class="form-label">Modelo</label>
+            <select id="modelo" name="modelo" class="form-select" required>
+              <option value="">Selecciona un modelo</option>
+            </select>
+          </div>
+
+          <!-- Input: Foto Carnet -->
           <div class="col-12">
             <label for="fotoCarnet" class="form-label">Foto Carnet</label>
             <input
@@ -179,9 +194,10 @@
               id="foto_carnet"
               name="fotoCarnet"
               class="form-control" />
+            <div id="error-foto_carnet" class="text-danger mt-1"></div>
           </div>
 
-          <!-- Checkbox -->
+          <!-- Input: Términos y Condiciones -->
           <div class="col-12">
             <div class="form-check">
               <input
@@ -190,13 +206,13 @@
                 name="acepto"
                 class="form-check-input"
                 required />
-              <label for="acepto" class="form-check-label"
-                >Acepto términos y condiciones</label
-              >
+              <label for="acepto" class="form-check-label">
+                Acepto términos y condiciones
+              </label>
             </div>
           </div>
 
-          <!-- Botón -->
+          <!-- Botón de Envío -->
           <div class="col-12 text-center">
             <button type="submit" class="btn btn-primary">
               Calcular Precio
@@ -205,10 +221,7 @@
         </form>
       </div>
     </div>
-
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
     <script src="/src/js/locationLoader.js"></script>
     <script src="/src/js/objects.js"></script>
     <script src="/src/js/validations.js"></script>
