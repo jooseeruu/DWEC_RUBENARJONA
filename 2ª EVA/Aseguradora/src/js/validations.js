@@ -65,7 +65,7 @@ function validarNombreApellido() {
 function validarDNI() {
   const input = document.getElementById("dni").toUpperCase();
   const valor = input.value.trim();
-  const patron = /^(\d{8})([A-Z])$/; // 8 dígitos y una letra
+  const patron = /^(\d{8})([a-zA-Z])$/; // 8 dígitos y una letra
   if (!patron.test(valor)) {
     mostrarError("dni", "DNI no válido (8 dígitos y una letra)");
     return false;
