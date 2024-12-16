@@ -218,4 +218,4 @@ function validarFotoJPG() {
   return true;
 }
 // 1 validar todo prevenir inyecciones sql
-// 2 meter tipo de vehiculo 
+// 2 echar cuentas tipo de vehiculo

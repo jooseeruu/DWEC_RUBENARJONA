@@ -52,3 +52,22 @@ marcaSelect.addEventListener("change", () => {
     modeloSelect.innerHTML = '<option value="">Selecciona un modelo</option>';
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const tiposCombustible = [
+    { valor: "diesel", texto: "Diesel" },
+    { valor: "gasolina", texto: "Gasolina" },
+    { valor: "hibrido", texto: "Híbrido" },
+    { valor: "electrico", texto: "Eléctrico" },
+  ];
+
+  const selectTipo = document.getElementById("tipo");
+
+  // Opciones dinámicas
+  tiposCombustible.forEach((tipo) => {
+    const opcion = document.createElement("option");
+    opcion.value = tipo.valor;
+    opcion.textContent = tipo.texto;
+    selectTipo.appendChild(opcion);
+  });
+});
