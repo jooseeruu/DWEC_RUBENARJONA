@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("El archivo validations.js se ha cargado correctamente.");
   // Creamos un array de objetos con los campos a validar y sus funciones de validación
   const campos = [
-    { id: "nombre", validator: validarNombreApellido },
-    { id: "apellidos", validator: validarNombreApellido },
+    { id: "nombre", validator: validarNombre },
+    { id: "apellidos", validator: validarApellidos },
     { id: "dni", validator: validarDNI },
     { id: "correo", validator: validarCorreo },
     { id: "telefono", validator: validarTelefono },
@@ -46,11 +47,11 @@ function limpiarError(id) {
     errorDiv.textContent = "";
   }
 }
-// Validaciones
-function validarNombreApellido() {
+
+function validarNombre() {
   const input = document.getElementById("nombre");
   const valor = input.value.trim();
-  const patron = /^[a-zA-Z]+( [a-zA-Z]+)?$/; // Solo letras, un espacio entre palabras
+  const patron = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+( [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)?$/;
   if (!patron.test(valor) || valor.length > 30) {
     mostrarError(
       "nombre",
@@ -59,6 +60,21 @@ function validarNombreApellido() {
     return false;
   }
   limpiarError("nombre");
+  return true;
+}
+
+function validarApellidos() {
+  const input = document.getElementById("apellidos");
+  const valor = input.value.trim();
+  const patron = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+( [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)*$/;
+  if (!patron.test(valor) || valor.length > 30) {
+    mostrarError(
+      "apellidos",
+      "Apellidos no válidos (solo letras, espacios entre palabras y máximo 30 caracteres)"
+    );
+    return false;
+  }
+  limpiarError("apellidos");
   return true;
 }
 //https://gist.github.com/afgomez/5691823
@@ -201,6 +217,3 @@ function validarFotoJPG() {
   limpiarError("foto_carnet");
   return true;
 }
-
-// NOTAS:
-// - Arreglar Validacion Apellidos

@@ -58,27 +58,6 @@ body {
   box-shadow: 0 6px 8px rgba(0, 123, 255, 0.3);
 }
 
-#resultados {
-  background-color: #ffffff;
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-top: 1rem;
-  display: none; /* Se muestra dinámicamente con JS */
-}
-
-#resultados h3 {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-#resultados p {
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #495057;
-}
-
 .is-valid {
   border-color: #198754;
 }

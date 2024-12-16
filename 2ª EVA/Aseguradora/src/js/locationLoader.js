@@ -1,3 +1,4 @@
+console.log("El archivo locationLoader.js se ha cargado correctamente.");
 const API_KEY =
   "eecf10b5d57dd1dc1d406f648c8d1ddb7791e66c86c14d85ee2591295e9c4df4";
 const BASE_URL = "https://apiv1.geoapi.es";
