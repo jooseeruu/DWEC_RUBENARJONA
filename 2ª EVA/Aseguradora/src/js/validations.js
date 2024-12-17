@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { id: "fecha_nacimiento", validator: validarFNacimiento },
     { id: "fecha_carnet", validator: validarFCarnet },
     { id: "foto_carnet", validator: validarFotoJPG },
+    { id: "tipo_vehiculo", validator: validarTipoVehiculo },
   ];
   // Asignamos los eventos a los campos
   campos.forEach((campo) => {
@@ -148,34 +149,62 @@ function validarMatricula() {
 
 function validarFNacimiento() {
   const input = document.getElementById("fecha_nacimiento");
-  const valor = new Date(input.value);
+  const valor = input.value;
   const fechaActual = new Date();
-  if (valor > fechaActual) {
+  const patron = /^\d{4}-\d{2}-\d{2}$/; // Formato YYYY-MM-DD
+
+  if (!patron.test(valor)) {
+    mostrarError(
+      "fecha_nacimiento",
+      "Fecha no válida. Usa el formato YYYY-MM-DD"
+    );
+    return false;
+  }
+
+  const fechaNacimiento = new Date(valor);
+  if (fechaNacimiento > fechaActual) {
     mostrarError(
       "fecha_nacimiento",
       "La fecha de nacimiento no puede ser futura"
     );
     return false;
   }
+
   const edadMinima = new Date(
-    valor.getFullYear() + 18,
-    valor.getMonth(),
-    valor.getDate()
+    fechaNacimiento.getFullYear() + 18,
+    fechaNacimiento.getMonth(),
+    fechaNacimiento.getDate()
   );
   if (fechaActual < edadMinima) {
     mostrarError("fecha_nacimiento", "Debes tener al menos 18 años");
     return false;
   }
+
   limpiarError("fecha_nacimiento");
   return true;
 }
 
 function validarFCarnet() {
-  const carnet = new Date(document.getElementById("fecha_carnet").value);
-  const nacimiento = new Date(
-    document.getElementById("fecha_nacimiento").value
-  );
+  const carnetInput = document.getElementById("fecha_carnet");
+  const nacimientoInput = document.getElementById("fecha_nacimiento");
+  const carnetValor = carnetInput.value;
+  const nacimientoValor = nacimientoInput.value;
+  const patron = /^\d{4}-\d{2}-\d{2}$/; // Formato YYYY-MM-DD
+
+  if (!patron.test(carnetValor)) {
+    mostrarError("fecha_carnet", "Fecha no válida. Usa el formato YYYY-MM-DD");
+    return false;
+  }
+
+  if (!patron.test(nacimientoValor)) {
+    mostrarError("fecha_carnet", "Primero corrige la fecha de nacimiento");
+    return false;
+  }
+
+  const carnet = new Date(carnetValor);
+  const nacimiento = new Date(nacimientoValor);
   const actual = new Date();
+
   if (carnet < nacimiento) {
     mostrarError(
       "fecha_carnet",
@@ -183,13 +212,16 @@ function validarFCarnet() {
     );
     return false;
   }
+
   if (carnet > actual) {
     mostrarError("fecha_carnet", "La fecha del carnet no puede ser futura");
     return false;
   }
+
   limpiarError("fecha_carnet");
   return true;
 }
+
 // Validamos tipo MIME para asegurarse de que sea JPG, es muy facil cambiar la extensión de un archivo de un archivo y si solo se valida por la extensión se puede subir un archivo malicioso
 function validarFotoJPG() {
   const input = document.getElementById("foto_carnet");
@@ -217,5 +249,15 @@ function validarFotoJPG() {
   limpiarError("foto_carnet");
   return true;
 }
-// 1 validar todo prevenir inyecciones sql
-// 2 echar cuentas tipo de vehiculo
+
+function validarTipoVehiculo() {
+  const input = document.getElementById("tipo_vehiculo");
+  const valor = input.value;
+  if (!valor) {
+    mostrarError("tipo_vehiculo", "Debes seleccionar un tipo de vehículo");
+    return false;
+  }
+  limpiarError("tipo_vehiculo");
+  return true;
+}
+// SOLO FALTA TOCAR MAS LAS VALIDACIONES DE LOS INPUTS Y ALGUN SELECT DE PROVINCIAS Y SIMILARES PARA EVITAR SQL INJECTION

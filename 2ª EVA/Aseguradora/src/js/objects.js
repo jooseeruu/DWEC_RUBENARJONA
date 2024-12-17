@@ -61,13 +61,13 @@ document.addEventListener("DOMContentLoaded", () => {
     { valor: "electrico", texto: "Eléctrico" },
   ];
 
-  const selectTipo = document.getElementById("tipo");
+  const selectTipo = document.getElementById("tipo_vehiculo");
 
   // Opciones dinámicas
-  tiposCombustible.forEach((tipo) => {
+  tiposCombustible.forEach((tipo_vehiculo) => {
     const opcion = document.createElement("option");
-    opcion.value = tipo.valor;
-    opcion.textContent = tipo.texto;
+    opcion.value = tipo_vehiculo.valor;
+    opcion.textContent = tipo_vehiculo.texto;
     selectTipo.appendChild(opcion);
   });
 });
