@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { id: "marca", validator: validarMarca },
     { id: "modelo", validator: validarModelo },
     { id: "provincia", validator: validarProvincia },
+    { id: "comunidad", validator: validarComunidad },
     { id: "tipo_seguro", validator: validarTipoSeguro },
     { id: "form-check", validator: validarCheck },
   ];
@@ -265,4 +266,71 @@ function validarTipoVehiculo() {
   limpiarError("tipo_vehiculo");
   return true;
 }
-// SOLO FALTA TOCAR MAS LAS VALIDACIONES DE LOS INPUTS Y ALGUN SELECT DE PROVINCIAS Y SIMILARES PARA EVITAR SQL INJECTION
+
+function validarMarca() {
+  const input = document.getElementById("marca");
+  const valor = input.value;
+  if (!valor) {
+    mostrarError("marca", "Debes seleccionar una marca");
+    return false;
+  }
+  limpiarError("marca");
+  return true;
+}
+
+function validarModelo() {
+  const input = document.getElementById("modelo");
+  const valor = input.value;
+  if (!valor) {
+    mostrarError("modelo", "Debes seleccionar un modelo");
+    return false;
+  }
+  limpiarError("modelo");
+  return true;
+}
+
+function validarProvincia() {
+  const input = document.getElementById("provincia");
+  const valor = input.value;
+  if (!valor) {
+    mostrarError("provincia", "Debes seleccionar una provincia");
+    return false;
+  }
+  limpiarError("provincia");
+  return true;
+}
+
+function validarComunidad() {
+  const input = document.getElementById("comunidad");
+  const valor = input.value;
+  if (!valor) {
+    mostrarError("comunidad", "Debes seleccionar una comunidad autónoma");
+    return false;
+  }
+  limpiarError("comunidad");
+  return true;
+}
+
+function validarTipoSeguro() {
+  const input = document.getElementById("tipo_seguro");
+  const valor = input.value;
+  if (!valor) {
+    mostrarError("tipo_seguro", "Debes seleccionar un tipo de seguro");
+    return false;
+  }
+  limpiarError("tipo_seguro");
+  return true;
+}
+
+function validarCheck() {
+  const input = document.getElementById("form-check");
+  if (!input.checked) {
+    mostrarError(
+      "form-check",
+      "Debes aceptar las condiciones si deseas continuar"
+    );
+    return false;
+  }
+  limpiarError("form-check");
+  return true;
+}
