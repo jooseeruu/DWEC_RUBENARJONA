@@ -19,6 +19,17 @@
       </div>
       <div class="card-body">
         <form id="form-seguro" class="row g-2" enctype="multipart/form-data">
+          <!-- Input: Sexo -->
+          <div class="col-md-6">
+            <label for="Sexo" class="form-label">Sexo</label>
+            <select id="Sexo" name="Sexo" class="form-select" required>
+              <option value="">Selecciona un sexo</option>
+              <option value="Hombre">Hombre</option>
+              <option value="Mujer">Mujer</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+
           <!-- Input: Nombre -->
           <div class="col-md-6">
             <label for="nombre" class="form-label">Nombre</label>
@@ -171,6 +182,7 @@
               name="tipo_seguro"
               class="form-select"
               required>
+              <option value="">Selecciona un tipo de seguro</option>
               <option value="Terceros">Terceros</option>
               <option value="Terceros ampliado">Terceros ampliado</option>
               <option value="Con franquicia">Con franquicia</option>

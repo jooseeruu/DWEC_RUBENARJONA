@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { id: "comunidad", validator: validarComunidad },
     { id: "tipo_seguro", validator: validarTipoSeguro },
     { id: "form-check", validator: validarCheck },
+    { id: "sexo", validator: validarSexo },
   ];
   // Asignamos los eventos a los campos
   campos.forEach((campo) => {
@@ -332,6 +333,17 @@ function validarCheck() {
     return false;
   }
   limpiarError("form-check");
+  return true;
+}
+
+function validarSexo() {
+  const input = document.getElementById("Sexo");
+  const valor = input.value;
+  if (!valor) {
+    mostrarError("Sexo", "Debes seleccionar un sexo");
+    return false;
+  }
+  limpiarError("Sexo");
   return true;
 }
 //REVISAR OPTIMIZACIONES POSIBLES
