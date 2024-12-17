@@ -334,3 +334,4 @@ function validarCheck() {
   limpiarError("form-check");
   return true;
 }
+//REVISAR OPTIMIZACIONES POSIBLES
