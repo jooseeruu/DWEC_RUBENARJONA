@@ -80,17 +80,6 @@ input[type="file"] {
   accent-color: #007bff; /* Blue checkbox */
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .card {
-    margin: 10px;
-  }
-
-  .btn-primary {
-    font-size: 0.9rem;
-  }
-}
-
 .is-invalid {
   border-color: #dc3545;
 }
