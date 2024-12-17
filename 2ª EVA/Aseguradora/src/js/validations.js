@@ -13,6 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
     { id: "fecha_carnet", validator: validarFCarnet },
     { id: "foto_carnet", validator: validarFotoJPG },
     { id: "tipo_vehiculo", validator: validarTipoVehiculo },
+    { id: "marca", validator: validarMarca },
+    { id: "modelo", validator: validarModelo },
+    { id: "provincia", validator: validarProvincia },
+    { id: "tipo_seguro", validator: validarTipoSeguro },
+    { id: "form-check", validator: validarCheck },
   ];
   // Asignamos los eventos a los campos
   campos.forEach((campo) => {
