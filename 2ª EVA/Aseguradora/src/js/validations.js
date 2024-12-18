@@ -55,11 +55,22 @@ function limpiarError(id) {
     errorDiv.textContent = "";
   }
 }
+// Validamos los selects y checkbox
+function validarSelectsCheckbox(id, mensaje, esCheckbox = false) {
+  const input = document.getElementById(id);
+  const valor = esCheckbox ? input.checked : input.value; // Si es un checkbox, usamos el atributo checked
+  if (!valor) {
+    mostrarError(id, mensaje);
+    return false;
+  }
+  limpiarError(id);
+  return true;
+}
 
 function validarNombre() {
   const input = document.getElementById("nombre");
   const valor = input.value.trim();
-  const patron = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+( [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)?$/;
+  const patron = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+( [a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+)?$/; // Nombre espacio Nombre
   if (!patron.test(valor) || valor.length > 30) {
     mostrarError(
       "nombre",
@@ -258,92 +269,40 @@ function validarFotoJPG() {
 }
 
 function validarTipoVehiculo() {
-  const input = document.getElementById("tipo_vehiculo");
-  const valor = input.value;
-  if (!valor) {
-    mostrarError("tipo_vehiculo", "Debes seleccionar un tipo de vehículo");
-    return false;
-  }
-  limpiarError("tipo_vehiculo");
-  return true;
+  return validarSelectsCheckbox(
+    "tipo_vehiculo",
+    "Selecciona un tipo de vehículo"
+  );
 }
 
 function validarMarca() {
-  const input = document.getElementById("marca");
-  const valor = input.value;
-  if (!valor) {
-    mostrarError("marca", "Debes seleccionar una marca");
-    return false;
-  }
-  limpiarError("marca");
-  return true;
+  return validarSelectsCheckbox("marca", "Selecciona una marca");
 }
 
 function validarModelo() {
-  const input = document.getElementById("modelo");
-  const valor = input.value;
-  if (!valor) {
-    mostrarError("modelo", "Debes seleccionar un modelo");
-    return false;
-  }
-  limpiarError("modelo");
-  return true;
+  return validarSelectsCheckbox("modelo", "Selecciona un modelo");
 }
 
 function validarProvincia() {
-  const input = document.getElementById("provincia");
-  const valor = input.value;
-  if (!valor) {
-    mostrarError("provincia", "Debes seleccionar una provincia");
-    return false;
-  }
-  limpiarError("provincia");
-  return true;
+  return validarSelectsCheckbox("provincia", "Selecciona una provincia");
 }
 
 function validarComunidad() {
-  const input = document.getElementById("comunidad");
-  const valor = input.value;
-  if (!valor) {
-    mostrarError("comunidad", "Debes seleccionar una comunidad autónoma");
-    return false;
-  }
-  limpiarError("comunidad");
-  return true;
+  return validarSelectsCheckbox("comunidad", "Selecciona una comunidad");
 }
 
 function validarTipoSeguro() {
-  const input = document.getElementById("tipo_seguro");
-  const valor = input.value;
-  if (!valor) {
-    mostrarError("tipo_seguro", "Debes seleccionar un tipo de seguro");
-    return false;
-  }
-  limpiarError("tipo_seguro");
-  return true;
+  return validarSelectsCheckbox("tipo_seguro", "Selecciona un tipo de seguro");
 }
 
 function validarCheck() {
-  const input = document.getElementById("form-check");
-  if (!input.checked) {
-    mostrarError(
-      "form-check",
-      "Debes aceptar las condiciones si deseas continuar"
-    );
-    return false;
-  }
-  limpiarError("form-check");
-  return true;
+  return validarSelectsCheckbox(
+    "form-check",
+    "Debes aceptar las condiciones",
+    true
+  );
 }
 
 function validarSexo() {
-  const input = document.getElementById("Sexo");
-  const valor = input.value;
-  if (!valor) {
-    mostrarError("Sexo", "Debes seleccionar un sexo");
-    return false;
-  }
-  limpiarError("Sexo");
-  return true;
+  return validarSelectsCheckbox("sexo", "Selecciona un sexo");
 }
-//REVISAR OPTIMIZACIONES POSIBLES
