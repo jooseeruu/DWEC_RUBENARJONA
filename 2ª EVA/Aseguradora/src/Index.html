@@ -144,7 +144,7 @@
 
           <!-- Input: Comunidad -->
           <div class="col-md-6">
-            <label for="comunidad" class="form-label">Comunidad</label>
+            <label for="comunidad" class="form-label">Comunidad Autonoma</label>
             <select
               id="comunidad"
               name="comunidad"
@@ -210,13 +210,24 @@
 
           <!-- Input: Foto Carnet -->
           <div class="col-12">
-            <label for="fotoCarnet" class="form-label">Foto Carnet</label>
+            <label for="fotoCarnet" class="form-label"
+              >Permiso de Conducir</label
+            >
             <input
               type="file"
               id="foto_carnet"
               name="fotoCarnet"
-              class="form-control" />
+              class="form-control"
+              accept="image/*" />
             <div id="error-foto_carnet" class="text-danger mt-1"></div>
+            <div class="mt-2">
+              <img
+                id="preview-foto_carnet"
+                src="#"
+                alt="Previsualización"
+                style="display: none; max-width: 100%; height: auto" />
+            </div>
+            <p id="mensaje-archivo" class="text-muted mt-2"></p>
           </div>
 
           <!-- Input: Términos y Condiciones -->

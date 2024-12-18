@@ -244,9 +244,14 @@ function validarFCarnet() {
 function validarFotoJPG() {
   const input = document.getElementById("foto_carnet");
   const archivo = input.files[0];
+  const preview = document.getElementById("preview-foto_carnet"); // Imagen preview
+  const mensajeArchivo = document.getElementById("mensaje-archivo"); // Mensaje adicional
 
   if (!archivo) {
     mostrarError("foto_carnet", "No se ha seleccionado ningún archivo");
+    preview.style.display = "none";
+    preview.src = ""; // Limpiamos la imagen preview
+    if (mensajeArchivo) mensajeArchivo.textContent = "";
     return false;
   }
 
@@ -254,6 +259,9 @@ function validarFotoJPG() {
   const mimeValido = "image/jpeg"; // JPG y JPEG son lo mismo en cuanto a MIME type
   if (archivo.type !== mimeValido) {
     mostrarError("foto_carnet", "La foto debe ser de tipo JPG");
+    preview.style.display = "none";
+    preview.src = "#";
+    if (mensajeArchivo) mensajeArchivo.textContent = "";
     return false;
   }
 
@@ -261,8 +269,35 @@ function validarFotoJPG() {
   const nombreArchivo = archivo.name.toLowerCase();
   if (!nombreArchivo.endsWith(".jpg")) {
     mostrarError("foto_carnet", "El archivo debe tener la extensión .jpg");
+    preview.style.display = "none";
+    preview.src = "#";
+    if (mensajeArchivo) mensajeArchivo.textContent = "";
     return false;
   }
+
+  const reader = new FileReader(); // Objeto para leer el archivo
+  const img = new Image(); // Objeto para cargar y validar dimensiones de la imagen
+
+  reader.onload = () => {
+    img.onload = () => {
+      // Verifica las dimensiones de la imagen
+      if (img.width <= 500 && img.height <= 500) {
+        preview.style.display = "block";
+        preview.src = reader.result; // Cargar la imagen en el preview
+        if (mensajeArchivo) mensajeArchivo.textContent = "";
+      } else {
+        preview.style.display = "none"; // Ocultar la imagen
+        preview.src = ""; // Limpiamos el preview
+        if (mensajeArchivo) {
+          mensajeArchivo.textContent =
+            "Imagen cargada, pero la imagen es demasiado grande y no se previsualizará.";
+        }
+      }
+    };
+    img.src = reader.result; // Cargar el archivo como fuente de la imagen
+  };
+
+  reader.readAsDataURL(archivo); // Leer el archivo como una URL base64
 
   limpiarError("foto_carnet");
   return true;
