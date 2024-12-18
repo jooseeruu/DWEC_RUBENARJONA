@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-// Funcion de mostrar error
+// Funcion para mostrar un mensaje de error debajo del campo
 function mostrarError(id, mensaje) {
   const errorDiv = document.getElementById(`error-${id}`);
   if (errorDiv) {
@@ -66,6 +66,8 @@ function validarSelectsCheckbox(id, mensaje, esCheckbox = false) {
   limpiarError(id);
   return true;
 }
+
+// FUNCIONES DE VALIDACIÓN DE CAMPOS
 
 function validarNombre() {
   const input = document.getElementById("nombre");
@@ -241,6 +243,8 @@ function validarFCarnet() {
 }
 
 // Validamos tipo MIME para asegurarse de que sea JPG, es muy facil cambiar la extensión de un archivo de un archivo y si solo se valida por la extensión se puede subir un archivo malicioso
+// https://developer.mozilla.org/es/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
+// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/image
 function validarFotoJPG() {
   const input = document.getElementById("foto_carnet");
   const archivo = input.files[0];

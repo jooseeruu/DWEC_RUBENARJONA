@@ -188,12 +188,12 @@ function calcularEdad(fechaNacimiento) {
 function calcularAniosDesdeFecha(fecha) {
   const hoy = new Date();
   const fechaBase = new Date(fecha);
-  let años = hoy.getFullYear() - fechaBase.getFullYear();
-  const esFechaPendiente =
-    hoy.getMonth() < fechaBase.getMonth() ||
-    (hoy.getMonth() === fechaBase.getMonth() &&
-      hoy.getDate() < fechaBase.getDate());
-  return esFechaPendiente ? años - 1 : años;
+  let años = hoy.getFullYear() - fechaBase.getFullYear(); // Años completos
+  const esFechaPendiente = // Comprobar si ya ha pasado el cumpleaños
+    hoy.getMonth() < fechaBase.getMonth() || // Si el mes actual es anterior al de nacimiento
+    (hoy.getMonth() === fechaBase.getMonth() && // Si el mes actual es igual al de nacimiento
+      hoy.getDate() < fechaBase.getDate()); // Si el día actual es anterior al de nacimiento
+  return esFechaPendiente ? años - 1 : años; // Restar un año si no ha pasado el cumpleaños
 }
 
 // Asignar evento al formulario
