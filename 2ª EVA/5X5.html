@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pintar Diagonales</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        margin: 20px;
+      }
+      td {
+        width: 50px;
+        height: 50px;
+        border: 1px solid black;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <!-- Tabla 5x5 -->
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+
+    <script>
+      // Seleccionar la tabla
+      const table = document.querySelector("table");
+      let row = table.firstElementChild.firstElementChild; // Primer <tr>
+      let rowIndex = 0;
+
+      // Recorrer las filas
+      while (row) {
+        // Pintar la diagonal principal
+        let diagonalPrincipal = row.firstElementChild;
+        for (let i = 0; i < rowIndex; i++) {
+          diagonalPrincipal = diagonalPrincipal.nextElementSibling;
+        }
+        diagonalPrincipal.style.backgroundColor = "red";
+
+        // Pintar la diagonal secundaria
+        let diagonalSecundaria = row.lastElementChild;
+        for (let i = 0; i < rowIndex; i++) {
+          diagonalSecundaria = diagonalSecundaria.previousElementSibling;
+        }
+        diagonalSecundaria.style.backgroundColor = "red";
+
+        // Ir a la siguiente fila
+        row = row.nextElementSibling;
+        rowIndex++;
+      }
+    </script>
+  </body>
+</html>

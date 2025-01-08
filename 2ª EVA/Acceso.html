@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DOM Children Example</title>
+  </head>
+  <body>
+    <div>Users:</div>
+    <ul>
+      <li>John</li>
+      <li>Pete</li>
+    </ul>
+    <script>
+      // Acceder al nodo <div> del DOM
+      console.log(document.body.firstElementChild);
+      console.log(document.body.children[0]);
+      console.log(document.body.childNodes[1]);
+
+      // Acceder al nodo <ul> del DOM
+      console.log(document.body.lastElementChild);
+      console.log(document.body.children[1]);
+
+      // Acceder al segundo <li> (con Pete)
+      console.log(document.body.lastElementChild.lastElementChild);
+    </script>
+  </body>
+</html>
