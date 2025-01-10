@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Lista</title>
+  </head>
+  <body>
+    <h1>Gestión de Lista</h1>
+    <ul id="miLista">
+      <li>Elemento de muestra</li>
+    </ul>
+    <button id="btnAgregar">
+      Añadir elemento a
+      <li></li>
+    </button>
+    <button id="btnBorrarPrimero">Borrar primer li</button>
+    <button id="btnBorrarUltimo">Borrar último li</button>
+
+    <script>
+      // REFERENCIAS A DOM
+      const miLista = document.getElementById("miLista");
+      const btnAgregar = document.getElementById("btnAgregar");
+      const btnBorrarPrimero = document.getElementById("btnBorrarPrimero");
+      const btnBorrarUltimo = document.getElementById("btnBorrarUltimo");
+
+      // AGREGAR ELEMENTOS A LA LISTA
+      btnAgregar.onclick = () => {
+        const TextoUsuario = prompt("Introduce el texto del nuevo elemento");
+        if (TextoUsuario) {
+          const nuevoElementoLI = document.createElement("li");
+          nuevoElementoLI.textContent = TextoUsuario;
+          miLista.insertAdjacentElement("beforeend", nuevoElementoLI); // se inserta antes de que cierre la etiqueta li(beforebegin, afterbegin, beforeend, afterend)
+        }
+      };
+
+      // BORRAR PRIMER ELEMENTO
+      btnBorrarPrimero.onclick = () => {
+        if (miLista.firstElementChild) {
+          miLista.firstElementChild.remove(); // firstElementChild es el primer hijo de la lista
+        } else {
+          alert("No hay elementos que borrar");
+        }
+      };
+
+      // BORRAR ULTIMO ELEMENTO
+      btnBorrarUltimo.onclick = () => {
+        if (miLista.lastElementChild) {
+          miLista.lastElementChild.remove(); // lastElementChild es el último hijo de la lista
+        } else {
+          alert("No hay elementos que borrar");
+        }
+      };
+    </script>
+  </body>
+</html>
