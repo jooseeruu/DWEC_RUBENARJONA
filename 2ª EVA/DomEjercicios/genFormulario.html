@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador Formularios</title>
+  </head>
+  <body>
+    <h1>Generador Formularios</h1>
+    <table border="1">
+      <tr>
+        <td><button onclick="crearInputTexto()">Crear Input Texto</button></td>
+        <td>
+          <button onclick="crearInputPassword()">Crear Input Password</button>
+        </td>
+        <td><button onclick="crearTextarea()">Crear Textarea</button></td>
+        <td><button onclick="crearLabel()">Crear Label</button></td>
+        <td><button onclick="crearImagen()">Crear Imagen</button></td>
+        <td><button onclick="crearCheckbox()">Crear Checkbox</button></td>
+        <td><button onclick="crearRadio()">Crear Radio</button></td>
+        <td>
+          <button onclick="crearBotonSubmit()">Crear Botón Submit</button>
+        </td>
+      </tr>
+    </table>
+
+    <form id="formulario"></form>
+
+    <script>
+      const formulario = document.getElementById("formulario"); // Formulario donde se añadirán los elementos
+
+      function crearInputTexto() {
+        const name = prompt("Introduce el atributo name del input de texto:");
+        if (name) {
+          formulario.insertAdjacentHTML(
+            // Inserta el input justo despues de su ultimo hijo
+            "beforeend",
+            `<input type="text" name="${name}" placeholder="${name}" id="${name}"><br>`
+          );
+        }
+      }
+
+      function crearInputPassword() {
+        const name = prompt(
+          "Introduce el atributo name del input de password:"
+        );
+        if (name) {
+          formulario.insertAdjacentHTML(
+            "beforeend",
+            `
+            <label for="${name}">Contraseña:</label>
+            <input 
+              type="password" 
+              name="${name}" 
+              id="${name}" 
+              placeholder="${name}" 
+            >
+            <button type="button" onclick="togglePassword('${name}')">Mostrar</button>
+            <br>
+            `
+          );
+        }
+      }
+
+      function togglePassword(id) {
+        const input = document.getElementById(id);
+        if (input.type === "password") {
+          // Si es password, lo cambia a texto
+          input.type = "text";
+        } else {
+          input.type = "password"; // Si es texto, lo cambia a password
+        }
+      }
+
+      function crearTextarea() {
+        const name = prompt("Introduce el atributo name del textarea:");
+        if (name) {
+          formulario.insertAdjacentHTML(
+            "beforeend",
+            `<textarea name="${name}"id="${name}" 
+              placeholder="${name}"  cols="40" rows="5"></textarea><br>`
+          );
+        }
+      }
+
+      function crearLabel() {
+        const forAttribute = prompt(
+          "Introduce el atributo for del label (nombre del input al que refiere):"
+        );
+        if (forAttribute) {
+          formulario.insertAdjacentHTML(
+            "beforeend",
+            `<label for="${forAttribute}">${forAttribute}</label><br>`
+          );
+        }
+      }
+
+      function crearImagen() {
+        const src = prompt("Introduce la ruta de la imagen (atributo src):");
+        if (src) {
+          formulario.insertAdjacentHTML(
+            "beforeend",
+            `<img src="${src}" alt="Imagen"><br>`
+          );
+        }
+      }
+
+      function crearCheckbox() {
+        const name = prompt("Introduce el atributo name del checkbox:");
+        const value = prompt("Introduce el atributo value del checkbox:");
+        if (name && value) {
+          formulario.insertAdjacentHTML(
+            "beforeend",
+            `<input type="checkbox" name="${name}" value="${value}"> ${value}<br>`
+          );
+        }
+      }
+
+      function crearRadio() {
+        const name = prompt("Introduce el atributo name del radio:"); // Nombre del grupo de radios
+        const value = prompt("Introduce el atributo value del radio:"); // Valor del radio
+        if (name && value) {
+          formulario.insertAdjacentHTML(
+            "beforeend",
+            `<input type="radio" name="${name}" value="${value}"> ${value}<br>`
+          );
+        }
+      }
+
+      function crearBotonSubmit() {
+        const name = prompt("Introduce el atributo name del botón submit:");
+        const value = prompt("Introduce el atributo value del botón submit:");
+        if (name && value) {
+          formulario.insertAdjacentHTML(
+            "beforeend",
+            `<button type="submit" name="${name}" value="${value}">${value}</button><br>`
+          );
+        }
+      }
+    </script>
+  </body>
+</html>
