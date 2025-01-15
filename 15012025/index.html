@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario Pizza</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div class="card">
+      <div class="card-header text-center bg-primary text-white">
+        <h2 class="mb-0" style="font-size: 1.25rem">Formulario Pizzeria</h2>
+      </div>
+      <div class="card-body">
+        <form id="pizzeriaForm" class="row g-2" enctype="multipart/form-data">
+          <!-- Input: Nombre Cliente -->
+          <div class="col-md-6">
+            <label for="nombre" class="form-label">Nombre Cliente</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              class="form-control"
+              required />
+            <div id="error-nombre" class="text-danger mt-1"></div>
+          </div>
+
+          <!-- Input: Correo Electrónico -->
+          <div class="col-md-6">
+            <label for="correo" class="form-label">Correo Electrónico</label>
+            <input
+              type="email"
+              id="correo"
+              name="correo"
+              class="form-control"
+              required />
+            <div id="error-correo" class="text-danger mt-1"></div>
+          </div>
+
+          <!-- Input: Teléfono -->
+          <div class="col-md-6">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input
+              type="tel"
+              id="telefono"
+              name="telefono"
+              class="form-control"
+              required />
+            <div id="error-telefono" class="text-danger mt-1"></div>
+          </div>
+          <h3>Datos de la Pizza</h3>
+          <!-- Input: Tamaño Pizza -->
+          <div class="col-md-6">
+            <label for="tamano" class="form-label">Tamaño de la Pizza</label>
+            <select id="tamano" name="tamano" class="form-select" required>
+              <option value="">Selecciona un tamaño</option>
+              <option value="pequena">Pequeña 10€</option>
+              <option value="mediana">Mediana 15€</option>
+              <option value="grande">Grande 20€</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="ingredientes" class="form-label"
+              >Ingredientes adicionales (1€/u)</label
+            >
+            <div>
+              <input type="checkbox" id="champi" name="champi" checked />
+              <label for="champi">Champiñones</label>
+            </div>
+
+            <div>
+              <input type="checkbox" id="peppe" name="peppe" />
+              <label for="peppe">Pepperoni</label>
+            </div>
+
+            <div>
+              <input type="checkbox" id="aceitunas" name="aceitunas" />
+              <label for="aceitunas">aceitunas</label>
+            </div>
+
+            <div>
+              <input type="checkbox" id="pimientos" name="pimientos" />
+              <label for="pimientos">Pimientos</label>
+            </div>
+          </div>
+
+          <div class="cantidad">
+            <label for="cantidad" class="form-label">Cantidad</label>
+            <input
+              type="number"
+              id="cantidad"
+              name="cantidad"
+              class="form-control"
+              required />
+            <div id="error-cantidad" class="text-danger mt-1"></div>
+          </div>
+
+          <!-- Botón de Envío -->
+          <div class="col-12 text-center">
+            <button type="submit" class="btn btn-primary">
+              Calcular Precio
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="resultados" class="container mt-4"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
