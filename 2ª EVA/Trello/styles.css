@@ -13,20 +13,22 @@ header {
   text-align: center;
 }
 
+/* Convierto #tablero a grid y aumento el gap a 2rem */
 #tablero {
-  display: flex;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, 300px); /* 3 columnas de 300px */
+  gap: 2rem; /* Aumenta la separación entre columnas y filas */
   padding: 1rem;
-  overflow-x: auto;
+  overflow-x: unset; /* Sin scroll horizontal */
 }
 
 /* Listas */
 .list {
   background-color: #ebecf0;
   border-radius: 5px;
-  width: 300px;
+  width: 300px; /* fijo para que sean 3 por fila */
   padding: 0.5rem;
-  flex-shrink: 0;
+  /* flex-shrink: 0;  <-- Ya no importa en Grid */
 }
 
 .list-title {
@@ -74,8 +76,7 @@ header {
   font-size: 0.9rem;
 }
 
-/* Botones especificos (no tiene ya mucho sentido, no planeaba necesitar tocar todos los botones) */
-
+/* Botones específicos */
 .btn-add-card {
   float: auto;
   margin-top: auto;
@@ -93,15 +94,17 @@ header {
   margin-left: 0.5rem;
   margin-top: auto;
 }
+
+/* Contenedor de tarjetas vacío */
 .cards.empty {
-  border: 3px dashed #888; /* Límites visibles */
+  border: 3px dashed #888;
   min-height: 12px;
   padding: 20px;
-  background-color: #f9f9f9; /* Fondo claro para mejor visibilidad */
-  transition: background-color 0.2s ease; /* Suavizamos el cambio visual */
-  margin-bottom: 10px; /*  Espacio con los botones  */
+  background-color: #f9f9f9;
+  transition: background-color 0.2s ease;
+  margin-bottom: 10px;
 }
 
 .cards.empty:hover {
-  background-color: #e0e0e0; /* Fondo más oscuro al pasar el ratón */
+  background-color: #e0e0e0;
 }
