@@ -12,9 +12,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // Título editable
     const titulo = document.createElement("div");
     titulo.classList.add("list-title");
-    titulo.contentEditable = true;
     titulo.textContent = nombre;
     lista.appendChild(titulo);
+
+    // Eventos para editar título
+    titulo.addEventListener("dblclick", () => {
+      titulo.contentEditable = true;
+      titulo.focus();
+    });
+
+    titulo.addEventListener("blur", () => {
+      titulo.contentEditable = false;
+    });
 
     // Contenedor de tarjetas
     const listaTarjetas = document.createElement("div");
@@ -57,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Contenido editable
     const contenido = document.createElement("div");
-    contenido.contentEditable = true;
+
     contenido.textContent = "Nueva tarjeta";
     tarjeta.appendChild(contenido);
 
@@ -82,6 +91,15 @@ document.addEventListener("DOMContentLoaded", () => {
     tarjeta.addEventListener("dragend", () => {
       tarjeta.classList.remove("dragging");
       verificarContenedorVacio(contenedorOrigen);
+    });
+    // Eventos para editar contenido
+    contenido.addEventListener("dblclick", () => {
+      contenido.contentEditable = true;
+      contenido.focus();
+    });
+
+    contenido.addEventListener("blur", () => {
+      contenido.contentEditable = false;
     });
 
     // Insertamos la tarjeta
