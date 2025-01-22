@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     titulo.addEventListener("blur", () => {
+      // blur nos permite detectar cuando el elemento pierde el foco para desactivar la edición
       titulo.contentEditable = false;
     });
 
@@ -84,13 +85,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // Eventos dragstart / dragend
     tarjeta.addEventListener("dragstart", (e) => {
       contenedorOrigen = tarjeta.parentElement;
-      tarjeta.classList.add("dragging");
-      e.dataTransfer.setData("text/plain", "");
+      tarjeta.classList.add("dragging"); // clase para indicar que está siendo arrastrada
+      e.dataTransfer.setData("text/plain", ""); // necesario para Firefox (no soporta tipos vacíos) https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/Recommended_drag_types#plain_text
     });
 
     tarjeta.addEventListener("dragend", () => {
       tarjeta.classList.remove("dragging");
-      verificarContenedorVacio(contenedorOrigen);
+      verificarContenedorVacio(contenedorOrigen); // comprobamos si el contenedor de origen está vacío
     });
     // Eventos para editar contenido
     contenido.addEventListener("dblclick", () => {
@@ -115,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       // posible indicador visual
     });
-
+    // dragenter y dragleave para indicar visualmente la zona de drop
     contenedor.addEventListener("dragenter", () => {
       contenedor.classList.add("hover");
     });
@@ -128,9 +129,9 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       contenedor.classList.remove("hover");
 
-      const tarjetaArrastrada = document.querySelector(".dragging");
+      const tarjetaArrastrada = document.querySelector(".dragging"); // elemento arrastrado
       if (tarjetaArrastrada) {
-        contenedor.appendChild(tarjetaArrastrada);
+        contenedor.appendChild(tarjetaArrastrada); // añadimos la tarjeta al contenedor
         verificarContenedorVacio(contenedor);
       }
     });
@@ -150,6 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================================================
   // 5. FUNCIÓN HELPER PARA CREAR BOTONES (con clase opcional)
   // =========================================================
+  // Tonteria pero es para que se vea más limpio
   function crearBoton(texto, accion, className = "") {
     const boton = document.createElement("button");
     boton.textContent = texto;

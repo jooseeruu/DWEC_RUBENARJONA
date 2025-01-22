@@ -17,8 +17,11 @@ header {
 /* Tablero */
 #tablero {
   display: grid;
-  grid-template-columns: repeat(4, 300px);
-  gap: 2rem;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  ); /* Define las columnas de la cuadrícula con un tamaño mínimo de 250px y un tamaño máximo que se ajusta automáticamente al espacio disponible en este caso  */
+  gap: 1rem;
   padding: 1rem;
   overflow-x: auto;
 }
@@ -27,14 +30,18 @@ header {
 .list {
   background-color: #ebecf0;
   border-radius: 5px;
-  width: 300px;
   padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Lista título */
 .list-title {
   font-weight: 700;
   margin-bottom: 0.5rem;
   outline: none;
+  font-size: 1rem;
+  text-align: center;
 }
 
 /* Cards */
@@ -55,10 +62,6 @@ header {
   align-items: center;
 }
 
-.card.dragging {
-  opacity: 0.5;
-}
-
 /* Botones */
 .btn {
   padding: 0.5rem;
@@ -71,25 +74,16 @@ header {
   font-size: 0.9rem;
 }
 
-.btn-add-card {
-  float: auto;
-  margin-top: auto;
-}
-
 .btn-delete-list {
   background-color: #bf0030;
-  float: right;
-  margin: 0;
 }
 
 .btn-delete-card {
   color: #000;
   background-color: #c2c2c2;
-  margin-left: 0.5rem;
-  margin-top: auto;
 }
 
-/* Cards Vacías */
+/* Cards vacias MUY IMPORTANTES usadas como zona habilitada para insertar tarjetas cuando no hay ninguna inicializada */
 .cards.empty {
   border: 3px dashed #888;
   min-height: 12px;
@@ -103,28 +97,19 @@ header {
   background-color: #e0e0e0;
 }
 
-/* Media Queries */
-
-/* Pantallas grandes (Ordenadores de escritorio y monitores) */
-@media screen and (min-width: 1200px) {
-  #tablero {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 2rem;
-  }
+/* Elementos Responsive*/
+.list {
+  max-width: 100%; /* Las listas no se salen */
 }
 
-/* Portátiles grandes */
-@media screen and (max-width: 1199px) and (min-width: 992px) {
-  #tablero {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-  }
+.card {
+  font-size: calc(
+    0.9rem + 0.2vw
+  ); /* Ajuste dinamico segun pantalla en las fuentes */
+  padding: calc(0.4rem + 0.2vw); /* Ajuste dinámico del padding */
 }
 
-/* Portátiles medianos y pequeños */
-@media screen and (max-width: 991px) and (min-width: 768px) {
-  #tablero {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-  }
+.btn {
+  font-size: calc(0.8rem + 0.2vw); /* Botones dinámicos */
+  padding: calc(0.4rem + 0.2vw);
 }
