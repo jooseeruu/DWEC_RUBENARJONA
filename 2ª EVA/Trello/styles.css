@@ -1,4 +1,4 @@
-/* Básicos */
+/* General */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -6,44 +6,43 @@ body {
   background-color: #f4f5f7;
 }
 
+/* Header */
 header {
   background-color: #0079bf;
-  color: white;
+  color: #fff;
   padding: 1rem;
   text-align: center;
 }
 
-/* Convierto #tablero a grid y aumento el gap a 2rem */
+/* Tablero */
 #tablero {
   display: grid;
-  grid-template-columns: repeat(4, 300px); /* 3 columnas de 300px */
-  gap: 2rem; /* Aumenta la separación entre columnas y filas */
+  grid-template-columns: repeat(4, 300px);
+  gap: 2rem;
   padding: 1rem;
-  overflow-x: unset; /* Sin scroll horizontal */
+  overflow-x: auto;
 }
 
-/* Listas */
+/* Lista */
 .list {
   background-color: #ebecf0;
   border-radius: 5px;
-  width: 300px; /* fijo para que sean 3 por fila */
+  width: 300px;
   padding: 0.5rem;
-  /* flex-shrink: 0;  <-- Ya no importa en Grid */
 }
 
 .list-title {
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 0.5rem;
   outline: none;
 }
 
-/* Contenedor de tarjetas */
+/* Cards */
 .cards {
   min-height: 20px;
   padding-bottom: 0.5rem;
 }
 
-/* Tarjetas */
 .card {
   background-color: #fff;
   border-radius: 3px;
@@ -60,23 +59,18 @@ header {
   opacity: 0.5;
 }
 
-/* ----------------------------
-   Botones (clases unificadas)
-   ---------------------------- */
-
-/* Clase base para todos los botones */
+/* Botones */
 .btn {
   padding: 0.5rem;
   border: none;
   border-radius: 3px;
   cursor: pointer;
   margin-top: 0.5rem;
-  color: #fff; /* texto en blanco */
-  background-color: #0079bf; /* fondo azul */
+  color: #fff;
+  background-color: #0079bf;
   font-size: 0.9rem;
 }
 
-/* Botones específicos */
 .btn-add-card {
   float: auto;
   margin-top: auto;
@@ -85,17 +79,17 @@ header {
 .btn-delete-list {
   background-color: #bf0030;
   float: right;
-  margin: 0; /* quita márgenes que puedan forzar posición rara */
+  margin: 0;
 }
 
 .btn-delete-card {
-  color: black;
+  color: #000;
   background-color: #c2c2c2;
   margin-left: 0.5rem;
   margin-top: auto;
 }
 
-/* Contenedor de tarjetas vacío */
+/* Cards Vacías */
 .cards.empty {
   border: 3px dashed #888;
   min-height: 12px;
@@ -107,4 +101,30 @@ header {
 
 .cards.empty:hover {
   background-color: #e0e0e0;
+}
+
+/* Media Queries */
+
+/* Pantallas grandes (Ordenadores de escritorio y monitores) */
+@media screen and (min-width: 1200px) {
+  #tablero {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Portátiles grandes */
+@media screen and (max-width: 1199px) and (min-width: 992px) {
+  #tablero {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Portátiles medianos y pequeños */
+@media screen and (max-width: 991px) and (min-width: 768px) {
+  #tablero {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
 }
