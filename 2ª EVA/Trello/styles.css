@@ -108,7 +108,7 @@ header {
 /* Pantallas grandes (Ordenadores de escritorio y monitores) */
 @media screen and (min-width: 1200px) {
   #tablero {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 2rem;
   }
 }
