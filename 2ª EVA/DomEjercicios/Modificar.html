@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Manipulación de Nodos</title>
+  </head>
+  <body>
+    <div id="contenedor" class="principal">
+      <p>Elemento original</p>
+    </div>
+
+    <script>
+      // 1. Creación de elementos
+      const nuevoDiv = document.createElement("div");
+      nuevoDiv.textContent = "Nuevo div creado";
+      const texto = document.createTextNode(" (Texto adicional)");
+
+      // 2. Clonación
+      const contenedorOriginal = document.querySelector(".principal");
+      const clonSuperficial = contenedorOriginal.cloneNode(false); // Solo el contenedor
+      const clonProfundo = contenedorOriginal.cloneNode(true); // Con todo su contenido
+
+      // 3. Métodos modernos de inserción
+      const contenedor = document.getElementById("contenedor");
+
+      // Insertar al final
+      contenedor.append(nuevoDiv, texto);
+
+      // Insertar al principio
+      contenedor.prepend(document.createElement("hr"));
+
+      // Insertar antes/después
+      contenedor.before(clonSuperficial);
+      contenedor.after(clonProfundo);
+
+      // Reemplazar
+      const elementoParaReemplazar = document.createElement("span");
+      elementoParaReemplazar.textContent = "Elemento reemplazado";
+      clonSuperficial.replaceWith(elementoParaReemplazar);
+
+      // Eliminar
+      setTimeout(() => elementoParaReemplazar.remove(), 2000); // Elimina después de 2 segundos
+
+      // 4. Métodos tradicionales
+      const nuevoParrafo = document.createElement("p");
+      nuevoParrafo.textContent = "Parrafo antiguo";
+
+      // appendChild
+      document.body.appendChild(nuevoParrafo);
+
+      // insertBefore
+      const lista = document.createElement("ul");
+      document.body.insertBefore(lista, document.querySelector("script"));
+
+      // replaceChild
+      const nuevoItem = document.createElement("li");
+      nuevoItem.textContent = "Item nuevo";
+      lista.replaceChild(nuevoItem, lista.firstChild); // Si no hay hijos fallará
+
+      // 5. insertAdjacentHTML
+      const boton = document.createElement("button");
+      boton.textContent = "Click aquí";
+      document.body.append(boton);
+
+      boton.insertAdjacentHTML("beforebegin", "<div>Antes del botón</div>");
+      boton.insertAdjacentHTML("afterbegin", "<span>Dentro (inicio)</span>");
+      boton.insertAdjacentHTML("beforeend", "<span>Dentro (final)</span>");
+      boton.insertAdjacentHTML("afterend", "<div>Después del botón</div>");
+
+      // 6. document.write (usar con precaución)
+      if (document.readyState === "loading") {
+        document.write("<p>Este contenido se agregó durante la carga</p>");
+      }
+    </script>
+  </body>
+</html>

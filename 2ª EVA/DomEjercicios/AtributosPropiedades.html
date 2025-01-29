@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <!-- Elementos con diferentes atributos -->
+    <input id="miInput" value="Valor Inicial" />
+    <a id="miEnlace" href="/ruta-ejemplo">Enlace de prueba</a>
+    <div
+      id="miDiv"
+      info-custom="valor personalizado"
+      data-info="valor-data"
+      AtributoEjemplo="Prueba mayúsculas"></div>
+
+    <script>
+      const input = document.getElementById("miInput");
+      const enlace = document.getElementById("miEnlace");
+      const div = document.getElementById("miDiv");
+
+      // 1. Diferencia básica entre propiedad y atributo
+      console.log("INPUT:");
+      console.log("Propiedad value:", input.value); // Valor actual (puede cambiar)
+      console.log("Atributo value:", input.getAttribute("value")); // Valor inicial HTML
+
+      // 2. Modificación de propiedad vs atributo
+      input.value = "Nuevo valor desde JS";
+      console.log("\nDespués de modificar propiedad:");
+      console.log("Propiedad:", input.value); // "Nuevo valor desde JS"
+      console.log("Atributo:", input.getAttribute("value")); // Sigue siendo "Valor Inicial"
+
+      // 3. Caso con enlaces (href)
+      console.log("\nENLACE:");
+      console.log("Propiedad href:", enlace.href); // URL completa
+      console.log("Atributo href:", enlace.getAttribute("href")); // "/ruta-ejemplo"
+
+      // 4. Atributos personalizados
+      console.log("\nATRIBUTOS PERSONALIZADOS:");
+      console.log("Atributo custom:", div.getAttribute("info-custom")); // Funciona
+      console.log("Propiedad custom:", div.info - custom); // Error/undefined (no es propiedad estándar)
+
+      // 5. Atributos data-*
+      console.log("\nDATA ATTRIBUTES:");
+      console.log("Con getAttribute:", div.getAttribute("data-info")); // "valor-data"
+      console.log("Con dataset:", div.dataset.info); // "valor-data"
+
+      // 6. Sensibilidad a mayúsculas
+      console.log("\nMAYÚSCULAS/MINÚSCULAS:");
+      console.log(
+        "Atributo con mayúsculas:",
+        div.getAttribute("AtributoEjemplo")
+      ); // null
+      console.log(
+        "Atributo con minúsculas:",
+        div.getAttribute("atributoejemplo")
+      ); // "Prueba mayúsculas"
+
+      // 7. Métodos de atributos
+      console.log("\nMÉTODOS:");
+      console.log("¿Tiene info-custom?", div.hasAttribute("info-custom")); // true
+
+      // Eliminar atributo
+      div.removeAttribute("info-custom");
+      console.log("Después de eliminar:", div.getAttribute("info-custom")); // null
+
+      // Colección de atributos
+      console.log("\nTODOS LOS ATRIBUTOS:");
+      Array.from(div.attributes).forEach((attr) => {
+        console.log(`${attr.name}: ${attr.value}`);
+      });
+    </script>
+  </body>
+</html>

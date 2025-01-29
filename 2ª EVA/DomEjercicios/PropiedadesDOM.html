@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejemplo de Propiedades DOM</title>
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="titulo">Ejemplo de Propiedades DOM</h1>
+    <p id="parrafo">
+      Este es un párrafo con <strong>contenido en negrita</strong>.
+    </p>
+    <input type="text" id="inputText" value="Texto de ejemplo" />
+    <button id="boton">Mostrar Información</button>
+
+    <script>
+      document.getElementById("boton").addEventListener("click", function () {
+        let titulo = document.getElementById("titulo");
+        let parrafo = document.getElementById("parrafo");
+        let inputText = document.getElementById("inputText");
+
+        console.log("nodeType del título:", titulo.nodeType); // 1 (Elemento)
+        console.log("nodeName del título:", titulo.nodeName); // "H1"
+        console.log("innerHTML del párrafo:", parrafo.innerHTML); // Contenido con etiquetas
+        console.log("outerHTML del párrafo:", parrafo.outerHTML); // Toda la etiqueta con contenido
+        console.log("textContent del párrafo:", parrafo.textContent); // Solo el texto sin etiquetas
+        console.log("Valor del input:", inputText.value); // "Texto de ejemplo"
+
+        // Modificando propiedades
+        parrafo.textContent = "Nuevo texto sin etiquetas";
+        inputText.hidden = true; // Oculta el input
+      });
+    </script>
+  </body>
+</html>
