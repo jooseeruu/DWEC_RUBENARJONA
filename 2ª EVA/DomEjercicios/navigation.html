@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ejemplo Navegación DOM</title>
+  </head>
+  <body>
+    <div id="contenedor">
+      <!-- Comentario de prueba -->
+      Texto inicial
+      <p id="parrafo1">Primer párrafo</p>
+      <span id="span1">Este es un span</span>
+      <ul id="lista">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+      </ul>
+      Texto final
+    </div>
+
+    <table id="tablaEspecial">
+      <caption>
+        Tabla de ejemplo
+      </caption>
+      <thead>
+        <tr>
+          <th>Encabezado 1</th>
+          <th>Encabezado 2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Celda 1</td>
+          <td>Celda 2</td>
+        </tr>
+        <tr>
+          <td>Celda 3</td>
+          <td>Celda 4</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      // 1. Propiedades para todos los nodos
+      const parrafo1 = document.getElementById("parrafo1");
+
+      console.log("parentNode:", parrafo1.parentNode.id); // contenedor
+      console.log("childNodes:", document.getElementById("lista").childNodes); // Incluye nodos de texto
+      console.log("firstChild:", parrafo1.firstChild); // Texto "Primer párrafo"
+      console.log("lastChild:", document.getElementById("lista").lastChild); // Último li
+      console.log("previousSibling:", parrafo1.previousSibling); // Nodo de texto
+      console.log("nextSibling:", parrafo1.nextSibling); // Nodo de texto
+
+      // 2. Propiedades para elementos
+      const span1 = document.getElementById("span1");
+
+      console.log("parentElement:", span1.parentElement.id); // contenedor
+      console.log("children:", document.getElementById("lista").children); // Solo elementos li
+      console.log("firstElementChild:", span1.firstElementChild); // null (no tiene hijos)
+      console.log(
+        "lastElementChild:",
+        document.getElementById("lista").lastElementChild.textContent
+      ); // Item 3
+      console.log("previousElementSibling:", span1.previousElementSibling.id); // parrafo1
+      console.log("nextElementSibling:", span1.nextElementSibling.id); // lista
+
+      // 3. Propiedades especiales de tablas
+      const tabla = document.getElementById("tablaEspecial");
+
+      console.log("Table rows:", tabla.rows); // Colección de todos los tr
+      console.log("Table caption:", tabla.caption.textContent); // Tabla de ejemplo
+      console.log("Table tHead:", tabla.tHead); // Encabezado
+      console.log("Table tBodies:", tabla.tBodies); // Colección de cuerpos
+      console.log("Body rows:", tabla.tBodies[0].rows); // Filas del cuerpo
+      console.log("Row cells:", tabla.rows[1].cells); // Celdas de la fila
+    </script>
+  </body>
+</html>
