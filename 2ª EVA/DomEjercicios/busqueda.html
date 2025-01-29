@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ejemplo Búsqueda en el DOM</title>
+  </head>
+  <body>
+    <div id="contenedor">
+      <p class="texto">Este es un párrafo.</p>
+      <span class="texto">Este es un span.</span>
+      <ul id="lista">
+        <li name="item">Item 1</li>
+        <li name="item">Item 2</li>
+        <li name="item">Item 3</li>
+      </ul>
+      <div class="caja">
+        <p class="texto">Párrafo dentro de una caja.</p>
+      </div>
+    </div>
+
+    <script>
+      // 1. querySelector y querySelectorAll
+      const primerParrafo = document.querySelector("p"); // Selecciona el primer párrafo
+      console.log("querySelector:", primerParrafo.textContent); // "Este es un párrafo."
+
+      const todosLosTextos = document.querySelectorAll(".texto"); // Selecciona todos los elementos con clase "texto"
+      console.log("querySelectorAll:", todosLosTextos); // NodeList con todos los elementos .texto
+
+      // 2. getElementById
+      const contenedor = document.getElementById("contenedor"); // Selecciona el div con id "contenedor"
+      console.log("getElementById:", contenedor.id); // "contenedor"
+
+      // 3. getElementsByName
+      const items = document.getElementsByName("item"); // Selecciona todos los elementos con name="item"
+      console.log("getElementsByName:", items); // NodeList con los elementos li
+
+      // 4. getElementsByTagName
+      const parrafos = document.getElementsByTagName("p"); // Selecciona todos los párrafos
+      console.log("getElementsByTagName:", parrafos); // HTMLCollection con todos los párrafos
+
+      // 5. getElementsByClassName
+      const textos = document.getElementsByClassName("texto"); // Selecciona todos los elementos con clase "texto"
+      console.log("getElementsByClassName:", textos); // HTMLCollection con todos los elementos .texto
+
+      // 6. matches
+      const span = document.querySelector("span");
+      console.log("matches:", span.matches(".texto")); // true (el span tiene la clase "texto")
+
+      // 7. closest
+      const item2 = document.querySelector("li:nth-child(2)"); // Selecciona el segundo li
+      const lista = item2.closest("ul"); // Busca el ancestro más cercano que sea un ul
+      console.log("closest:", lista.id); // "lista"
+
+      // 8. contains
+      const caja = document.querySelector(".caja");
+      const parrafoEnCaja = caja.querySelector("p");
+      console.log("contains:", caja.contains(parrafoEnCaja)); // true (el párrafo está dentro de la caja)
+      console.log("contains:", contenedor.contains(caja)); // true (la caja está dentro del contenedor)
+      console.log("contains:", caja.contains(caja)); // true (un elemento se contiene a sí mismo)
+    </script>
+  </body>
+</html>
