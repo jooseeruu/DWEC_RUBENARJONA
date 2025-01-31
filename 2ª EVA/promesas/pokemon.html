@@ -6,14 +6,14 @@
     <title>Pokémon API</title>
   </head>
   <body>
-    <h1>Lista de los Primeros 151 Pokémon</h1>
+    <h1>Lista de los Primeros 100 Pokémon</h1>
     <ul id="pokemon-list"></ul>
 
     <script>
       async function fetchPokemonNames() {
         try {
           const response = await fetch(
-            "https://pokeapi.co/api/v2/pokemon?limit=151"
+            "https://pokeapi.co/api/v2/pokemon?limit=100"
           );
           const data = await response.json();
           const pokemonList = data.results;
