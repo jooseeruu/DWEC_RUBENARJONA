@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Coche {
+        constructor(marca, modelo, color) {
+          this.marca = marca;
+          this.modelo = modelo;
+          this.color = color;
+        }
+        mostrarInfo() {
+          console.log(
+            `Marca: ${this.marca}, Modelo: ${this.modelo}, Color: ${this.color}`
+          );
+        }
+      }
+
+      const coches = [
+        new Coche("Ford", "Focus", "Azul"),
+        new Coche("Renault", "Clio", "Rojo"),
+        new Coche("Seat", "Ibiza", "Blanco"),
+      ];
+
+      // Función que devuelve una Promesa para esperar 2 segundos
+      function esperarYMostrarCoches(coches) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            try {
+              coches.forEach((coche) => coche.mostrarInfo());
+              resolve("Información de coches mostrada correctamente.");
+            } catch (error) {
+              reject(
+                "Ocurrió un error al mostrar la información de los coches."
+              );
+            }
+          }, 6000);
+        });
+      }
+
+      // Uso de la Promesa
+      esperarYMostrarCoches(coches)
+        .then((mensaje) => {
+          console.log(mensaje); // Mensaje de éxito
+        })
+        .catch((error) => {
+          console.error(error); // Manejo de errores
+        });
+    </script>
+  </body>
+</html>

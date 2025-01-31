@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Coche {
+        constructor(marca, modelo, color) {
+          this.marca = marca;
+          this.modelo = modelo;
+          this.color = color;
+        }
+
+        mostrarInfo() {
+          console.log(
+            `Marca: ${this.marca}, Modelo: ${this.modelo}, Color: ${this.color}`
+          );
+        }
+      }
+
+      const coches = [
+        new Coche("Ford", "Focus", "Azul"),
+        new Coche("Renault", "Clio", "Rojo"),
+        new Coche("Seat", "Ibiza", "Blanco"),
+      ];
+
+      // Mostrar array coches con callback de 2 seg
+      setTimeout(() => {
+        coches.forEach((coche) => coche.mostrarInfo());
+      }, 2000);
+    </script>
+  </body>
+</html>

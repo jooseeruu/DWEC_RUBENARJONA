@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Operaciones con callback</title>
+  </head>
+  <body>
+    <script>
+      // Función que recibe un número y un callback
+      function operacion(num, callback) {
+        // Realiza una operación
+        const resultado = num * 2;
+
+        // Llama al callback con el resultado
+        callback(resultado);
+      }
+
+      // Callback que muestra el resultado en consola
+      function mostrarResultado(resultado) {
+        console.log(`El resultado es: ${resultado}`);
+      }
+
+      // Llama a la función operacion con un número y el callback
+      operacion(5, mostrarResultado);
+    </script>
+  </body>
+</html>

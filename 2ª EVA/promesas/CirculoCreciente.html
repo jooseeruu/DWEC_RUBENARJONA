@@ -1,0 +1,72 @@
+<!-- 
+
+Este documento HTML crea un botón que, cuando se hace clic, activa una animación de un círculo creciente. 
+Una vez que el círculo haya terminado de crecer, aparecerá un mensaje "¡Hola, mundo!" se muestra dentro del círculo.
+
+Elementos:
+- Un botón con el texto "Pulsame" que activa la función "ir" cuando se hace clic.
+- Un script que contiene la función `go` y la función `showCircle`.
+
+Funciones:
+- `go()`: llama a la función `showCircle` con coordenadas y radio específicos, luego agrega una clase y texto al elemento circular resultante.
+- `showCircle(cx, cy, radio)`: Crea un elemento circular en las coordenadas especificadas con un tamaño inicial de 0, luego lo anima al radio especificado. Devuelve una Promesa que se resuelve con el elemento círculo una vez que se completa la animación.
+
+Estilos:
+- `.message-ball`: Estilos para el texto dentro del círculo.
+- `.circle`: estilos para el elemento circular, incluidas propiedades de transición para ancho y alto, posicionamiento fijo y un color de fondo rojo.
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .message-ball {
+        font-size: 20px;
+        line-height: 200px;
+        text-align: center;
+      }
+      .circle {
+        transition-property: width, height;
+        transition-duration: 2s;
+        position: fixed;
+        transform: translateX(-50%) translateY(-50%);
+        background-color: red;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="go()">Pulsame</button>
+    <script>
+      function go() {
+        showCircle(150, 150, 100).then((div) => {
+          div.classList.add("message-ball");
+          div.textContent = "Hello, world!";
+        });
+      }
+
+      function showCircle(cx, cy, radius) {
+        return new Promise((resolve) => {
+          let circle = document.createElement("div");
+          circle.style.width = 0;
+          circle.style.height = 0;
+          circle.style.left = cx + "px";
+          circle.style.top = cy + "px";
+          circle.className = "circle";
+          document.body.append(circle);
+
+          setTimeout(() => {
+            circle.style.width = radius * 2 + "px";
+            circle.style.height = radius * 2 + "px";
+            circle.addEventListener("transitionend", function handler() {
+              circle.removeEventListener("transitionend", handler);
+              resolve(circle);
+            });
+          }, 0);
+        });
+      }
+    </script>
+  </body>
+</html>
