@@ -1,45 +1,129 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
+/* =================================== */
+/* RESET Y ESTILOS GLOBALES           */
+/* =================================== */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f1f1f1;
+  color: #333;
   padding: 20px;
 }
+
+/* =================================== */
+/* TITULO                             */
+/* =================================== */
 h1 {
   text-align: center;
-}
-.search-container {
-  text-align: center;
   margin-bottom: 20px;
+  font-size: 2rem;
 }
+
+/* =================================== */
+/* BUSCADOR                           */
+/* =================================== */
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
 .search-container input {
-  padding: 8px;
-  width: 200px;
-  font-size: 16px;
+  width: 300px;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
 }
+
+.search-container input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
 .search-container button {
-  padding: 8px 12px;
-  font-size: 16px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
 }
+
+.search-container button:hover {
+  background-color: #0056b3;
+}
+
+/* =================================== */
+/* CONTENEDOR DE TARJETAS             */
+/* =================================== */
 .card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
-  padding: 20px;
 }
+
+/* =================================== */
+/* ESTILO DE CADA TARJETA             */
+/* =================================== */
 .card {
   background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px;
   text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
-.card img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 5px auto;
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
+
+/* Nombre del Pokémon */
 .card h3 {
   text-transform: capitalize;
+  margin-bottom: 10px;
+}
+
+/* Imágenes de los Pokémon */
+.card img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+}
+
+.card img + img {
+  margin-top: 10px;
+}
+
+/* Información del color */
+.card p {
+  margin-top: 15px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+/* =================================== */
+/* MEDIA QUERIES (RESPONSIVIDAD)       */
+/* =================================== */
+@media (max-width: 600px) {
+  .search-container {
+    flex-direction: column;
+  }
+
+  .search-container input {
+    width: 100%;
+  }
 }
