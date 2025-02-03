@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Lista de los Primeros 100 Pokémon</h1>
+    <h1>Lista de los Primeros 151 Pokémon</h1>
     <div class="search-container">
       <input
         type="text"
@@ -18,7 +18,7 @@
     <div class="card-container" id="pokemon-list"></div>
     <script>
       function fetchPokemonNames() {
-        fetch("https://pokeapi.co/api/v2/pokemon?limit=100")
+        fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
           .then((response) => response.json())
           .then((data) => {
             const pokemonList = data.results;
