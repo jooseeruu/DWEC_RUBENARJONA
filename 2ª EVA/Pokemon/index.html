@@ -3,103 +3,237 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pokémon API - Tarjetas con Imágenes y Buscador por Color</title>
+    <title>Pokémon API - Tarjetas con Imágenes y Buscadores</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <h1>Lista de los Primeros 151 Pokémon</h1>
     <div class="search-container">
+      <!-- Buscador por color -->
       <input
         type="text"
         id="color-search"
         placeholder="Buscar por color (ej: red, blue)..." />
+
+      <input
+        type="text"
+        id="type-search"
+        placeholder="Buscar por tipo (ej: fire, water)..." />
       <button id="search-btn">Buscar</button>
+    </div>
+    <div id="loading-indicator" class="loading">
+      <div class="spinner"></div>
+      <p>Cargando Pokémons...</p>
     </div>
     <div class="card-container" id="pokemon-list"></div>
     <script>
-      function fetchPokemonNames() {
-        fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
-          .then((response) => response.json())
-          .then((data) => {
-            const pokemonList = data.results;
-            const container = document.getElementById("pokemon-list");
+      // ============================
+      // Funciones de Utilidad
+      // ============================
 
-            pokemonList.forEach((pokemon) => {
-              // Obtenemos los detalles del Pokémon
-              fetch(pokemon.url)
-                .then((response) => response.json())
-                .then((details) => {
-                  // Se hace una segunda petición para obtener la especie y con ello el color
-                  fetch(details.species.url)
-                    .then((res) => res.json())
-                    .then((speciesData) => {
-                      const card = document.createElement("div");
-                      card.className = "card";
-                      // Se asigna el color obtenido como data attribute para usar en el filtro
-                      card.dataset.color = speciesData.color.name;
-
-                      // Nombre del Pokémon
-                      const nameElem = document.createElement("h3");
-                      nameElem.textContent = pokemon.name;
-                      card.appendChild(nameElem);
-
-                      // Imagen frontal normal
-                      const imgNormal = document.createElement("img");
-                      imgNormal.src = details.sprites.front_default;
-                      imgNormal.alt = pokemon.name + " Normal";
-                      card.appendChild(imgNormal);
-
-                      // Imagen frontal shiny
-                      const imgShiny = document.createElement("img");
-                      imgShiny.src = details.sprites.front_shiny;
-                      imgShiny.alt = pokemon.name + " Shiny";
-                      card.appendChild(imgShiny);
-
-                      // mostrar el color del Pokémon
-                      const colorInfo = document.createElement("p");
-                      colorInfo.textContent =
-                        "Color: " + speciesData.color.name;
-                      card.appendChild(colorInfo);
-
-                      container.appendChild(card);
-                    })
-                    .catch((error) =>
-                      console.error(
-                        "Error al obtener detalles de la especie:",
-                        error
-                      )
-                    );
-                })
-                .catch((error) =>
-                  console.error("Error al obtener detalles del Pokémon:", error)
-                );
-            });
-          })
-          .catch((error) =>
-            console.error("Error al obtener los datos de la API:", error)
+      /**
+       * Realiza una petición HTTP GET a la URL proporcionada y devuelve el JSON resultante.
+       * Lanza un error si la respuesta no es exitosa.
+       *
+       * @param {string} url - La URL de la API a consultar.
+       * @returns {Promise<Object>} - Los datos en formato JSON.
+       */
+      async function fetchData(url) {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(
+            `Error al obtener datos de ${url}: ${response.status}`
           );
+        }
+        return response.json();
       }
 
-      fetchPokemonNames();
+      // ============================
+      // Funciones para Obtener Datos
+      // ============================
 
-      // Implementar buscador por color
-      document
-        .getElementById("search-btn")
-        .addEventListener("click", function () {
-          const searchTerm = document
-            .getElementById("color-search")
-            .value.toLowerCase()
-            .trim();
-          const cards = document.querySelectorAll(".card");
-          cards.forEach((card) => {
-            // Se muestra la tarjeta si el color coincide o si no se ingresó ningún término
-            if (card.dataset.color.includes(searchTerm) || searchTerm === "") {
-              card.style.display = "block";
-            } else {
-              card.style.display = "none";
-            }
-          });
+      /**
+       * Obtiene la lista de los primeros Pokémon.
+       *
+       * @param {number} limit - La cantidad de Pokémon a obtener (por defecto 151).
+       * @returns {Promise<Array>} - Array de objetos con información básica de cada Pokémon.
+       */
+      async function getPokemonList(limit = 151) {
+        const apiUrl = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`;
+        const data = await fetchData(apiUrl);
+        return data.results;
+      }
+
+      /**
+       * Obtiene los detalles completos de un Pokémon usando su URL.
+       *
+       * @param {string} pokemonUrl - La URL de los detalles del Pokémon.
+       * @returns {Promise<Object>} - Objeto con los detalles del Pokémon.
+       */
+      async function getPokemonDetails(pokemonUrl) {
+        return fetchData(pokemonUrl);
+      }
+
+      /**
+       * Obtiene los datos de la especie del Pokémon, como el color.
+       *
+       * @param {string} speciesUrl - La URL de la especie del Pokémon.
+       * @returns {Promise<Object>} - Objeto con los datos de la especie.
+       */
+      async function getSpeciesData(speciesUrl) {
+        return fetchData(speciesUrl);
+      }
+
+      // ============================
+      // Función para Crear Tarjetas (Cards)
+      // ============================
+
+      /**
+       * Crea un elemento 'card' para representar un Pokémon.
+       *
+       * @param {Object} pokemon - Objeto con la información básica del Pokémon.
+       * @param {Object} details - Detalles adicionales del Pokémon.
+       * @param {Object} speciesData - Datos de la especie del Pokémon (ej. color).
+       * @returns {HTMLElement} - Elemento HTML que representa la tarjeta del Pokémon.
+       */
+      function createPokemonCard(pokemon, details, speciesData) {
+        // Crear contenedor de la tarjeta
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        // Asignar atributos de datos para filtrado
+        card.dataset.color = speciesData.color.name.toLowerCase();
+        card.dataset.types = details.types
+          .map((t) => t.type.name.toLowerCase())
+          .join(" ");
+
+        // Agregar nombre del Pokémon
+        const nameElem = document.createElement("h3");
+        nameElem.textContent = pokemon.name;
+        card.appendChild(nameElem);
+
+        // Agregar imágenes (normal y shiny)
+        const imageSources = [
+          { src: details.sprites.front_default, label: "Normal" },
+          { src: details.sprites.front_shiny, label: "Shiny" },
+        ];
+
+        imageSources.forEach(({ src, label }) => {
+          if (src) {
+            const img = document.createElement("img");
+            img.src = src;
+            img.alt = `${pokemon.name} ${label}`;
+            card.appendChild(img);
+          }
         });
+
+        // Agregar información del color
+        const colorInfo = document.createElement("p");
+        colorInfo.textContent = `Color: ${speciesData.color.name}`;
+        card.appendChild(colorInfo);
+
+        // Agregar información de los tipos
+        const typesInfo = document.createElement("p");
+        const typesList = details.types.map((t) => t.type.name).join(", ");
+        typesInfo.textContent = `Tipo(s): ${typesList}`;
+        card.appendChild(typesInfo);
+
+        return card;
+      }
+
+      // ============================
+      // Función para Renderizar las Tarjetas
+      // ============================
+
+      /**
+       * Carga la lista de Pokémon y renderiza cada uno en el contenedor correspondiente.
+       * Muestra un spinner durante la carga y oculta dicho spinner al finalizar.
+       */
+      async function renderPokemonCards() {
+        const loader = document.getElementById("loading-indicator");
+        const container = document.getElementById("pokemon-list");
+
+        try {
+          // Mostrar indicador de carga
+          loader.style.display = "block";
+          // Limpiar contenido anterior
+          container.innerHTML = "";
+
+          // Obtener la lista de Pokémon
+          const pokemonList = await getPokemonList();
+
+          // Crear un fragmento para insertar las tarjetas de forma eficiente
+          const fragment = document.createDocumentFragment();
+
+          // Procesar cada Pokémon individualmente
+          for (const pokemon of pokemonList) {
+            try {
+              const details = await getPokemonDetails(pokemon.url);
+              const speciesData = await getSpeciesData(details.species.url);
+              const card = createPokemonCard(pokemon, details, speciesData);
+              fragment.appendChild(card);
+            } catch (error) {
+              console.error(`Error procesando ${pokemon.name}:`, error);
+            }
+          }
+
+          // Agregar todas las tarjetas al contenedor
+          container.appendChild(fragment);
+        } catch (error) {
+          console.error("Error general al renderizar Pokémon:", error);
+          // Opcional: Mostrar un mensaje de error al usuario en la interfaz.
+        } finally {
+          // Ocultar el indicador de carga una vez completado el proceso
+          loader.style.display = "none";
+        }
+      }
+
+      // ============================
+      // Función para Filtrar Tarjetas en Tiempo Real
+      // ============================
+
+      /**
+       * Filtra las tarjetas de Pokémon según el valor ingresado en los campos de búsqueda
+       * por color y tipo.
+       */
+      function filterCards() {
+        const colorTerm = document
+          .getElementById("color-search")
+          .value.toLowerCase()
+          .trim();
+        const typeTerm = document
+          .getElementById("type-search")
+          .value.toLowerCase()
+          .trim();
+
+        const cards = document.querySelectorAll(".card");
+
+        cards.forEach((card) => {
+          const cardColor = card.dataset.color;
+          const cardTypes = card.dataset.types;
+
+          // Se muestran las tarjetas que cumplan con ambos criterios o si los campos están vacíos
+          const matchColor = colorTerm === "" || cardColor.includes(colorTerm);
+          const matchType = typeTerm === "" || cardTypes.includes(typeTerm);
+
+          card.style.display = matchColor && matchType ? "block" : "none";
+        });
+      }
+
+      // ============================
+      // Configuración de Eventos y Ejecución Inicial
+      // ============================
+
+      // Asignar eventos de "input" a los campos de búsqueda para filtrar en tiempo real
+      document
+        .getElementById("color-search")
+        .addEventListener("input", filterCards);
+      document
+        .getElementById("type-search")
+        .addEventListener("input", filterCards);
+
+      // Iniciar la carga y renderización de los Pokémon
+      renderPokemonCards();
     </script>
   </body>
 </html>
