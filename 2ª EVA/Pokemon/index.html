@@ -30,14 +30,6 @@
       // ============================
       // Funciones de Utilidad
       // ============================
-
-      /**
-       * Realiza una petición HTTP GET a la URL proporcionada y devuelve el JSON resultante.
-       * Lanza un error si la respuesta no es exitosa.
-       *
-       * @param {string} url - La URL de la API a consultar.
-       * @returns {Promise<Object>} - Los datos en formato JSON.
-       */
       async function fetchData(url) {
         const response = await fetch(url);
         if (!response.ok) {
@@ -51,35 +43,15 @@
       // ============================
       // Funciones para Obtener Datos
       // ============================
-
-      /**
-       * Obtiene la lista de los primeros Pokémon.
-       *
-       * @param {number} limit - La cantidad de Pokémon a obtener (por defecto 151).
-       * @returns {Promise<Array>} - Array de objetos con información básica de cada Pokémon.
-       */
       async function getPokemonList(limit = 151) {
         const apiUrl = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`;
         const data = await fetchData(apiUrl);
         return data.results;
       }
 
-      /**
-       * Obtiene los detalles completos de un Pokémon usando su URL.
-       *
-       * @param {string} pokemonUrl - La URL de los detalles del Pokémon.
-       * @returns {Promise<Object>} - Objeto con los detalles del Pokémon.
-       */
       async function getPokemonDetails(pokemonUrl) {
         return fetchData(pokemonUrl);
       }
-
-      /**
-       * Obtiene los datos de la especie del Pokémon, como el color.
-       *
-       * @param {string} speciesUrl - La URL de la especie del Pokémon.
-       * @returns {Promise<Object>} - Objeto con los datos de la especie.
-       */
       async function getSpeciesData(speciesUrl) {
         return fetchData(speciesUrl);
       }
@@ -87,15 +59,6 @@
       // ============================
       // Función para Crear Tarjetas (Cards)
       // ============================
-
-      /**
-       * Crea un elemento 'card' para representar un Pokémon.
-       *
-       * @param {Object} pokemon - Objeto con la información básica del Pokémon.
-       * @param {Object} details - Detalles adicionales del Pokémon.
-       * @param {Object} speciesData - Datos de la especie del Pokémon (ej. color).
-       * @returns {HTMLElement} - Elemento HTML que representa la tarjeta del Pokémon.
-       */
       function createPokemonCard(pokemon, details, speciesData) {
         // Crear contenedor de la tarjeta
         const card = document.createElement("div");
@@ -134,6 +97,7 @@
 
         // Agregar información de los tipos
         const typesInfo = document.createElement("p");
+        // Unir los nombres de los tipos en una cadena separada por comas
         const typesList = details.types.map((t) => t.type.name).join(", ");
         typesInfo.textContent = `Tipo(s): ${typesList}`;
         card.appendChild(typesInfo);
@@ -144,11 +108,6 @@
       // ============================
       // Función para Renderizar las Tarjetas
       // ============================
-
-      /**
-       * Carga la lista de Pokémon y renderiza cada uno en el contenedor correspondiente.
-       * Muestra un spinner durante la carga y oculta dicho spinner al finalizar.
-       */
       async function renderPokemonCards() {
         const loader = document.getElementById("loading-indicator");
         const container = document.getElementById("pokemon-list");
@@ -191,11 +150,6 @@
       // ============================
       // Función para Filtrar Tarjetas en Tiempo Real
       // ============================
-
-      /**
-       * Filtra las tarjetas de Pokémon según el valor ingresado en los campos de búsqueda
-       * por color y tipo.
-       */
       function filterCards() {
         const colorTerm = document
           .getElementById("color-search")
@@ -223,7 +177,6 @@
       // ============================
       // Configuración de Eventos y Ejecución Inicial
       // ============================
-
       // Asignar eventos de "input" a los campos de búsqueda para filtrar en tiempo real
       document
         .getElementById("color-search")
