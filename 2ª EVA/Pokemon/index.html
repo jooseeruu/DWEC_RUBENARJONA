@@ -28,59 +28,49 @@
     <div class="card-container" id="pokemon-list"></div>
     <script>
       // ============================
-      // Funciones de Utilidad
-      // ============================
-      async function fetchData(url) {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(
-            `Error al obtener datos de ${url}: ${response.status}`
-          );
-        }
-        return response.json();
-      }
-
-      // ============================
-      // Funciones para Obtener Datos
+      // Función para Realizar Peticiones a la API
       // ============================
       async function getPokemonList(limit = 151) {
         const apiUrl = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`;
-        const data = await fetchData(apiUrl);
-        return data.results;
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        return data.results; // Regresa únicamente el nombre y la URL de detalles
+      }
+      async function getPokemonDetails(pokemonUrl) {
+        const response = await fetch(pokemonUrl);
+        return response.json(); // Regresa todos los detalles del Pokémon
       }
 
-      async function getPokemonDetails(pokemonUrl) {
-        return fetchData(pokemonUrl);
-      }
       async function getSpeciesData(speciesUrl) {
-        return fetchData(speciesUrl);
+        const response = await fetch(speciesUrl);
+        return response.json(); // Regresa datos de especies del Pokémon
       }
 
       // ============================
       // Función para Crear Tarjetas (Cards)
       // ============================
       function createPokemonCard(pokemon, details, speciesData) {
-        // Crear contenedor de la tarjeta
+        // Crea contenedor de la tarjeta
         const card = document.createElement("div");
         card.classList.add("card");
 
-        // Asignar atributos de datos para filtrado
+        // Asigna atributos de datos para filtrado en caso de no hacer esto no podriamos filtrar
         card.dataset.color = speciesData.color.name.toLowerCase();
         card.dataset.types = details.types
+          // Mapea los tipos de Pokémon a una lista de nombres de tipo en minúsculas
           .map((t) => t.type.name.toLowerCase())
           .join(" ");
 
-        // Agregar nombre del Pokémon
+        // Agrega nombre del Pokémon
         const nameElem = document.createElement("h3");
         nameElem.textContent = pokemon.name;
         card.appendChild(nameElem);
 
-        // Agregar imágenes (normal y shiny)
+        // Agrega imágenes (normal y shiny)
         const imageSources = [
-          { src: details.sprites.front_default, label: "Normal" },
+          { src: details.sprites.front_default, label: "Normal" }, // Se obtiene la imagen a traves del objeto details.sprites
           { src: details.sprites.front_shiny, label: "Shiny" },
         ];
-
         imageSources.forEach(({ src, label }) => {
           if (src) {
             const img = document.createElement("img");
@@ -90,16 +80,15 @@
           }
         });
 
-        // Agregar información del color
+        // Agrega información del color
         const colorInfo = document.createElement("p");
         colorInfo.textContent = `Color: ${speciesData.color.name}`;
         card.appendChild(colorInfo);
 
-        // Agregar información de los tipos
+        // Agrega información de los tipos
         const typesInfo = document.createElement("p");
-        // Unir los nombres de los tipos en una cadena separada por comas
         const typesList = details.types.map((t) => t.type.name).join(", ");
-        typesInfo.textContent = `Tipo(s): ${typesList}`;
+        typesInfo.textContent = `Tipo: ${typesList}`;
         card.appendChild(typesInfo);
 
         return card;
@@ -112,39 +101,25 @@
         const loader = document.getElementById("loading-indicator");
         const container = document.getElementById("pokemon-list");
 
-        try {
-          // Mostrar indicador de carga
-          loader.style.display = "block";
-          // Limpiar contenido anterior
-          container.innerHTML = "";
+        // Muestra indicador de carga y limpiar contenido anterior
+        loader.style.display = "block";
+        container.innerHTML = "";
 
-          // Obtener la lista de Pokémon
-          const pokemonList = await getPokemonList();
+        // Obtiene la lista de Pokémon
+        const pokemonList = await getPokemonList();
+        const fragment = document.createDocumentFragment();
 
-          // Crear un fragmento para insertar las tarjetas de forma eficiente
-          const fragment = document.createDocumentFragment();
-
-          // Procesar cada Pokémon individualmente
-          for (const pokemon of pokemonList) {
-            try {
-              const details = await getPokemonDetails(pokemon.url);
-              const speciesData = await getSpeciesData(details.species.url);
-              const card = createPokemonCard(pokemon, details, speciesData);
-              fragment.appendChild(card);
-            } catch (error) {
-              console.error(`Error procesando ${pokemon.name}:`, error);
-            }
-          }
-
-          // Agregar todas las tarjetas al contenedor
-          container.appendChild(fragment);
-        } catch (error) {
-          console.error("Error general al renderizar Pokémon:", error);
-          // Opcional: Mostrar un mensaje de error al usuario en la interfaz.
-        } finally {
-          // Ocultar el indicador de carga una vez completado el proceso
-          loader.style.display = "none";
+        // Procesa cada Pokémon
+        for (const pokemon of pokemonList) {
+          const details = await getPokemonDetails(pokemon.url);
+          const speciesData = await getSpeciesData(details.species.url); //Realmente el color es sobre la versión normal del pokemon no sobre la shiny
+          const card = createPokemonCard(pokemon, details, speciesData);
+          fragment.appendChild(card);
         }
+
+        // Agrega todas las tarjetas al contenedor y oculta el indicador de carga
+        container.appendChild(fragment);
+        loader.style.display = "none";
       }
 
       // ============================
@@ -160,24 +135,22 @@
           .value.toLowerCase()
           .trim();
 
+        // Filtra las tarjetas basadas en los términos de búsqueda de color y tipo
+        // Si el término de búsqueda está vacío, se muestran todas las tarjetas
+        // Si no, se muestran solo las tarjetas que coinciden con el color y el tipo
         const cards = document.querySelectorAll(".card");
-
         cards.forEach((card) => {
-          const cardColor = card.dataset.color;
-          const cardTypes = card.dataset.types;
-
-          // Se muestran las tarjetas que cumplan con ambos criterios o si los campos están vacíos
-          const matchColor = colorTerm === "" || cardColor.includes(colorTerm);
-          const matchType = typeTerm === "" || cardTypes.includes(typeTerm);
-
-          card.style.display = matchColor && matchType ? "block" : "none";
+          const cardColor = card.dataset.color; // Se obtiene el color de la tarjeta
+          const cardTypes = card.dataset.types; // Se obtienen los tipos de la tarjeta
+          const matchColor = colorTerm === "" || cardColor.includes(colorTerm); // Se verifica si el color de la tarjeta incluye el término de búsqueda
+          const matchType = typeTerm === "" || cardTypes.includes(typeTerm); // Se verifica si el tipo de la tarjeta incluye el término de búsqueda
+          card.style.display = matchColor && matchType ? "block" : "none"; // Se muestra si coincide con el color y el tipo
         });
       }
 
       // ============================
       // Configuración de Eventos y Ejecución Inicial
       // ============================
-      // Asignar eventos de "input" a los campos de búsqueda para filtrar en tiempo real
       document
         .getElementById("color-search")
         .addEventListener("input", filterCards);
@@ -185,7 +158,7 @@
         .getElementById("type-search")
         .addEventListener("input", filterCards);
 
-      // Iniciar la carga y renderización de los Pokémon
+      // Inicia la carga y renderiza los Pokémon
       renderPokemonCards();
     </script>
   </body>
