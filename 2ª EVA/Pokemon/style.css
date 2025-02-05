@@ -20,11 +20,11 @@ body {
 
 h1 {
   font-family: "Pokemon Solid", sans-serif;
-  font-size: 4rem; /* Tamaño grande para destacar */
+  font-size: 6rem;
   text-align: center;
   color: #ffcb05; /* Amarillo típico de Pokémon */
-  -webkit-text-stroke: 2px #3b4cca; /* Trazo rojo que simula el contorno */
-  text-shadow: 3px 3px 0 #273495; /* Sombra azul sutil para dar profundidad */
+  -webkit-text-stroke: 2px #3b4cca; /* Trazo azul que simula el contorno */
+  text-shadow: 3px 3px 0 #273495; /* Sombra azul */
 }
 
 /* =================================== */
