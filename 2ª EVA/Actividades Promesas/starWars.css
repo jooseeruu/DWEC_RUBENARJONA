@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+
+:root {
+  --primary-bg: #ffffff;
+  --secondary-bg: #f7f7f7;
+  --primary-text: #333;
+  --accent: #ffcc00;
+  --border-radius: 8px;
+  --shadow-light: rgba(0, 0, 0, 0.05);
+  --shadow-medium: rgba(0, 0, 0, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: "Roboto", sans-serif;
+  background-color: var(--secondary-bg);
+  color: var(--primary-text);
+}
+
+h1 {
+  text-align: center;
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+form {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+input[type="number"] {
+  width: 80px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: var(--border-radius);
+  background: var(--primary-bg);
+  box-shadow: inset 0 2px 4px var(--shadow-light);
+  margin-right: 10px;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--accent);
+  color: var(--primary-text);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  filter: brightness(0.9);
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.column {
+  background: var(--primary-bg);
+  flex: 1 1 300px;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 8px var(--shadow-light);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.column:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px var(--shadow-medium);
+}
+
+.column h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.error {
+  color: #e74c3c;
+  text-align: center;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.loading {
+  text-align: center;
+  font-style: italic;
+  margin-bottom: 20px;
+}
