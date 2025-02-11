@@ -1,9 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Currículum de José Rubén Arjona Jiménez</title>
+    <link rel="stylesheet" href="curriculum.css" />
   </head>
-  <body></body>
+  <body>
+    <h1>Currículum de José Rubén Arjona Jiménez</h1>
+    <div class="cv-container">
+      <!-- Contenedor para la imagen obtenida de randomuser.me -->
+      <div class="cv-image">
+        <img id="profileImg" src="" alt="Imagen de perfil" />
+      </div>
+      <!-- Contenedor para los detalles del currículum -->
+      <div class="cv-details" id="cvDetails"></div>
+    </div>
+
+    <script>
+      // Función para mostrar el currículum en el DOM
+      function mostrarCurriculum(data) {
+        const container = document.getElementById("cvDetails");
+        let html = `<h2>${data.nombre}</h2>`;
+
+        // Sección de experiencia laboral
+        html += `<h3>Experiencia Laboral</h3>`;
+        data.experiencia.forEach((exp) => {
+          html += `
+            <div class="experience">
+              <h4>${exp.puesto} en ${exp.empresa}</h4>
+              <p><strong>Tipo de Jornada:</strong> ${exp.tipoJornada}</p>
+              <p><strong>Periodo:</strong> ${exp.periodo.inicio} - ${
+            exp.periodo.fin
+          }</p>
+              <p><strong>Duración:</strong> ${exp.duracion}</p>
+              <p><strong>Ubicación:</strong> ${exp.ubicacion}</p>
+              <p><strong>Modalidad:</strong> ${exp.modalidad}</p>
+              <p><strong>Aptitudes:</strong> ${exp.aptitudes.join(", ")}</p>
+            </div>
+          `;
+        });
+
+        // Sección de educación
+        html += `<h3>Educación</h3>`;
+        data.educacion.forEach((edu) => {
+          html += `
+            <div class="education">
+              <h4>${edu.institucion}</h4>
+              <p><strong>Programa:</strong> ${edu.programa}</p>
+              <p><strong>Periodo:</strong> ${edu.periodo.inicio} - ${edu.periodo.fin}</p>
+            </div>
+          `;
+        });
+
+        container.innerHTML = html;
+      }
+
+      // Función asíncrona para cargar los datos del currículum
+      async function cargarDatos() {
+        // Cargo el archivo curriculum.json
+        const respuestaCV = await fetch("curriculum.json");
+        const datosCV = await respuestaCV.json();
+        mostrarCurriculum(datosCV);
+
+        // Obtengo la imagen de perfil desde randomuser.me
+        const respuestaImg = await fetch("https://randomuser.me/api/");
+        const datosImg = await respuestaImg.json();
+        const imgUrl = datosImg.results[0].picture.large; // URL de la imagen de perfil grande
+        document.getElementById("profileImg").src = imgUrl;
+      }
+
+      document.addEventListener("DOMContentLoaded", cargarDatos);
+    </script>
+  </body>
 </html>

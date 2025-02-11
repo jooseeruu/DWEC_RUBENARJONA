@@ -1,0 +1,104 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos generales */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f2f5;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* Título principal */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+/* Contenedor del currículum */
+.cv-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Contenedor de la imagen */
+.cv-image {
+  flex: 1 1 200px;
+  background: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.cv-image img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 4px solid #4a90e2;
+}
+
+/* Contenedor de detalles */
+.cv-details {
+  flex: 2 1 400px;
+  padding: 20px;
+}
+
+.cv-details h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.cv-details h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #4a90e2;
+  border-bottom: 2px solid #4a90e2;
+  padding-bottom: 5px;
+}
+
+/* Estilos para cada bloque de experiencia y educación */
+.cv-details .experience,
+.cv-details .education {
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.cv-details .experience:last-child,
+.cv-details .education:last-child {
+  border-bottom: none;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .cv-container {
+    flex-direction: column;
+  }
+
+  .cv-image,
+  .cv-details {
+    flex: 1 1 100%;
+  }
+
+  .cv-image {
+    padding: 15px;
+  }
+
+  .cv-details {
+    padding: 15px;
+  }
+}
