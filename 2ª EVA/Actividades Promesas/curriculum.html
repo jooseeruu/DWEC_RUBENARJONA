@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="curriculum.css" />
   </head>
   <body>
-    <h1>Currículum de José Rubén Arjona Jiménez</h1>
+    <h1>Currículum Vitae</h1>
     <div class="cv-container">
       <!-- Contenedor para la imagen obtenida de randomuser.me -->
       <div class="cv-image">
@@ -17,56 +17,130 @@
     </div>
 
     <script>
-      // Función para mostrar el currículum en el DOM
+      // Función para mostrar el currículum en el DOM con validaciones
       function mostrarCurriculum(data) {
         const container = document.getElementById("cvDetails");
-        let html = `<h2>${data.nombre}</h2>`;
+        if (!container) {
+          console.error("El contenedor 'cvDetails' no existe en el DOM.");
+          return;
+        }
+
+        // Validamos la existencia de la propiedad "nombre"
+        const nombre = data.nombre || "Nombre no disponible";
+        let html = `<h2>${nombre}</h2>`;
 
         // Sección de experiencia laboral
-        html += `<h3>Experiencia Laboral</h3>`;
-        data.experiencia.forEach((exp) => {
-          html += `
-            <div class="experience">
-              <h4>${exp.puesto} en ${exp.empresa}</h4>
-              <p><strong>Tipo de Jornada:</strong> ${exp.tipoJornada}</p>
-              <p><strong>Periodo:</strong> ${exp.periodo.inicio} - ${
-            exp.periodo.fin
-          }</p>
-              <p><strong>Duración:</strong> ${exp.duracion}</p>
-              <p><strong>Ubicación:</strong> ${exp.ubicacion}</p>
-              <p><strong>Modalidad:</strong> ${exp.modalidad}</p>
-              <p><strong>Aptitudes:</strong> ${exp.aptitudes.join(", ")}</p>
-            </div>
-          `;
-        });
+        if (
+          data.experiencia &&
+          Array.isArray(data.experiencia) &&
+          data.experiencia.length
+        ) {
+          html += `<h3>Experiencia Laboral</h3>`;
+          data.experiencia.forEach((exp) => {
+            html += `
+              <div class="experience">
+                <h4>${exp.puesto || "Puesto no disponible"} en ${
+              exp.empresa || "Empresa no disponible"
+            }</h4>
+                <p><strong>Tipo de Jornada:</strong> ${
+                  exp.tipoJornada || "N/D"
+                }</p>
+                <p><strong>Periodo:</strong> ${
+                  exp.periodo?.inicio || "N/D"
+                } - ${exp.periodo?.fin || "N/D"}</p>
+                <p><strong>Duración:</strong> ${exp.duracion || "N/D"}</p>
+                <p><strong>Ubicación:</strong> ${exp.ubicacion || "N/D"}</p>
+                <p><strong>Modalidad:</strong> ${exp.modalidad || "N/D"}</p>
+                <p><strong>Aptitudes:</strong> ${
+                  exp.aptitudes && Array.isArray(exp.aptitudes)
+                    ? exp.aptitudes.join(", ")
+                    : "N/D"
+                }</p>
+              </div>
+            `;
+          });
+        } else {
+          html += `<p>No se encontró información de experiencia laboral.</p>`;
+        }
 
         // Sección de educación
-        html += `<h3>Educación</h3>`;
-        data.educacion.forEach((edu) => {
-          html += `
-            <div class="education">
-              <h4>${edu.institucion}</h4>
-              <p><strong>Programa:</strong> ${edu.programa}</p>
-              <p><strong>Periodo:</strong> ${edu.periodo.inicio} - ${edu.periodo.fin}</p>
-            </div>
-          `;
-        });
+        if (
+          data.educacion &&
+          Array.isArray(data.educacion) &&
+          data.educacion.length
+        ) {
+          html += `<h3>Educación</h3>`;
+          data.educacion.forEach((edu) => {
+            html += `
+              <div class="education">
+                <h4>${edu.institucion || "Institución no disponible"}</h4>
+                <p><strong>Programa:</strong> ${edu.programa || "N/D"}</p>
+                <p><strong>Periodo:</strong> ${
+                  edu.periodo?.inicio || "N/D"
+                } - ${edu.periodo?.fin || "N/D"}</p>
+              </div>
+            `;
+          });
+        } else {
+          html += `<p>No se encontró información de educación.</p>`;
+        }
 
         container.innerHTML = html;
       }
 
-      // Función asíncrona para cargar los datos del currículum
+      // Función asíncrona para cargar los datos del currículum y la imagen de perfil
       async function cargarDatos() {
-        // Cargo el archivo curriculum.json
-        const respuestaCV = await fetch("curriculum.json");
-        const datosCV = await respuestaCV.json();
-        mostrarCurriculum(datosCV);
+        // Carga de datos del currículum con manejo de errores
+        try {
+          const respuestaCV = await fetch("curriculum.json");
+          if (!respuestaCV.ok) {
+            throw new Error(
+              `Error al cargar curriculum.json: ${respuestaCV.status} ${respuestaCV.statusText}`
+            );
+          }
+          const datosCV = await respuestaCV.json();
+          mostrarCurriculum(datosCV);
+        } catch (error) {
+          console.error("Error al cargar el currículum:", error);
+          const container = document.getElementById("cvDetails");
+          if (container) {
+            container.innerHTML = `<p>Error al cargar el currículum.</p>`;
+          }
+        }
 
-        // Obtengo la imagen de perfil desde randomuser.me
-        const respuestaImg = await fetch("https://randomuser.me/api/");
-        const datosImg = await respuestaImg.json();
-        const imgUrl = datosImg.results[0].picture.large; // URL de la imagen de perfil grande
-        document.getElementById("profileImg").src = imgUrl;
+        // Carga de la imagen de perfil con manejo de errores
+        try {
+          const respuestaImg = await fetch("https://randomuser.me/api/");
+          if (!respuestaImg.ok) {
+            throw new Error(
+              `Error al cargar imagen: ${respuestaImg.status} ${respuestaImg.statusText}`
+            );
+          }
+          const datosImg = await respuestaImg.json();
+          const profileImg = document.getElementById("profileImg");
+          if (
+            datosImg.results &&
+            datosImg.results[0] &&
+            datosImg.results[0].picture &&
+            datosImg.results[0].picture.large
+          ) {
+            const imgUrl = datosImg.results[0].picture.large;
+            if (profileImg) {
+              profileImg.src = imgUrl;
+            } else {
+              console.error(
+                "El elemento 'profileImg' no se encontró en el DOM."
+              );
+            }
+          } else {
+            throw new Error(
+              "Formato de datos inesperado para la imagen de perfil."
+            );
+          }
+        } catch (error) {
+          console.error("Error al cargar la imagen de perfil:", error);
+          // Opcional: mostrar una imagen de respaldo o notificar al usuario
+        }
       }
 
       document.addEventListener("DOMContentLoaded", cargarDatos);
