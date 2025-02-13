@@ -98,8 +98,17 @@ form {
 }
 
 form label {
+  display: block;
   font-size: 1.5rem;
+  font-weight: 500;
   color: var(--color-text);
+
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+form label:hover {
+  color: var(--color-primary);
 }
 
 form input[type="number"] {
