@@ -4,7 +4,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
 
 /* =======================================
-   Reset de Estilos
+   Reset de Estilos y Otrs Configuraciones
 ======================================= */
 *,
 *::before,
@@ -12,6 +12,18 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* Para navegadores basados en Webkit (Chrome, Safari, Edge, Opera) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Para Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 /* =======================================
@@ -86,7 +98,7 @@ form {
 }
 
 form label {
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: var(--color-text);
 }
 
