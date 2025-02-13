@@ -8,12 +8,10 @@
   </head>
   <body>
     <h1>Café</h1>
-    <div class="grid" id="productGrid">
-      <!-- Se cargarán las tarjetas de producto -->
-    </div>
+    <div class="grid" id="productGrid"></div>
 
     <script>
-      // Datos de prueba almacenados en un objeto (arreglo de productos)
+      // Datos de prueba almacenados en un arreglo de productos
       const productos = [
         {
           nombre: "Café Espresso",
@@ -81,25 +79,29 @@
       async function cargarProductos() {
         const grid = document.getElementById("productGrid");
 
-        for (const producto of productos) {
-          const imagenUrl = await obtenerImagen();
+        // Crear todas las promesas para cargar productos en paralelo y esperar a que todas se resuelvan
+        const tarjetas = await Promise.all(
+          productos.map(async (producto) => {
+            const imagenUrl = await obtenerImagen();
+            const tarjeta = document.createElement("div");
+            tarjeta.className = "card";
+            // Renderizar la tarjeta con los datos del producto y la imagen en la tarjeta se carga con el atributo loading="lazy" para optimizar la carga de la página
+            tarjeta.innerHTML = `
+              <img src="${imagenUrl}" alt="${producto.nombre}" loading="lazy"> 
+              <h2>${producto.nombre}</h2>
+              <p>${producto.descripcion}</p>
+              <span>${producto.precio}</span>
+            `;
+            return tarjeta;
+          })
+        );
 
-          // Crear tarjeta para el producto
-          const tarjeta = document.createElement("div");
-          tarjeta.classList.add("card");
-          tarjeta.innerHTML = `
-          <img src="${imagenUrl}" alt="${producto.nombre}">
-          <h2>${producto.nombre}</h2>
-          <p>${producto.descripcion}</p>
-          <span>${producto.precio}</span>
-        `;
-
-          grid.appendChild(tarjeta);
-        }
+        // Agregar todas las tarjetas al grid de forma optimizada
+        tarjetas.forEach((tarjeta) => grid.appendChild(tarjeta));
       }
 
-      // Ejecutar la carga de productos al iniciar la aplicación
-      cargarProductos();
+      // Ejecutar la carga de productos cuando el DOM esté listo
+      document.addEventListener("DOMContentLoaded", cargarProductos);
     </script>
   </body>
 </html>
