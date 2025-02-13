@@ -172,7 +172,7 @@ h4 {
        Sección de Detalles del CV
       =============================== */
 .cv-details {
-  flex: 3 1 600px;
+  flex: 3 1 800px;
   padding: 2rem;
   background: repeating-linear-gradient(
     45deg,
@@ -186,34 +186,11 @@ h4 {
 /* Bloques de Experiencia y Educación */
 .experience,
 .education {
-  margin-bottom: 1.5rem;
-  padding: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.8rem;
   background-color: rgba(0, 0, 0, 0.3);
   border-left: 3px solid var(--neon-cyan);
   position: relative;
-}
-
-.experience::before,
-.education::before {
-  content: "*";
-  position: absolute;
-  left: -15px;
-  top: -5px;
-  color: var(--neon-pink);
-  text-shadow: var(--glow-pink);
-}
-
-/* ===============================
-       Efectos de Hover y Enlaces
-      =============================== */
-.cv-details a {
-  color: var(--neon-pink);
-  text-decoration: none;
-  transition: color var(--transition-duration);
-}
-
-.cv-details a:hover {
-  color: var(--neon-green);
 }
 
 /* ===============================
