@@ -1,200 +1,72 @@
-/* =======================================
-   Variables y Paleta Cyberpunk
-========================================== */
+/* ===============================
+ Reset Global y Base (Buenas Prácticas)
+   =============================== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  padding: 20px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ===============================
+       Variables CSS
+      =============================== */
 :root {
-  /* Paleta Neo Cyberpunk */
   --bg-main: #0a0a0a;
   --bg-secondary: #111;
   --neon-pink: #ff00ff;
   --neon-cyan: #00ffff;
   --neon-green: #00ff00;
   --neon-yellow: #ffe700;
-  --text-main: #fff;
-
-  /* Efectos especiales */
+  --text-main: #ffffff;
+  --transition-duration: 0.3s;
+  --border-neon: 1px solid var(--neon-cyan);
   --glow-pink: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
   --glow-cyan: 0 0 15px rgba(0, 255, 255, 0.5);
-  --cyber-border: 1px solid var(--neon-cyan);
-  --cyber-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* =======================================
-   Reset y Estilos Globales
-========================================== */
-html {
-  scrollbar-width: thin; /* (auto, thin, none) */
-  scroll-snap-align: start;
-  scroll-behavior: smooth;
-  scrollbar-color: var(--neon-pink) var(--bg-secondary);
+/* ===============================
+       Estilos para la Scrollbar
+      =============================== */
+body::-webkit-scrollbar {
+  width: 8px;
+}
+body::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--neon-pink);
+  border-radius: 4px;
 }
 
-/* Reset mejorado */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* =======================================
-   Estilos Base Cyberpunk
-========================================== */
-body {
-  font-family: "Segoe UI", system-ui, sans-serif;
-  background: var(--bg-main);
-  color: var(--text-main);
-  line-height: 1.6;
-  padding: 20px;
-  min-height: 20vh;
-}
-
+/* ===============================
+       Tipografía y Encabezados
+      =============================== */
 h1 {
   text-align: center;
   margin: 2rem 0;
+  font-size: clamp(2.2rem, 5vw, 2.8rem);
   color: var(--neon-pink);
   text-shadow: var(--glow-pink);
-  font-size: 2.8rem;
-  position: relative;
-  animation: text-flicker 1.5s infinite;
+  animation: flicker 1.5s infinite;
 }
 
-/* =======================================
-   Contenedor Principal del CV
-========================================== */
-.cv-container {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 1200px;
-  margin: 0.5rem auto;
-  background: var(--bg-secondary);
-  border-radius: 12px;
-  box-shadow: var(--glow-cyan);
-  overflow: hidden;
-  border: var(--cyber-border);
-  transition: var(--cyber-transition);
-}
-
-/* ---------------------------------------
-   Sección de Imagen con Efecto Holográfico
------------------------------------------ */
-.cv-image {
-  flex: 1 1 250px;
-  background: linear-gradient(
-      45deg,
-      transparent 49.9%,
-      var(--neon-cyan) 50%,
-      transparent 50.1%
-    ),
-    linear-gradient(
-      -45deg,
-      transparent 49.9%,
-      var(--neon-pink) 50%,
-      transparent 50.1%
-    );
-  background-size: 1em 1em;
-  display: grid;
-  place-items: center;
-  padding: 2rem;
-  border-right: 3px solid var(--neon-pink);
-}
-
-.cv-image img {
-  border-radius: 50%;
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  border: 4px solid var(--neon-cyan);
-  box-shadow: var(--glow-cyan);
-  filter: saturate(1.5) contrast(1.2);
-  transition: var(--cyber-transition);
-}
-
-/* ---------------------------------------
-   Contenido Principal
------------------------------------------ */
-.cv-details {
-  flex: 3 1 600px;
-  padding: 2rem;
-  background: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 2px,
-    rgba(255, 0, 255, 0.1) 2px,
-    rgba(0, 255, 255, 0.1) 4px
-  );
-}
-
-.cv-details h2 {
-  margin-bottom: 1.5rem;
-  color: var(--neon-green);
-  text-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
-  font-size: 2rem;
-  position: relative;
-}
-
-.cv-details h2::after {
-  content: "";
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100px;
-  height: 3px;
-  background: var(--neon-pink);
-  box-shadow: var(--glow-pink);
-}
-
-.cv-details h3 {
-  margin: 1.5rem 0;
-  color: var(--neon-cyan);
-  border-bottom: 2px solid var(--neon-pink);
-  padding-bottom: 0.5rem;
-  text-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
-}
-
-.cv-details h4 {
-  margin: 1rem 0;
-  color: var(--neon-yellow);
-  text-shadow: 0 0 5px rgba(255, 0, 255, 0.3);
-}
-
-/* ---------------------------------------
-   Bloques de Contenido: Experiencia y Educación
------------------------------------------ */
-.experience,
-.education {
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.3);
-  border-left: 3px solid var(--neon-cyan);
-  position: relative;
-}
-
-.experience::before,
-.education::before {
-  content: "◆";
-  position: absolute;
-  left: -15px;
-  top: -5px;
-  color: var(--neon-pink);
-  text-shadow: var(--glow-pink);
-}
-
-/* ---------------------------------------
-   Efectos de Interacción
------------------------------------------ */
-.cv-container:hover {
-  box-shadow: 0 0 35px rgba(0, 255, 255, 0.8);
-  transform: translateY(-3px);
-}
-
-.cv-image img:hover {
-  transform: rotate(5deg) scale(1.05);
-  box-shadow: 0 0 35px var(--neon-cyan);
-}
-
-/* =======================================
-   Animaciones
-========================================== */
-@keyframes text-flicker {
+@keyframes flicker {
   0%,
   19%,
   21%,
@@ -214,23 +86,150 @@ h1 {
   }
 }
 
-/* =======================================
-   Responsive Design
-========================================== */
+h2 {
+  color: var(--neon-green);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 80px;
+  height: 3px;
+  background: var(--neon-pink);
+  box-shadow: var(--glow-pink);
+}
+
+h3 {
+  color: var(--neon-cyan);
+  font-size: 1.5rem;
+  margin: 1.5rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--neon-pink);
+}
+
+h4 {
+  color: var(--neon-yellow);
+  font-size: 1.25rem;
+  margin: 1rem 0;
+}
+
+/* ===============================
+       Contenedor del CV
+      =============================== */
+.cv-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 1rem auto;
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+  border: var(--border-neon);
+  box-shadow: var(--glow-cyan);
+  overflow: hidden;
+  transition: transform var(--transition-duration),
+    box-shadow var(--transition-duration);
+}
+
+.cv-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 35px rgba(0, 255, 255, 0.8);
+}
+
+/* ===============================
+       Sección de Imagen
+      =============================== */
+.cv-image {
+  flex: 1 1 250px;
+  padding: 2rem;
+  display: grid;
+  place-items: center;
+  background: none;
+}
+
+.cv-image img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--neon-cyan);
+  box-shadow: var(--glow-cyan);
+  filter: saturate(1.5) contrast(1.2);
+  transition: transform var(--transition-duration),
+    box-shadow var(--transition-duration);
+}
+
+.cv-image img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 35px var(--neon-cyan);
+}
+
+/* ===============================
+       Sección de Detalles del CV
+      =============================== */
+.cv-details {
+  flex: 3 1 600px;
+  padding: 2rem;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 0, 255, 0.1) 2px,
+    rgba(0, 255, 255, 0.1) 4px
+  );
+}
+
+/* Bloques de Experiencia y Educación */
+.experience,
+.education {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-left: 3px solid var(--neon-cyan);
+  position: relative;
+}
+
+.experience::before,
+.education::before {
+  content: "*";
+  position: absolute;
+  left: -15px;
+  top: -5px;
+  color: var(--neon-pink);
+  text-shadow: var(--glow-pink);
+}
+
+/* ===============================
+       Efectos de Hover y Enlaces
+      =============================== */
+.cv-details a {
+  color: var(--neon-pink);
+  text-decoration: none;
+  transition: color var(--transition-duration);
+}
+
+.cv-details a:hover {
+  color: var(--neon-green);
+}
+
+/* ===============================
+       Diseño Responsive
+      =============================== */
 @media (max-width: 768px) {
   .cv-container {
     flex-direction: column;
     margin: 1rem;
   }
-
   .cv-image {
-    border-right: none;
     border-bottom: 3px solid var(--neon-pink);
     padding: 1.5rem;
   }
-
   h1 {
-    font-size: 2.2rem;
+    font-size: clamp(1.8rem, 6vw, 2.2rem);
   }
 }
 
@@ -239,8 +238,18 @@ h1 {
     width: 150px;
     height: 150px;
   }
-
-  .cv-details h2 {
+  h2 {
     font-size: 1.8rem;
   }
+}
+
+/* ===============================
+       Estilos Opcionales (Footer)
+      =============================== */
+footer {
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--neon-cyan);
+  font-size: 1.2rem;
 }
