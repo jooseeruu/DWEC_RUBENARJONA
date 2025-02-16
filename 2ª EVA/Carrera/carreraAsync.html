@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Carrera de Coches con Async/Await</title>
+    <link rel="stylesheet" href="carrera.css" />
+  </head>
+  <body>
+    <h1 style="text-align: center">Carrera de Coches</h1>
+    <div id="track">
+      <!-- Imágenes de los coches -->
+      <img src="/assets/ferrari.png" class="f1" id="ferrari" />
+      <img src="/assets/lotus.png" class="f1" id="lotus" />
+      <img src="/assets/mclaren.png" class="f1" id="mclaren" />
+      <img src="/assets/redbull.png" class="f1" id="redbull" />
+      <!-- Línea de meta -->
+      <div class="meta"></div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // IDs de los coches participantes
+        const coches = ["ferrari", "lotus", "mclaren", "redbull"];
+        // Obtenemos el contenedor de la pista para calcular la línea de meta
+        const track = document.getElementById("track");
+        // La meta se define en función del ancho del contenedor menos el ancho de la línea (5px)
+        const finishLine = track.clientWidth - 5;
+        console.log("Finish Line:", finishLine);
+
+        /**
+         * Función que simula el movimiento de un coche utilizando una Promesa.
+         * @param {string} idCoche - ID del coche en el DOM.
+         * @returns {Promise} - Se resuelve cuando el coche llega a la meta, devolviendo un objeto con su id y el tiempo.
+         */
+        function moverCoche(idCoche) {
+          return new Promise((resolve) => {
+            const coche = document.getElementById(idCoche);
+            let posicion = 0;
+            coche.style.left = "0px";
+
+            // Función interna recursiva para avanzar el coche
+            function avanzar() {
+              // Generamos un retardo aleatorio entre 20 y 70 ms
+              const delay = Math.floor(Math.random() * 51) + 20;
+              // Avance aleatorio entre 5 y 15 píxeles
+              const avance = Math.floor(Math.random() * 11) + 5;
+              posicion += avance;
+
+              if (posicion >= finishLine) {
+                posicion = finishLine;
+                coche.style.left = posicion + "px";
+                resolve({ id: idCoche, tiempo: performance.now() });
+              } else {
+                coche.style.left = posicion + "px";
+                setTimeout(avanzar, delay);
+              }
+            }
+
+            avanzar();
+          });
+        }
+
+        /**
+         * Función asíncrona que gestiona la carrera.
+         */
+        async function iniciarCarrera() {
+          // Creamos un array de promesas para cada coche
+          const promesasCarrera = coches.map((coche) => moverCoche(coche));
+
+          // Esperamos a que todas las promesas se resuelvan
+          const resultados = await Promise.all(promesasCarrera);
+
+          // Ordenamos los resultados según el tiempo de llegada (de menor a mayor)
+          resultados.sort((a, b) => a.tiempo - b.tiempo);
+          console.log("Orden de llegadas:", resultados);
+
+          const ganador = resultados[0].id;
+          alert(`¡El ganador es: ${ganador}!`);
+
+          // Recargamos la página para reiniciar la carrera
+          location.reload();
+        }
+
+        // Iniciamos la carrera
+        iniciarCarrera();
+      });
+    </script>
+  </body>
+</html>
