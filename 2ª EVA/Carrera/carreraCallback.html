@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Carrera de Coches</title>
+    <link rel="stylesheet" href="carrera.css" />
+  </head>
+  <body>
+    <h1 style="text-align: center">Carrera de Coches</h1>
+    <div id="track">
+      <!-- Imágenes de los coches -->
+      <img src="/assets/ferrari.png" class="f1" id="ferrari" />
+      <img src="/assets/lotus.png" class="f1" id="lotus" />
+      <img src="/assets/mclaren.png" class="f1" id="mclaren" />
+      <img src="/assets/redbull.png" class="f1" id="redbull" />
+      <!-- Línea de meta -->
+      <div class="meta"></div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // IDs de los coches participantes
+        const coches = ["ferrari", "lotus", "mclaren", "redbull"];
+        // Array para almacenar el orden de llegada con su tiempo
+        const llegadas = [];
+
+        // Obtenemos el contenedor de la pista para calcular la línea de meta
+        const track = document.getElementById("track");
+        // La meta se define en función del ancho del contenedor menos el ancho de la línea (5px)
+        const finishLine = track.clientWidth - 5;
+        console.log("Finish Line:", finishLine);
+
+        /**
+         * Función que simula el movimiento de un coche.
+         * Se llama cada vez que se carga la página.
+         * @param {string} idCoche - ID del coche en el DOM.
+         * @param {Function} callback - Función a llamar cuando el coche llega a la meta.
+         */
+        function moverCoche(idCoche, callback) {
+          const coche = document.getElementById(idCoche);
+          let posicion = 0;
+          coche.style.left = "0px";
+
+          // Función interna recursiva para avanzar el coche
+          function avanzar() {
+            // Generamos un retardo aleatorio entre 20 y 70 ms
+            const delay = Math.floor(Math.random() * 51) + 20;
+            // Avance aleatorio entre 5 y 15 píxeles
+            const avance = Math.floor(Math.random() * 11) + 5;
+            posicion += avance;
+
+            if (posicion >= finishLine) {
+              posicion = finishLine;
+              coche.style.left = posicion + "px";
+              callback(idCoche, performance.now());
+            } else {
+              coche.style.left = posicion + "px";
+              setTimeout(avanzar, delay);
+            }
+          }
+
+          avanzar();
+        }
+
+        /**
+         * Callback que se ejecuta cuando un coche llega a la meta.
+         * @param {string} idCoche - ID del coche que llegó.
+         * @param {number} tiempo - Momento en que llegó el coche.
+         */
+        function cocheLlegado(idCoche, tiempo) {
+          llegadas.push({ id: idCoche, tiempo });
+          console.log(
+            `El coche ${idCoche} llegó a la meta en ${tiempo.toFixed(2)} ms.`
+          );
+
+          // Una vez que todos han llegado, se declara el ganador
+          if (llegadas.length === coches.length) {
+            // Ordenamos el array por el tiempo de llegada (de menor a mayor)
+            llegadas.sort((a, b) => a.tiempo - b.tiempo);
+            console.log("Orden de llegadas:", llegadas);
+            const ganador = llegadas[0].id;
+            alert(`¡El ganador es: ${ganador}!`);
+            // Al aceptar el alert se recarga la página para reiniciar la carrera
+            location.reload();
+          }
+        }
+
+        // Iniciamos la carrera para cada coche al cargar la página
+        coches.forEach((coche) => {
+          moverCoche(coche, cocheLlegado);
+        });
+      });
+    </script>
+  </body>
+</html>
