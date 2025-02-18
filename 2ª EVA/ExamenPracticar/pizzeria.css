@@ -1,0 +1,48 @@
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+/* Título principal */
+h1 {
+  text-align: center;
+  color: #d35400;
+}
+
+/* Estilos para el área de salida */
+#output {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-top: 20px;
+  white-space: pre-wrap;
+}
+
+/* Estilos para mensajes de error */
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+/* Estilos para el selector y el botón */
+label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+select,
+button {
+  padding: 8px 12px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Centrado de elementos */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

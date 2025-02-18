@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sistema de Pedidos en Línea - Pizzería “La Delicia”</title>
+    <link rel="stylesheet" href="pizzeria.css" />
+  </head>
+  <body>
+    <h1>Sistema de Pedidos en Línea para la Pizzería “La Delicia”</h1>
+
+    <!-- Sección de selección de pizza -->
+    <label for="pizzaSelect">Selecciona tu pizza:</label>
+    <select id="pizzaSelect"></select>
+    <button id="btnPedido">Realizar Pedido</button>
+
+    <div id="output"></div>
+
+    <script>
+      /*************************************************
+       * Funciones de Registro
+       * Se encarga de imprimir mensajes en la página.
+       *************************************************/
+      function log(message) {
+        const outputDiv = document.getElementById("output");
+        outputDiv.innerHTML += message + "<br>";
+      }
+
+      function logError(message) {
+        const outputDiv = document.getElementById("output");
+        outputDiv.innerHTML += `<span class="error">${message}</span><br>`;
+      }
+
+      /*************************************************
+       * 1. Menú de Pizzas y Selección
+       *************************************************/
+      const menu = [
+        {
+          nombre: "Margarita",
+          precio: 8.99,
+          descripcion: "Queso, tomate y albahaca",
+        },
+        {
+          nombre: "Pepperoni",
+          precio: 10.99,
+          descripcion: "Pepperoni, queso y salsa de tomate",
+        },
+        {
+          nombre: "Hawaiana",
+          precio: 9.99,
+          descripcion: "Jamón, piña y queso",
+        },
+      ];
+
+      // Rellenar el select con las opciones del menú.
+      const selectElem = document.getElementById("pizzaSelect");
+      menu.forEach((pizza, index) => {
+        const option = document.createElement("option");
+        option.value = index; // Se guarda el índice para identificar la pizza.
+        option.text = `${pizza.nombre} - $${pizza.precio} - ${pizza.descripcion}`;
+        selectElem.appendChild(option);
+      });
+
+      /*************************************************
+       * 2. Verificación de Inventario (Callback)
+       *************************************************/
+      function verificarInventario(pizza, callback) {
+        log(`Verificando inventario para la pizza ${pizza.nombre}...`);
+        setTimeout(() => {
+          // Simulamos que hay inventario con un 70% de probabilidad.
+          const hayInventario = Math.random() > 0.3;
+          if (hayInventario) {
+            log("Inventario suficiente.");
+            callback(true);
+          } else {
+            log("Inventario insuficiente.");
+            callback(false);
+          }
+        }, 1500);
+      }
+
+      /*************************************************
+       * 3. Realización del Pedido (Promesas)
+       *************************************************/
+      function realizarPedido(pizza) {
+        log(`Realizando pedido para la pizza ${pizza.nombre}...`);
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            // Se simula un 70% de probabilidad de éxito.
+            const exito = Math.random() > 0.3;
+            if (exito) {
+              log("Pedido realizado exitosamente.");
+              resolve(pizza);
+            } else {
+              log("Error al realizar el pedido.");
+              reject("Error: El pedido no pudo ser procesado.");
+            }
+          }, 1500);
+        });
+      }
+
+      /*************************************************
+       * 4. Preparación de la Pizza (Async/Await)
+       *************************************************/
+      function mezclarIngredientes(pizza) {
+        log("Mezclando ingredientes...");
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            log("Ingredientes mezclados.");
+            resolve(pizza);
+          }, 1000);
+        });
+      }
+
+      function hornearPizza(pizza) {
+        log("Horneando la pizza...");
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            log("Pizza horneada.");
+            resolve(pizza);
+          }, 2000);
+        });
+      }
+
+      function empacarPizza(pizza) {
+        log("Empacando la pizza...");
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            log("Pizza empacada.");
+            resolve(pizza);
+          }, 1000);
+        });
+      }
+
+      async function prepararPizza(pizza) {
+        log(`Preparando la pizza ${pizza.nombre}...`);
+        try {
+          await mezclarIngredientes(pizza);
+          await hornearPizza(pizza);
+          await empacarPizza(pizza);
+          log("Pizza preparada con éxito.");
+          return pizza;
+        } catch (error) {
+          throw new Error("Error en la preparación de la pizza.");
+        }
+      }
+
+      /*************************************************
+       * 5. Flujo Completo del Proceso de Pedido
+       *************************************************/
+      function procesarPedido(pizzaSeleccionada) {
+        // Limpiar salida anterior
+        document.getElementById("output").innerHTML = "";
+
+        log("=== Inicio del proceso de pedido ===");
+        log(`Pizza seleccionada: ${pizzaSeleccionada.nombre}`);
+
+        // Paso 1: Verificar inventario
+        verificarInventario(pizzaSeleccionada, function (inventarioDisponible) {
+          if (!inventarioDisponible) {
+            logError("No hay inventario suficiente. Proceso terminado.");
+            return;
+          }
+
+          // Paso 2: Realizar el pedido
+          realizarPedido(pizzaSeleccionada)
+            .then((pizzaPedido) => {
+              // Paso 3: Preparar la pizza
+              return prepararPizza(pizzaPedido);
+            })
+            .then((pizzaPreparada) => {
+              // Paso 4: Consulta a la API externa para obtener información adicional
+              log("Obteniendo información adicional de la API...");
+              return fetch("https://jsonplaceholder.typicode.com/posts/1");
+            })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error en la respuesta de la API");
+              }
+              return response.json();
+            })
+            .then((apiData) => {
+              // Paso 5: Mostrar información adicional y mensaje final
+              log("Información adicional obtenida:");
+              log(JSON.stringify(apiData, null, 2));
+              log(
+                `¡Tu pizza ${pizzaSeleccionada.nombre} está lista para ser entregada!`
+              );
+            })
+            .catch((error) => {
+              logError("Ocurrió un error durante el proceso: " + error);
+            });
+        });
+      }
+
+      // Evento para iniciar el proceso cuando el usuario hace clic en "Realizar Pedido"
+      document.getElementById("btnPedido").addEventListener("click", () => {
+        const indexSeleccionado = document.getElementById("pizzaSelect").value;
+        const pizzaSeleccionada = menu[indexSeleccionado];
+        procesarPedido(pizzaSeleccionada);
+      });
+    </script>
+  </body>
+</html>

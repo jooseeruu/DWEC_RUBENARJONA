@@ -1,0 +1,89 @@
+Proyecto: Sistema de Pedidos en Línea para la Pizzería “La Delicia”
+Contexto:
+La pizzería “La Delicia” desea contar con un sistema de pedidos en línea que simule el proceso completo de recibir, procesar y preparar un pedido de pizza. Este sistema se implementará en JavaScript y hará uso de diferentes técnicas asíncronas para simular procesos reales, tales como la verificación de inventario, la realización del pedido, la preparación de la pizza y la consulta a una API externa para obtener información adicional (por ejemplo, promociones o reseñas).
+
+Objetivos del Ejercicio:
+Comprender y aplicar técnicas asíncronas en JavaScript:
+
+Uso de callbacks para tareas simples.
+Uso de promesas para operaciones que pueden tener éxito o fallar.
+Uso de async/await para encadenar operaciones de forma secuencial.
+Integrar una consulta a una API externa (usando fetch) para enriquecer la información del pedido.
+
+Simular procesos reales mediante el uso de setTimeout para generar retardos en cada operación.
+
+Requerimientos del Sistema:
+Menú y Selección de Pizza:
+
+Definir un menú de pizzas (por ejemplo, un array de objetos con propiedades como nombre, precio y descripcion).
+Simular la selección de una pizza (puede ser la primera del menú o una opción predeterminada).
+Verificación de Inventario (Callback):
+
+Crear una función verificarInventario(pizza, callback) que simule la comprobación del stock de la pizza seleccionada.
+Utilizar setTimeout para simular un retardo (entre 1 y 2 segundos).
+Al finalizar, el callback debe indicar si hay stock suficiente (true) o no (false).
+Si no hay inventario, el sistema debe mostrar un mensaje de error y detener el proceso.
+Realización del Pedido (Promesas):
+
+Crear una función realizarPedido(pizza) que retorne una promesa.
+La promesa debe simular el procesamiento del pedido usando setTimeout (entre 1 y 2 segundos).
+El resultado debe ser aleatorio: el pedido puede realizarse con éxito (promesa resuelta) o fallar (promesa rechazada).
+Manejar el resultado utilizando .then() y .catch().
+Preparación de la Pizza (Async/Await):
+
+Implementar una función prepararPizza(pizza) declarada como async.
+Dentro de esta función, simular tres pasos secuenciales de preparación:
+Mezcla de Ingredientes
+Horneado
+Empacado
+Cada paso será una función que retorne una promesa, que se resuelve tras un retardo simulado (usando setTimeout).
+Utilizar await para asegurar que cada paso se complete antes de iniciar el siguiente.
+Consulta a API Externa (Fetch):
+
+Antes de finalizar el pedido, realizar una petición con fetch a la siguiente URL:
+arduino
+Copiar
+https://jsonplaceholder.typicode.com/posts/1
+Interpretar la respuesta como información adicional para el pedido (por ejemplo, reseñas o un cupón de descuento).
+Asegurarse de manejar posibles errores en la consulta.
+Flujo del Proceso:
+Selección de Pizza:
+El sistema muestra el menú y se selecciona una pizza.
+
+Verificación de Inventario:
+Se llama a verificarInventario.
+
+Si el inventario es insuficiente, se muestra un mensaje de error y se detiene el proceso.
+Si hay stock, se continúa con el siguiente paso.
+Realización del Pedido:
+Se llama a realizarPedido.
+
+Si el pedido se procesa correctamente, se avanza.
+Si ocurre un error, se muestra un mensaje de fallo y se detiene el proceso.
+Preparación de la Pizza:
+Se llama a prepararPizza (usando async/await) para simular:
+
+Mezcla de ingredientes.
+Horneado.
+Empacado.
+Consulta a la API Externa:
+Finalmente, se realiza un fetch a la API externa para obtener información adicional.
+
+La respuesta se muestra en consola o se integra en el mensaje final.
+Mensaje Final:
+Si todas las etapas se completan sin errores, se muestra un mensaje indicando que la pizza está lista y se incluye la información obtenida de la API.
+
+Consideraciones Adicionales:
+Simulación de Tiempos:
+Emplear setTimeout para simular retardos reales en cada operación.
+
+Manejo de Errores:
+Cada función asíncrona debe gestionar adecuadamente sus posibles errores (por ejemplo, falta de inventario, fallo en el pedido o error en la API).
+
+Interfaz:
+La implementación se puede realizar en un entorno de consola, sin necesidad de crear una interfaz gráfica compleja.
+
+Documentación:
+Comentar el código para explicar el flujo y la función de cada parte.
+
+Este ejercicio, diseñado para ser completado en aproximadamente 3 horas, permite a los alumnos poner en práctica diversas técnicas asíncronas en JavaScript y comprender cómo integrarlas para simular un proceso de pedido real. ¡Buena suerte en el desarrollo!
