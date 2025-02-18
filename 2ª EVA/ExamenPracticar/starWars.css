@@ -1,0 +1,202 @@
+/* =======================================
+   Importación de Fuentes
+======================================= */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+
+/* =======================================
+   Reset de Estilos y Otrs Configuraciones
+======================================= */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Para navegadores basados en Webkit (Chrome, Safari, Edge, Opera) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Para Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* =======================================
+   Variables de Diseño (Paleta Star Wars)
+======================================= */
+:root {
+  /* Colores inspirados en Star Wars */
+  --color-background: #0d0d0d;
+  --color-surface: #1c1c1c;
+  --color-primary: #ffe81f;
+  --color-secondary: #1e88e5;
+  --color-error: #e53935;
+  --color-text: #e0e0e0;
+
+  /* Tipografía y Espaciado */
+  --font-family: "Roboto", sans-serif;
+  --border-radius: 10px;
+  --transition: 0.3s ease;
+  --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* =======================================
+   Estilos Globales y Fondo con Efecto Estelar
+======================================= */
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-background);
+  /* Efecto sutil de estrellas */
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 30px 30px;
+  color: var(--color-text);
+  line-height: 1.6;
+  padding: 20px;
+  scroll-behavior: smooth;
+}
+
+/* =======================================
+   Encabezado Principal
+======================================= */
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+h1::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background-color: var(--color-primary);
+  border-radius: var(--border-radius);
+  margin: 0.5rem auto 0;
+}
+
+/* =======================================
+   Formulario de Búsqueda
+======================================= */
+form {
+  max-width: 500px;
+  margin: 0 auto 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+form label {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+form label:hover {
+  color: var(--color-primary);
+}
+
+form input[type="number"] {
+  width: 100px;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: 2px solid var(--color-secondary);
+  border-radius: var(--border-radius);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  transition: border-color var(--transition);
+}
+
+form input[type="number"]:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+form button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--color-primary);
+  color: var(--color-surface);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition);
+}
+
+form button:hover {
+  background-color: var(--color-secondary);
+  transform: translateY(-2px);
+}
+
+/* =======================================
+   Indicador de Carga
+======================================= */
+.loading {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: var(--color-primary);
+}
+
+/* =======================================
+   Contenedor y Columnas de Resultados
+======================================= */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.column {
+  background-color: var(--color-surface);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  flex: 1 1 300px;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.column:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.column h2 {
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: var(--color-secondary);
+  margin-bottom: 1rem;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-primary);
+}
+
+/* =======================================
+   Mensajes de Error
+======================================= */
+.error {
+  color: var(--color-error);
+  background-color: rgba(229, 57, 53, 0.1);
+  border: 1px solid var(--color-error);
+  padding: 0.8rem;
+  border-radius: var(--border-radius);
+  margin: 1rem 0;
+  text-align: center;
+}

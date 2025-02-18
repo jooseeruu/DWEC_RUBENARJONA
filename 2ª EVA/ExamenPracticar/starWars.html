@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Star Wars - API Info</title>
+    <link rel="stylesheet" href="starWars.css" />
+  </head>
+  <body>
+    <h1>Star Wars API</h1>
+    <form id="dataForm">
+      <label for="userInput">Ingresa un número (ID): </label>
+      <input type="number" id="userInput" name="userInput" required min="1" />
+      <button type="submit">Buscar</button>
+    </form>
+    <div id="loading" class="loading" style="display: none">Cargando...</div>
+    <div class="container" id="results">
+      <div class="column" id="personColumn">
+        <h2>Persona</h2>
+        <div id="personData"></div>
+      </div>
+      <div class="column" id="planetColumn">
+        <h2>Planeta</h2>
+        <div id="planetData"></div>
+      </div>
+      <div class="column" id="starshipColumn">
+        <h2>Nave</h2>
+        <div id="starshipData"></div>
+      </div>
+    </div>
+
+    <script>
+      // Evento para enviar el formulario y obtener los datos
+      document
+        .getElementById("dataForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          // Vacia los contenedores de datos cada vez que se envía el formulario
+          document.getElementById("personData").innerHTML = "";
+          document.getElementById("planetData").innerHTML = "";
+          document.getElementById("starshipData").innerHTML = "";
+          // Recupero el ID ingresado por el usuario y lo guardo en una variable
+          const id = document.getElementById("userInput").value;
+          if (!id) return;
+
+          document.getElementById("loading").style.display = "block";
+          //Defino los endpoints de la API que voy a consultar con el ID ingresado
+          const endpoints = {
+            person: `https://swapi.dev/api/people/${id}/`,
+            planet: `https://swapi.dev/api/planets/${id}/`,
+            starship: `https://swapi.dev/api/starships/${id}/`,
+          };
+          // Hago peticiones a la API con los endpoints definidos
+          const fetchData = async (url) => {
+            try {
+              const response = await fetch(url);
+              if (!response.ok) {
+                throw new Error(
+                  `Error ${response.status}: ${response.statusText}`
+                );
+              }
+              return await response.json();
+            } catch (error) {
+              return { error: error.message };
+            }
+          };
+          // Espero a que todas las promesas se resuelvan y guardo los resultados en un array
+          const [personResult, planetResult, starshipResult] =
+            await Promise.all([
+              fetchData(endpoints.person),
+              fetchData(endpoints.planet),
+              fetchData(endpoints.starship),
+            ]);
+
+          document.getElementById("loading").style.display = "none";
+          // Muestro los datos en el HTML
+          const personDataDiv = document.getElementById("personData");
+          if (personResult.error) {
+            personDataDiv.innerHTML = `<p class="error">No se encontró la persona. ${personResult.error}</p>`;
+          } else {
+            personDataDiv.innerHTML = `
+            <p><strong>Nombre:</strong> ${personResult.name}</p>
+            <p><strong>Altura:</strong> ${personResult.height} cm</p>
+            <p><strong>Peso:</strong> ${personResult.mass} kg</p>
+            <p><strong>Color de cabello:</strong> ${personResult.hair_color}</p>
+            <p><strong>Color de piel:</strong> ${personResult.skin_color}</p>
+            <p><strong>Color de ojos:</strong> ${personResult.eye_color}</p>
+            <p><strong>Año de nacimiento:</strong> ${personResult.birth_year}</p>
+            <p><strong>Género:</strong> ${personResult.gender}</p>
+          `;
+          }
+
+          const planetDataDiv = document.getElementById("planetData");
+          if (planetResult.error) {
+            planetDataDiv.innerHTML = `<p class="error">No se encontró el planeta. ${planetResult.error}</p>`;
+          } else {
+            planetDataDiv.innerHTML = `
+            <p><strong>Nombre:</strong> ${planetResult.name}</p>
+            <p><strong>Clima:</strong> ${planetResult.climate}</p>
+            <p><strong>Gravedad:</strong> ${planetResult.gravity}</p>
+            <p><strong>Terreno:</strong> ${planetResult.terrain}</p>
+            <p><strong>Población:</strong> ${planetResult.population}</p>
+          `;
+          }
+
+          const starshipDataDiv = document.getElementById("starshipData");
+          if (starshipResult.error) {
+            starshipDataDiv.innerHTML = `<p class="error">No se encontró la nave. ${starshipResult.error}</p>`;
+          } else {
+            starshipDataDiv.innerHTML = `
+            <p><strong>Nombre:</strong> ${starshipResult.name}</p>
+            <p><strong>Modelo:</strong> ${starshipResult.model}</p>
+            <p><strong>Fabricante:</strong> ${starshipResult.manufacturer}</p>
+            <p><strong>Costo en créditos:</strong> ${starshipResult.cost_in_credits}</p>
+            <p><strong>Tripulación:</strong> ${starshipResult.crew}</p>
+            <p><strong>Pasajeros:</strong> ${starshipResult.passengers}</p>
+            <p><strong>Clase de nave:</strong> ${starshipResult.starship_class}</p>
+          `;
+          }
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+{
+    "nombre": "José Rubén Arjona Jiménez",
+    "experiencia": [
+      {
+        "puesto": "Agente de rampa",
+        "empresa": "Eurowings",
+        "tipoJornada": "Jornada parcial",
+        "periodo": {
+          "inicio": "jul. 2023",
+          "fin": "actualidad"
+        },
+        "duracion": "1 año 8 meses",
+        "ubicacion": "Palma, Islas Baleares, España",
+        "modalidad": "Presencial",
+        "aptitudes": [
+          "Trabajo en equipo",
+          "Trabajo manual",
+          "7 aptitudes más"
+        ]
+      },
+      {
+        "puesto": "Personal de cocina",
+        "empresa": "McDonald's",
+        "tipoJornada": "Jornada parcial",
+        "periodo": {
+          "inicio": "jun. 2022",
+          "fin": "sept. 2022"
+        },
+        "duracion": "4 meses",
+        "ubicacion": "Palma, Islas Baleares, España",
+        "modalidad": "Presencial",
+        "aptitudes": [
+          "Servicios de restauración",
+          "Trabajo en equipo",
+          "3 aptitudes más"
+        ]
+      }
+    ],
+    "educacion": [
+      {
+        "institucion": "CIFP Francesc de Borja Moll",
+        "programa": "Ciclo Formativo de Grado Superior en Desarrollo de Aplicaciones Web",
+        "periodo": {
+          "inicio": "sept. 2022",
+          "fin": "jun. 2025"
+        }
+      },
+      {
+        "institucion": "Colegio San José Obrero",
+        "programa": "Bachillerato en Humanidades/Estudios Humanísticos",
+        "periodo": {
+          "inicio": "sept. 2020",
+          "fin": "may. 2022"
+        }
+      }
+    ]
+  }
+  

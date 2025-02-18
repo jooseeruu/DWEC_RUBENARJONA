@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Café</title>
+    <link rel="stylesheet" href="cafe.css" />
+  </head>
+  <body>
+    <h1>Café</h1>
+    <div class="grid" id="productGrid"></div>
+
+    <script>
+      // Datos de prueba almacenados en un array de productos
+      const productos = [
+        {
+          nombre: "Café Espresso",
+          descripcion: "Café intenso y concentrado",
+          precio: "$2.50",
+        },
+        {
+          nombre: "Café Americano",
+          descripcion: "Café con agua caliente",
+          precio: "$3.00",
+        },
+        {
+          nombre: "Latte",
+          descripcion: "Café con leche espumosa",
+          precio: "$3.50",
+        },
+        {
+          nombre: "Capuchino",
+          descripcion: "Café con espuma y chocolate",
+          precio: "$3.75",
+        },
+        {
+          nombre: "Mocha",
+          descripcion: "Café con chocolate y leche",
+          precio: "$4.00",
+        },
+        {
+          nombre: "Café Cortado",
+          descripcion: "Café con un toque de leche",
+          precio: "$2.75",
+        },
+        {
+          nombre: "Macchiato",
+          descripcion: "Café manchado con espuma",
+          precio: "$3.25",
+        },
+        {
+          nombre: "Affogato",
+          descripcion: "Café con helado de vainilla",
+          precio: "$4.50",
+        },
+        {
+          nombre: "Cold Brew",
+          descripcion: "Café frío infusionado",
+          precio: "$3.80",
+        },
+      ];
+
+      // Función para obtener una imagen de la Coffee API
+      async function obtenerImagen() {
+        try {
+          const response = await fetch(
+            "https://coffee.alexflipnote.dev/random.json"
+          );
+          const data = await response.json();
+          return data.file;
+        } catch (error) {
+          console.error("Error al obtener la imagen:", error);
+          // Imagen de respaldo en caso de error
+          return "https://via.placeholder.com/300x200?text=Sin+Imagen";
+        }
+      }
+
+      // Función para cargar y renderizar los productos en la cuadrícula
+      async function cargarProductos() {
+        const grid = document.getElementById("productGrid");
+
+        // Creamos todas las promesas para cargar productos en paralelo y esperar a que todas se resuelvan
+        const tarjetas = await Promise.all(
+          productos.map(async (producto) => {
+            const imagenUrl = await obtenerImagen();
+            const tarjeta = document.createElement("div");
+            tarjeta.className = "card";
+            // Renderizamos la tarjeta con los datos del producto y la imagen en la tarjeta se carga con el atributo loading="lazy" para optimizar la carga de la página
+            tarjeta.innerHTML = `
+              <img src="${imagenUrl}" alt="${producto.nombre}" loading="lazy"> 
+              <h2>${producto.nombre}</h2>
+              <p>${producto.descripcion}</p>
+              <span>${producto.precio}</span>
+            `;
+            return tarjeta;
+          })
+        );
+
+        // Agregamos todas las tarjetas al grid de forma optimizada
+        tarjetas.forEach((tarjeta) => grid.appendChild(tarjeta));
+      }
+
+      // Ejecutamos la carga de productos cuando el DOM esté listo
+      document.addEventListener("DOMContentLoaded", cargarProductos);
+    </script>
+  </body>
+</html>
