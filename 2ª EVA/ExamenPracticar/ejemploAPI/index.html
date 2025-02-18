@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Explorador de Usuarios</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Explorador de Usuarios</h1>
+
+    <!-- Botones para disparar cada método -->
+    <button id="callbackBtn">Cargar Usuarios (Callback)</button>
+    <button id="promiseBtn">Cargar Usuarios (Promesas)</button>
+    <button id="asyncBtn">Cargar Usuarios (Async/Await)</button>
+
+    <!-- Indicador de carga -->
+    <div id="loading" class="hidden">Cargando...</div>
+
+    <!-- Contenedor donde se mostrarán los usuarios -->
+    <div id="usersContainer"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

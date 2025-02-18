@@ -1,0 +1,68 @@
+/* Estilos básicos para la página */
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f5f5f5;
+}
+
+h1 {
+  color: #333;
+}
+
+/* Estilos para los botones */
+button {
+  margin: 5px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Indicador de carga */
+#loading {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Clase para ocultar elementos */
+.hidden {
+  display: none;
+}
+
+/* Contenedor de usuarios */
+#usersContainer {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/* Tarjeta individual del usuario */
+.user {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  width: 150px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user img {
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+/* Estilo para mensajes de error */
+.error {
+  color: red;
+  font-weight: bold;
+}
